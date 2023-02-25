@@ -6,9 +6,7 @@ The latest and greatest way to find free stuff near you.
 
 <details>
 <summary>⚠️ If you are cloning this repo</summary>
-
 Be sure to install project dependencies before running for the first time by using:
-
 ```
 npm i
 ```
@@ -17,7 +15,9 @@ npm i
 
 This React project is bootstrapped with [Vite](https://vitejs.dev), you can do so by using:
 
-> `npm create vite@latest`.
+```
+npm create vite@latest
+```
 
 ## Project Dependencies
 
