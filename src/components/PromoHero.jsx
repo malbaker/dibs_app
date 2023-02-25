@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function Hero() {
+// This is the promo page hero component for ads
+export default function PromoHero() {
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content text-center">
