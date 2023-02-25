@@ -7,6 +7,7 @@ The latest and greatest way to find free stuff near you.
 <details>
 <summary>⚠️ If you are cloning this repo</summary>
 Be sure to install project dependencies before running for the first time by using:
+
 ```
 npm i
 ```
