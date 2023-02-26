@@ -2,13 +2,17 @@ import { useState, useEffect } from 'react'
 import { db } from './config/firebase'
 import { getDocs,collection, addDoc } from  'firebase/firestore'
 import Hero from './components/PromoHero'
-import HPButtons from './components/HPButtons'
+import AddressInput from './components/AddressInput'
+import ItemTypeDropdown from './components/ItemTypeDropdown'
+
 
 
 function App() {
 
   return (
     <div className="bg-lm-blue min-h-screen">
+      <ItemTypeDropdown />
+      <AddressInput />
     </div>
   )
 }
