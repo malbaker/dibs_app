@@ -15,10 +15,23 @@ import ViewPage from './components/ViewPage'
 function App() {
 
   return (
-    <div className="bg-lm-blue min-h-screen">
+    <div className="drawer h-screen bg-lm-blue font-outfit">
+          <BrowserRouter>
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">
+        <Navbar />
+        <div className="hero min-h-screen">
+        <Routes>
+        <Route exact path="/" element={<HomePage />} />
+        <Route path="/post" element={<PostPage />} />
+        <Route path="/view" element={<ViewPage />} />
+      </Routes>
+        </div>
+      </div>
+      <Sidebar />
+      </BrowserRouter>
     </div>
   );
 }
 
 export default App
-
