@@ -23,7 +23,7 @@ const Navbar = () => {
           </label>
         </div>
         <div class="navbar-center">
-          <a class="btn btn-ghost normal-case text-xl" href="/">dibs.</a>
+          <a class="btn btn-ghost normal-case text-xl hover:bg-lm-blue hover:text-buttons" href="/">dibs.</a>
         </div>
         <div class="navbar-end"></div>
       </div>
