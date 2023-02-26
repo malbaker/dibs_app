@@ -15,7 +15,7 @@ function AddressInput({ onAddressSubmit }) {
         type="text"
         value={address}
         onChange={handleAddressChange}
-        placeholder="Enter your address"
+        placeholder="enter your address"
         className="input input-bordered input-md w-full max-w-xs mt-2 rounded-full"
       />
     </div>
