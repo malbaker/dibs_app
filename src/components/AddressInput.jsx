@@ -17,16 +17,13 @@ function AddressInput({ onAddressSubmit }) {
       <form onSubmit={handleSubmit}>
         <label className="mt-2"></label>
         <input
-          type="text"
-          value={address}
-          onChange={handleAddressChange}
-          placeholder="enter your address"
-          name="address"
-          className="input input-bordered input-md w-full max-w-xs mt-2 rounded-full"
-        />
-        <button type="submit" className="btn mt-2">
-          Save
-        </button>
+            type="text"
+            value={address}
+            onChange={handleAddressChange}
+            placeholder="enter your address"
+            name="address"
+            className="input input-bordered input-md w-full max-w-full mt-2 rounded-full"
+            />
       </form>
     </div>
   );

@@ -1,35 +1,37 @@
 import React, { useState } from 'react';
 import AddressInput from './AddressInput';
+import ItemDescrip from './ItemDescrip';
 import ItemTypeDropdown from './ItemTypeDropdown';
+import InputButton from './InputButton';
 
-function InputForm() {
+function InputForm({ onInputSubmit }) {
   const [address, setAddress] = useState('');
-  const [selectedItemType, setSelectedItemType] = useState('');
+  const [description, setDescription] = useState('');
+  const [itemType, setItemType] = useState('');
 
-  const handleAddressSubmit = (value) => {
-    setAddress(value);
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
   };
 
-  const handleItemTypeSubmit = (value) => {
-    setSelectedItemType(value);
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleItemTypeChange = (event) => {
+    setItemType(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // handle form submission here
+    onInputSubmit({ address, description, itemType });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="address">Address:</label>
-        <AddressInput onAddressSubmit={handleAddressSubmit} />
-      </div>
-      <div>
-        <label htmlFor="item-type">Item Type:</label>
-        <ItemTypeDropdown onItemTypeSubmit={handleItemTypeSubmit} />
-      </div>
-      <button type="submit">Submit</button>
+    <form onSubmit={handleSubmit} className="flex flex-col items-center">
+      <AddressInput onAddressSubmit={handleAddressChange} />
+      <ItemDescrip onDescriptionSubmit={handleDescriptionChange} />
+      <ItemTypeDropdown onItemTypeSubmit={handleItemTypeChange} />
+      <InputButton label="post item" />
     </form>
   );
 }
