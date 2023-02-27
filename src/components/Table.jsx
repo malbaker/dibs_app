@@ -2,8 +2,8 @@ import React from 'react';
 
 function Table({ data }) {
   return (
-    <div class="max-w-fit">
-  <table class="table">
+    <div className="max-w-fit">
+  <table className="table">
     <thead>
       <tr>
         <th></th>
@@ -13,36 +13,14 @@ function Table({ data }) {
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th>1</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
-      <tr>
-        <th> 2</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
-      <tr>
-        <th>3</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
-      <tr>
-        <th>4</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
-      <tr>
-        <th>5</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
+      {data.map((post) => (
+        <tr key={post.id}>
+          <th></th>
+          <td>{post.category}</td>
+          <td>{post.address}</td>
+          <td>{post.description}</td>
+        </tr>
+      ))}
     </tbody>
   </table>
 </div>

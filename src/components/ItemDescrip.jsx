@@ -14,7 +14,7 @@ function ItemDescrip({ onDescriptionSubmit }) {
         value={description}
         onChange={handleDescriptionChange}
         placeholder="write a short description about your item"
-        className="input input-bordered w-full max-w-md mt-5 rounded-full"
+        className="input input-bordered w-full max-w-md my-5 rounded-full"
         style={{ paddingTop: '0.75rem', paddingBottom: '0.75rem' }}
       />
     </div>
