@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
       <div className="navbar font-outfit">
         <div className="navbar-start">
-          <label htmlFor="my-drawer" className="btn btn-ghost btn-circle">
+          <label htmlFor="my-drawer" className="btn btn-ghost text-dm-blue btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -23,7 +23,7 @@ const Navbar = () => {
           </label>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost normal-case text-3xl hover:bg-lm-blue hover:text-buttons" href="/">dibs.</a>
+          <a className="btn text-dm-blue btn-ghost normal-case text-3xl hover:bg-lm-blue hover:text-buttons" href="/">dibs.</a>
         </div>
         <div className="navbar-end"></div>
       </div>
