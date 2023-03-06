@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import { db } from '../config/firebase';
+import { db, storage } from '../config/firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import InputButton from './InputButton';
 
-class Post {
-  constructor(description, category, address) {
-    this.description = description;
-    this.category = category;
-    this.address = address;
-  }
-}
 
 
-function InputForm({ onInputSubmit }) {
+
+function InputForm() {
   const [address, setAddress] = useState('');
   const [description, setDescription] = useState('');
   const [itemType, setItemType] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [imgUrl, setImgUrl] = useState(null);
+  const [progressPercent, setProgresspercent] = useState(0);
+
   
 
   const handleAddressChange = (event) => {
@@ -32,6 +30,34 @@ function InputForm({ onInputSubmit }) {
     setIsDropdownOpen(false);
   };
 
+  const handleFileUpload = (event) => {
+    event.preventDefault();
+    const file = event.target.files[0]
+
+    if (!file) return;
+
+    const storageRef = ref(storage, `images/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on("state_changed",
+      (snapshot) => {
+        const progress =
+          Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        setProgresspercent(progress);
+      },
+      (error) => {
+        alert(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImgUrl(downloadURL)
+        });
+      }
+    );
+
+  }
+
+
   const handleSubmit =  async (event) => {
     event.preventDefault();
 
@@ -40,8 +66,9 @@ function InputForm({ onInputSubmit }) {
         description: description,
         category: itemType,
         address: address,
+        image: imgUrl,
       });
-      console.log("Document written with ID: ", docRef.id);
+      console.log("Document written with ID: ", docRef.id); 
     } catch (err) {
       console.error("Error adding document: ", err);
     }
@@ -49,7 +76,20 @@ function InputForm({ onInputSubmit }) {
   };
 
   return (
+
     <form className="flex flex-col items-center">
+      {/* File upload for post image */}
+      <div className="form-control w-full max-w-xs">
+      <label className="label">
+        <span className="label-text text-dm-blue">Upload an image, limit 1(one)</span>
+
+      </label>
+      <input 
+        className="file-input file-input-bordered w-full max-w-xs rounded-full mb-3" 
+        type="file" accept="image/*" onChange={(e) => handleFileUpload(e)}
+      />
+</div>
+      {/* Post address input */}
       <input
             type="text"
             value={address}
@@ -58,6 +98,7 @@ function InputForm({ onInputSubmit }) {
             name="address"
             className="input input-bordered input-md w-full max-w-full mt-2 rounded-full"
       />
+      {/* Post description input */}
       <textarea
         value={description}
         onChange={handleDescriptionChange}
@@ -65,6 +106,7 @@ function InputForm({ onInputSubmit }) {
         className="input input-bordered w-full max-w-md my-5 rounded-full"
         style={{ paddingTop: '0.75rem', paddingBottom: '0.75rem' }}
       />
+      {/* Post category dropdown */}
       <div className="relative inline-block">
           <button
             className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
@@ -110,7 +152,8 @@ function InputForm({ onInputSubmit }) {
           )}
         </div>
 
-      <InputButton onClick={handleSubmit} label="post item" />
+      <InputButton onClick={(e) => {handleSubmit(e)}} label="post item" 
+      isActive={(progressPercent == 100) && (imgUrl != null) && (address != '') && (description != '') && (itemType != '')  ? true : false}/>
     </form>
   );
 }

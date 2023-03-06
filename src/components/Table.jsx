@@ -7,6 +7,7 @@ function Table({ data }) {
         <thead>
           <tr>
             <th></th>
+            <th>Image</th>
             <th>Item Type</th>
             <th>Item Location</th>
             <th>Description</th>
@@ -16,6 +17,7 @@ function Table({ data }) {
           {data.map((post) => (
             <tr key={post.id}>
               <th></th>
+              <td>{post.image != null ? <img src={post.image}></img> : 'No image.' }</td>
               <td>{post.category}</td>
               <td>{post.address}</td>
               <td>{post.description}</td>
