@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
 function Table({ data }) {
   return (
@@ -6,18 +7,24 @@ function Table({ data }) {
       <table className="table">
         <thead>
           <tr>
-            <th></th>
+            <th />
             <th>Image</th>
             <th>Item Type</th>
             <th>Item Location</th>
-            <th>Description</th>
+            <th className="w">Description</th>
           </tr>
         </thead>
         <tbody>
           {data.map((post) => (
             <tr key={post.id}>
-              <th></th>
-              <td>{post.image != null ? <img src={post.image}></img> : 'No image.' }</td>
+              <th />
+              <td>
+                {post.image != null ? (
+                  <img src={post.image} alt={post.description} />
+                ) : (
+                  "No image."
+                )}
+              </td>
               <td>{post.category}</td>
               <td>{post.address}</td>
               <td>{post.description}</td>
@@ -28,5 +35,8 @@ function Table({ data }) {
     </div>
   );
 }
+Table.propTypes = {
+  data: PropTypes.array.isRequired,
+};
 
 export default Table;
