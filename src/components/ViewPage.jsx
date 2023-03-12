@@ -8,7 +8,7 @@ import Filter from './Filter';
 function ViewPage() {
 
     const [posts, setPosts] = useState([]);
-    const [filter, setFilter] = useState({"category": ["furniture"]})
+    const [filter, setFilter] = useState({})
     
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +33,7 @@ function ViewPage() {
         <div className="hero-content text-center sticky top-0 max-w-screen-sm">
             <div className="max-w-fit mx-auto pt-20">
                 <h1 className="text-4xl font-semibold mb-8">View Items</h1>
-                <Filter/>
+                <Filter filter={filter} setFilter={setFilter}/>
                 <div style={{ overflowX: 'auto' }}>
                     <Table data={posts} />
                 </div>

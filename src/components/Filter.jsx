@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Filter() {
+function Filter({filter, setFilter}) {
     const [showDropdown, setShowDropdown] = useState(false)
     const onClick = () => setShowDropdown(!showDropdown)
 
@@ -17,14 +17,14 @@ function Filter() {
             </button>
 
             <div id="filterDropdown">
-                { showDropdown ? <FilterDropdown/> : null}
+                { showDropdown ? <FilterDropdown filter={filter} setFilter={setFilter}/> : null}
             </div>
         </div>
 
     )
 }
 
-function FilterDropdown() {
+function FilterDropdown({filter, setFilter}) {
     
     let itemTypeOptions = [
         {"index": 0, "name": "furniture"}, 
@@ -41,7 +41,23 @@ function FilterDropdown() {
         for (let i = 0; i < selectedItemType.length; i++) {
             temp.push(selectedItemType[i])
             if (i === index) {
-                temp[i] = !temp[i]
+                temp[i] = !temp[i]  
+                
+                if (temp[i]){
+                    if ("category" in filter) {
+                        filter["category"].push(itemTypeOptions[index].name)
+                    } else {
+                        let temp1 = filter
+                        temp1["category"] = [itemTypeOptions[index].name]
+                        setFilter(temp1)
+                    }
+                } else if (filter["category"]) {
+                    const indexToRemove = filter["category"].indexOf(itemTypeOptions[index].name);
+                    console.log(filter["category"])
+                    if (indexToRemove > -1) { 
+                        filter["category"].splice(indexToRemove, 1);
+                    }
+                }
             }
         }
 
@@ -49,11 +65,11 @@ function FilterDropdown() {
     }
     for (let itemType of itemTypeOptions){
         itemTypeInput.push(
-            <input
+            <input className='flex-direction-column'
                 type="checkbox"
                 id={`custom-checkbox-${itemType.index}`}
-                name={itemTypeOptions[itemType.index]}
-                value={itemTypeOptions[itemType.index]}
+                name={itemTypeOptions[itemType.name]}
+                value={itemTypeOptions[itemType.name]}
                 checked={selectedItemType[itemType.index]}
                 onChange={() => handleOnChange(itemType.index)}
             />,
@@ -62,7 +78,7 @@ function FilterDropdown() {
     }
 
     return (
-        <div>
+        <div className='flex flex-direction-column'>
             {itemTypeInput}
         </div>
     )
