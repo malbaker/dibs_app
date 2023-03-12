@@ -2,18 +2,31 @@ import React, { useState, useEffect } from 'react';
 import Table from './Table';
 import { db } from '../config/firebase';
 import { collection, getDocs } from 'firebase/firestore';
+import Filter from './Filter';
 
 
 function ViewPage() {
 
     const [posts, setPosts] = useState([]);
-
+    const [filter, setFilter] = useState({"category": ["furniture"]})
+    
     useEffect(() => {
         const fetchData = async () => {
             const querySnapshot = await getDocs(collection(db, "posts"));
-            setPosts(querySnapshot.docs.map(doc => doc.data()));
+            setPosts(querySnapshot.docs.map(doc => 
+                doc.data()
+            ));
         };
-        fetchData();
+        fetchData().then(() => {
+            setPosts(posts.filter((post) => {
+                for (let key in filter) {
+                    if(filter[key].indexOf(post[key]) < 0){
+                        return false
+                    }
+                    return true
+                }
+            }))
+        });
     }, []);
 
     return (
