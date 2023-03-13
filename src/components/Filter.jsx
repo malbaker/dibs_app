@@ -78,15 +78,18 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
 
     for (let itemType of itemTypeOptions){
         itemTypeInput.push(
-            <input className='flex-direction-column'
-                type="checkbox"
-                id={`custom-checkbox-${itemType.index}`}
-                name={itemTypeOptions[itemType.name]}
-                value={itemTypeOptions[itemType.name]}
-                checked={selectedItemType[itemType.index]}
-                onChange={() => handleOnChange(itemType.index)}
-            />,
-            <label htmlFor={`custom-checkbox-${itemType.index}`}>{itemType.name}</label>
+            <div>
+                <input className='flex-direction-row'
+                    key={`custom-checkbox-${itemType.index}`}
+                    type="checkbox"
+                    id={`custom-checkbox-${itemType.index}`}
+                    name={itemType.name}
+                    value={itemType.name}
+                    checked={selectedItemType[itemType.index]}
+                    onChange={() => handleOnChange(itemType.index)}
+                />
+                <label htmlFor={`custom-checkbox-${itemType.index}`}>{itemType.name}</label>
+            </div>
         )
     }
 
