@@ -11,7 +11,7 @@ function Filter({filter, setFilter, data, setPosts}) {
     })
     
     return (       
-        <div className="flex">
+        <div className="flex flex-col">
             <button onClick={onClick} id="filterButton" className="btn mt-2 bg-buttons hover:bg-buttons rounded-full border-transparent focus:border-transparent focus:ring-0">
                 Filter
             </button>
@@ -20,7 +20,6 @@ function Filter({filter, setFilter, data, setPosts}) {
                 { showDropdown ? <FilterDropdown filter={filter} setFilter={setFilter} data={data} setPosts={setPosts} /> : null}
             </div>
         </div>
-
     )
 }
 
@@ -94,7 +93,7 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
     }
 
     return (
-        <div className='flex flex-direction-column'>
+        <div className='flex flex-col' style={{backgroundColor: 'rgb(240 197 82 / var(--tw-bg-opacity))'}}>
             {itemTypeInput}
         </div>
     )
