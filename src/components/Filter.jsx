@@ -75,6 +75,7 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
             return posts
         })
     }
+
     for (let itemType of itemTypeOptions){
         itemTypeInput.push(
             <input className='flex-direction-column'
