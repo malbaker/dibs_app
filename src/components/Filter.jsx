@@ -31,7 +31,16 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
         {"index": 3, "name": "tech items"}, 
         {"index": 4, "name": "other"}
     ]
+
+    // State that will keep track of which checkboxes are checked using boolean 
     const [selectedItemType, setSelectedItemType] = useState(new Array(itemTypeOptions.length).fill(false))
+    // In case you close dropdown and reopen it, this ensures the dropdown looks the same way you left it
+    for (const itemTypeOption of itemTypeOptions) {
+        if (filter["category"] && filter["category"].indexOf(itemTypeOption["name"]) >= 0) {
+            selectedItemType[itemTypeOption["index"]] = true
+        }
+    }
+
     let itemTypeInput = []
 
     const handleOnChange = (index) => {
@@ -51,7 +60,7 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
                     const indexToRemove = filter["category"].indexOf(itemTypeOptions[index].name);
 
                     if (indexToRemove >= 0) { 
-                        filter = filter["category"].splice(indexToRemove, 1);
+                        filter["category"].splice(indexToRemove, 1);
                     }
                 }
 
