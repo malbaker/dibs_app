@@ -36,31 +36,31 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
     let itemTypeInput = []
 
     const handleOnChange = (index) => {
-        let temp = []
-        for (let i = 0; i < selectedItemType.length; i++) {
-            temp.push(selectedItemType[i])
-            if (i === index) {
-                temp[i] = !temp[i]  
-                
-                if (temp[i]){
-                    if ("category" in filter) {
+        setSelectedItemType((selectedItemType) => {
+            // Records whether checkbox was selected/unselected
+            selectedItemType[index] = !selectedItemType[index]
+
+            // Updates the filter criteria based on selected items
+            setFilter(filter => {
+                if (selectedItemType[index]) {
+                    if ("category" in filter && filter["category"].indexOf(itemTypeOptions[index].name) < 0) {
                         filter["category"].push(itemTypeOptions[index].name)
-                    } else {
-                        let temp1 = filter
-                        temp1["category"] = [itemTypeOptions[index].name]
-                        setFilter(temp1)
+                    } else if (!("category" in filter)) {
+                        filter["category"] = [itemTypeOptions[index].name]
                     }
                 } else if (filter["category"]) {
                     const indexToRemove = filter["category"].indexOf(itemTypeOptions[index].name);
-                    console.log(filter["category"])
-                    if (indexToRemove > -1) { 
-                        filter["category"].splice(indexToRemove, 1);
+
+                    if (indexToRemove >= 0) { 
+                        filter = filter["category"].splice(indexToRemove, 1);
                     }
                 }
-            }
-        }
 
-        setSelectedItemType(temp)
+                return filter
+            })
+            
+            return selectedItemType
+        })
 
         setPosts(() => {
             let posts = data.filter((post) => {
