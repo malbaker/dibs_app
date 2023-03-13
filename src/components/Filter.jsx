@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Filter({filter, setFilter}) {
+function Filter({filter, setFilter, data}) {
     const [showDropdown, setShowDropdown] = useState(false)
     const onClick = () => setShowDropdown(!showDropdown)
 
@@ -17,15 +17,14 @@ function Filter({filter, setFilter}) {
             </button>
 
             <div id="filterDropdown">
-                { showDropdown ? <FilterDropdown filter={filter} setFilter={setFilter}/> : null}
+                { showDropdown ? <FilterDropdown filter={filter} setFilter={setFilter} data={data}/> : null}
             </div>
         </div>
 
     )
 }
 
-function FilterDropdown({filter, setFilter}) {
-    
+function FilterDropdown({filter, setFilter, data}) {
     let itemTypeOptions = [
         {"index": 0, "name": "furniture"}, 
         {"index": 1, "name": "home decor"}, 
