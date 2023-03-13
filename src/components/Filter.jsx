@@ -70,24 +70,24 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
                         newFilter["category"].splice(indexToRemove, 1);
                     }
                 }
-                
+
+                setPosts(() => {
+                    let posts = data.filter((post) => {
+                        for (let key in newFilter) {
+                            if (newFilter[key].length > 0 && newFilter[key].indexOf(post[key]) < 0){
+                                return false
+                            }
+                        }
+                        return true
+                    })
+
+                    return posts
+                })
+
                 return newFilter
             })
-            
+            console.log(newSelectedItemType)
             return newSelectedItemType
-        })
-
-        setPosts(() => {
-            let posts = data.filter((post) => {
-                for (let key in filter) {
-                    if (filter[key].length > 0 && filter[key].indexOf(post[key]) < 0){
-                        return false
-                    }
-                }
-                return true
-            })
-    
-            return posts
         })
     }
 
