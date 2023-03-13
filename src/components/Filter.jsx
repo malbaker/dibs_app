@@ -103,6 +103,7 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
 
     return (
         <div className='flex flex-col' style={{backgroundColor: 'rgb(240 197 82 / var(--tw-bg-opacity))'}}>
+            <h3>Item Type:</h3>
             {itemTypeInput}
         </div>
     )
