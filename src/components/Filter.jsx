@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Filter({filter, setFilter, data}) {
+function Filter({filter, setFilter, data, setPosts}) {
     const [showDropdown, setShowDropdown] = useState(false)
     const onClick = () => setShowDropdown(!showDropdown)
 
@@ -17,14 +17,14 @@ function Filter({filter, setFilter, data}) {
             </button>
 
             <div id="filterDropdown">
-                { showDropdown ? <FilterDropdown filter={filter} setFilter={setFilter} data={data}/> : null}
+                { showDropdown ? <FilterDropdown filter={filter} setFilter={setFilter} data={data} setPosts={setPosts} /> : null}
             </div>
         </div>
 
     )
 }
 
-function FilterDropdown({filter, setFilter, data}) {
+function FilterDropdown({filter, setFilter, data, setPosts}) {
     let itemTypeOptions = [
         {"index": 0, "name": "furniture"}, 
         {"index": 1, "name": "home decor"}, 
@@ -61,6 +61,19 @@ function FilterDropdown({filter, setFilter, data}) {
         }
 
         setSelectedItemType(temp)
+
+        setPosts(() => {
+            let posts = data.filter((post) => {
+                for (let key in filter) {
+                    if (filter[key].length > 0 && filter[key].indexOf(post[key]) < 0){
+                        return false
+                    }
+                }
+                return true
+            })
+    
+            return posts
+        })
     }
     for (let itemType of itemTypeOptions){
         itemTypeInput.push(

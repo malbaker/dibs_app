@@ -24,23 +24,15 @@ function ViewPage() {
                 return data
             })
         };
-        fetchData().then(() => {
-            setPosts(data.filter((post) => {
-                for (let key in filter) {
-                    if(filter[key].indexOf(post[key]) < 0){
-                        return false
-                    }
-                    return true
-                }
-            }))
-        });
+          
+        fetchData()
     }, []);
 
     return (
         <div className="hero-content text-center sticky top-0 max-w-screen-sm">
             <div className="max-w-fit mx-auto pt-20">
                 <h1 className="text-4xl font-semibold mb-8">View Items</h1>
-                <Filter filter={filter} setFilter={setFilter} data={data}/>
+                <Filter filter={filter} setFilter={setFilter} data={data} setPosts={setPosts}/>
                 <div style={{ overflowX: 'auto' }}>
                     <Table data={posts} />
                 </div>
