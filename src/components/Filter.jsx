@@ -44,30 +44,37 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
     let itemTypeInput = []
 
     const handleOnChange = (index) => {
-        setSelectedItemType((selectedItemType) => {
+        setSelectedItemType((prevSelectedItemType) => {
+            let newSelectedItemType = [...prevSelectedItemType]
             // Records whether checkbox was selected/unselected
-            selectedItemType[index] = !selectedItemType[index]
-
+            newSelectedItemType[index] = !prevSelectedItemType[index]
+            
             // Updates the filter criteria based on selected items
-            setFilter(filter => {
-                if (selectedItemType[index]) {
-                    if ("category" in filter && filter["category"].indexOf(itemTypeOptions[index].name) < 0) {
-                        filter["category"].push(itemTypeOptions[index].name)
-                    } else if (!("category" in filter)) {
-                        filter["category"] = [itemTypeOptions[index].name]
+            setFilter(prevFilter => {
+                let newFilter = {}
+                Object.keys(prevFilter).forEach((key) => {
+                    newFilter[key] = [...prevFilter[key]]
+                    
+                })
+                
+                if (newSelectedItemType[index]) {
+                    if ("category" in prevFilter && prevFilter["category"].indexOf(itemTypeOptions[index].name) < 0) {
+                        newFilter["category"].push(itemTypeOptions[index].name)
+                    } else if (!("category" in prevFilter)) {
+                        newFilter["category"] = [itemTypeOptions[index].name]
                     }
-                } else if (filter["category"]) {
+                } else if (prevFilter["category"]) {
                     const indexToRemove = filter["category"].indexOf(itemTypeOptions[index].name);
 
                     if (indexToRemove >= 0) { 
-                        filter["category"].splice(indexToRemove, 1);
+                        newFilter["category"].splice(indexToRemove, 1);
                     }
                 }
-
-                return filter
+                
+                return newFilter
             })
             
-            return selectedItemType
+            return newSelectedItemType
         })
 
         setPosts(() => {
