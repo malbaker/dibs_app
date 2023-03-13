@@ -11,7 +11,7 @@ class Post {
   }
 }
 
-function InputForm({ onInputSubmit }) {
+function InputForm({}) {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [itemType, setItemType] = useState("");
