@@ -13,9 +13,11 @@ function ViewPage() {
     useEffect(() => {
         const fetchData = async () => {
             const querySnapshot = await getDocs(collection(db, "posts"));
-            setPosts(querySnapshot.docs.map(doc => 
-                doc.data()
-            ));
+            setPosts(querySnapshot.docs.map(doc => {
+                let post = doc.data()
+                post["id"] = doc.id
+                return post
+            }));
         };
         fetchData().then(() => {
             setPosts(posts.filter((post) => {
