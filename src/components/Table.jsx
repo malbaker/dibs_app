@@ -1,52 +1,42 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
 function Table({ data }) {
   return (
-    <div class="max-w-fit">
-  <table class="table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Item Type</th>
-        <th>Item Location</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>1</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
-      <tr>
-        <th> 2</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
-      <tr>
-        <th>3</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
-      <tr>
-        <th>4</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
-      <tr>
-        <th>5</th>
-        <td>Furniture</td>
-        <td>33 Harry Agganis Way</td>
-        <td>White couch from IKEA</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <div className="max-w-fit">
+      <table className="table">
+        <thead>
+          <tr>
+            <th />
+            <th>Image</th>
+            <th>Item Type</th>
+            <th>Item Location</th>
+            <th className="w">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((post) => (
+            <tr key={post.id}>
+              <th />
+              <td>
+                {post.image != null ? (
+                  <img src={post.image} alt={post.description} />
+                ) : (
+                  "No image."
+                )}
+              </td>
+              <td>{post.category}</td>
+              <td>{post.address}</td>
+              <td>{post.description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
+Table.propTypes = {
+  data: PropTypes.array.isRequired,
+};
 
 export default Table;
