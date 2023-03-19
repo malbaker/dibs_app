@@ -24,7 +24,7 @@ function Filter({filter, setFilter, data, setPosts}) {
 }
 
 function FilterDropdown({filter, setFilter, data, setPosts}) {
-    let itemTypeOptions = [
+    const itemTypeOptions = [
         {"index": 0, "name": "furniture"}, 
         {"index": 1, "name": "home decor"}, 
         {"index": 2, "name": "clothing"}, 
@@ -33,15 +33,18 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
     ]
 
     // State that will keep track of which checkboxes are checked using boolean 
-    const [selectedItemType, setSelectedItemType] = useState(new Array(itemTypeOptions.length).fill(false))
-    // In case you close dropdown and reopen it, this ensures the dropdown looks the same way you left it
-    for (const itemTypeOption of itemTypeOptions) {
-        if (filter["category"] && filter["category"].indexOf(itemTypeOption["name"]) >= 0) {
-            selectedItemType[itemTypeOption["index"]] = true
-        }
-    }
+    const [selectedItemType, setSelectedItemType] = useState(() => {
+        let temp = new Array(itemTypeOptions.length).fill(false)
 
-    let itemTypeInput = []
+        // In case you close dropdown and reopen it, this ensures the dropdown looks the same way you left it
+        for (const itemTypeOption of itemTypeOptions) {
+            if (filter["category"] && filter["category"].indexOf(itemTypeOption["name"]) >= 0) {
+                temp[itemTypeOption["index"]] = true
+            }
+        }
+
+        return temp
+    })
 
     const handleOnChange = (index) => {
         setSelectedItemType((prevSelectedItemType) => {
@@ -53,8 +56,7 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
             setFilter(prevFilter => {
                 let newFilter = {}
                 Object.keys(prevFilter).forEach((key) => {
-                    newFilter[key] = [...prevFilter[key]]
-                    
+                    newFilter[key] = [...prevFilter[key]]  
                 })
                 
                 if (newSelectedItemType[index]) {
@@ -63,14 +65,15 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
                     } else if (!("category" in prevFilter)) {
                         newFilter["category"] = [itemTypeOptions[index].name]
                     }
-                } else if (prevFilter["category"]) {
-                    const indexToRemove = filter["category"].indexOf(itemTypeOptions[index].name);
+                } else if (newFilter["category"]) {
+                    const indexToRemove = newFilter["category"].indexOf(itemTypeOptions[index].name);
 
                     if (indexToRemove >= 0) { 
                         newFilter["category"].splice(indexToRemove, 1);
                     }
                 }
 
+                // Updates posts based on the new filter criteria
                 setPosts(() => {
                     let posts = data.filter((post) => {
                         for (let key in newFilter) {
@@ -86,24 +89,24 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
 
                 return newFilter
             })
-            console.log(newSelectedItemType)
+
             return newSelectedItemType
         })
     }
 
+    let itemTypeInput = []
     for (let itemType of itemTypeOptions){
         itemTypeInput.push(
-            <div>
+            <div key={`div-${itemType.index}`}>
                 <input className='flex-direction-row'
-                    key={`custom-checkbox-${itemType.index}`}
                     type="checkbox"
-                    id={`custom-checkbox-${itemType.index}`}
+                    id={`checkbox-${itemType.index}`}
                     name={itemType.name}
                     value={itemType.name}
                     checked={selectedItemType[itemType.index]}
                     onChange={() => handleOnChange(itemType.index)}
                 />
-                <label htmlFor={`custom-checkbox-${itemType.index}`}>{itemType.name}</label>
+                <label htmlFor={`custom-checkbox-${itemType.index}`} key={`label-${itemType.index}`}>{itemType.name}</label>
             </div>
         )
     }
