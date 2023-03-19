@@ -45,7 +45,7 @@ function Sidebar() {
         </li>
 
         <li className="text-buttons mt-96">
-          <a className=" active:bg-dm-blue active:text-lm-blue" href="/">
+          <a className=" active:bg-dm-blue active:text-lm-blue" href="/contact">
             contact
           </a>
         </li>
