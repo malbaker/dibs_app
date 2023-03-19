@@ -15,9 +15,11 @@ function ViewPage() {
   }, []);
 
   return (
-    <div className="hero-content text-center sticky top-0 max-w-screen-sm">
+    <div className="hero-content text-center sticky top-0 max-w-screen-md flex-initial">
       <div className="max-w-fit mx-auto pt-20">
-        <h1 className="text-4xl text-dm-blue font-semibold mb-8">View Items</h1>
+        <h1 className="text-4xl text-dm-blue font-semibold mb-8 text-left">
+          View Items
+        </h1>
         <div className="overflow-x-auto">
           <Table data={posts} />
         </div>
