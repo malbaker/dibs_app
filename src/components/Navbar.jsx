@@ -2,7 +2,7 @@ import React from "react";
 
 function Navbar() {
   return (
-    <div className="navbar font-outfit">
+    <div className="navbar font-outfit fixed bg-lm-blue z-30">
       <div className="navbar-start">
         <label htmlFor="my-drawer" className="btn btn-ghost text-dm-blue btn-circle">
           <svg
@@ -26,7 +26,7 @@ function Navbar() {
           className="btn text-dm-blue btn-ghost normal-case text-3xl hover:bg-lm-blue hover:text-buttons"
           href="/"
         >
-          dibs.
+          dibs!
         </a>
       </div>
       <div className="navbar-end" />

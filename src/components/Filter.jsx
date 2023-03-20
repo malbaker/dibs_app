@@ -20,7 +20,7 @@ function Filter({ filter, setFilter, data, setPosts }) {
       <button
         onClick={() => onClick()}
         id="filterButton"
-        className="btn mt-2 bg-buttons hover:bg-buttons text-dm-blue rounded-full border-transparent focus:border-transparent focus:ring-0"
+        className="btn mt-2 bg-buttons hover:bg-buttons w-3/4 text-dm-blue rounded-full border-transparent focus:border-transparent focus:ring-0 justify-center"
       >
         Filter
       </button>
