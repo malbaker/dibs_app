@@ -8,11 +8,14 @@ function InputButton({ onClick, label, isActive }) {
         onClick={(e) => {
           onClick(e);
         }}
-        className={`mt-4 text-dm-blue rounded-full border-transparent focus:border-transparent focus:ring-0 ${
-          !isActive ? "btn-disabled" : "btn bg-buttons hover:bg-buttons"
+        className={`mt-4 px-6 py-3 text-white rounded-full border-transparent focus:border-transparent focus:ring-0 uppercase ${
+          !isActive
+            ? "btn-disabled"
+            : "bg-buttons btn from-gray-400 to-buttons hover:from-gray-400 hover:to-buttons"
         }`}
+        style={{ fontSize: "14px" }}
       >
-        {isActive ? label : "Please complete all fields"}
+        {isActive ? label : "post item"}
       </button>
     </div>
   );
