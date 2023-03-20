@@ -11,10 +11,9 @@ function InputForm() {
   const [isItemTypeDropdownOpen, setIsItemTypeDropdownOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState(null);
 
-  const [progressPercent, setProgresspercent] = useState(0);
+  const [progressPercent, setProgressPercent] = useState(0);
   const [condition, setCondition] = useState("");
   const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
-
 
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
@@ -71,6 +70,7 @@ function InputForm() {
         category: itemType,
         address,
         image: imgUrl,
+        condition,
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (err) {
@@ -110,8 +110,14 @@ function InputForm() {
         />
       </div>
 
+      <textarea
+        value={description}
+        onChange={handleDescriptionChange}
+        placeholder="Write a short description"
+        className="input input-bordered input-md w-full max-w-full my-2 rounded-full"
+      />
       {/* Post category dropdown */}
-      <div className="relative inline-block">
+      <div className="relative inline-block my-2">
         <button
           className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
           type="button"
@@ -154,10 +160,9 @@ function InputForm() {
             </li>
           </ul>
         )}
-
       </div>
       {/* Post condition dropdown */}
-      <div className="relative inline-block">
+      <div className="relative inline-block my-2">
         <button
           className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
           type="button"

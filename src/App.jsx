@@ -7,7 +7,6 @@ import ViewPage from "./components/ViewPage";
 import ContactPage from "./components/ContactPage";
 import FAQ from "./components/faq";
 
-
 function App() {
   return (
     <div className="drawer h-screen bg-lm-blue font-outfit">
@@ -24,7 +23,6 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
 
               <Route path="/faq" element={<FAQ />} />
-
             </Routes>
           </div>
         </div>

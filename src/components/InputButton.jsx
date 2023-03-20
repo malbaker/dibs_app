@@ -11,7 +11,7 @@ function InputButton({ onClick, label, isActive }) {
         className={`mt-4 px-6 py-3 text-white rounded-full border-transparent focus:border-transparent focus:ring-0 uppercase ${
           !isActive
             ? "btn-disabled"
-            : "bg-buttons cursor-not-allowed btn from-gray-400 to-buttons hover:from-gray-400 hover:to-buttons"
+            : "bg-buttons btn from-gray-400 to-buttons hover:from-gray-400 hover:to-buttons"
         }`}
         style={{ fontSize: "14px" }}
       >

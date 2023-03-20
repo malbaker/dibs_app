@@ -34,6 +34,7 @@ function Table({ data }) {
             <th>Image</th>
             <th>Item Type</th>
             <th>Item Location</th>
+            <th>Condition</th>
             <th>Description</th>
             <th> </th>
           </tr>
@@ -51,6 +52,7 @@ function Table({ data }) {
               </td>
               <td>{post.category}</td>
               <td>{post.address}</td>
+              <td>{post.condition}</td>
               <td>{post.description}</td>
               <td>
                 <InputButton

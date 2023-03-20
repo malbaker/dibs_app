@@ -12,18 +12,18 @@ function ContactForm() {
           <div className="btn-group bg-buttons rounded ">
             <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
               {" "}
-              <a className="text-black px-6 py-2 ml-4 text-xs" href="#">
+              <a className="text-black px-6 py-2 ml-4 text-xs" href="/">
                 <SlLocationPin />
               </a>
             </button>
             <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
               {" "}
-              <a className="text-black px-6 py-2 ml-4 text-xs" href="#">
+              <a className="text-black px-6 py-2 ml-4 text-xs" href="/">
                 <SlPhone />
               </a>
             </button>
             <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
-              <a className=" text-black px-6 py-2 ml-4 text-xs" href="#">
+              <a className=" text-black px-6 py-2 ml-4 text-xs" href="/">
                 <AiOutlineMail />
               </a>
             </button>
@@ -56,7 +56,7 @@ function ContactForm() {
                     type="email"
                     id="email"
                     name="email"
-                    className="w-full bg-lm-blue rounded border border-dm-blue focus:border-indigo-500 text-dm-blue outline-none text-dm-blue py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    className="w-full bg-lm-blue rounded border border-dm-blue focus:border-indigo-500 text-dm-blue outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
               </div>
