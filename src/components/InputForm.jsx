@@ -10,7 +10,8 @@ function InputForm() {
   const [itemType, setItemType] = useState("");
   const [isItemTypeDropdownOpen, setIsItemTypeDropdownOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState(null);
-  const [progressPercent, setProgresspercent] = useState(0);
+
+  const [progressPercent, setProgressPercent] = useState(0);
   const [condition, setCondition] = useState("");
   const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
 
@@ -47,7 +48,7 @@ function InputForm() {
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
         );
-        setProgresspercent(progress);
+        setProgressPercent(progress);
       },
       (error) => {
         alert(error);
@@ -69,6 +70,7 @@ function InputForm() {
         category: itemType,
         address,
         image: imgUrl,
+        condition,
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (err) {
@@ -80,9 +82,9 @@ function InputForm() {
   return (
     <form className="flex flex-col items-center">
       {/* File upload for post image */}
-      <div className="form-control w-full max-w-xs">
+      <div className="form-control w-full max-w-xs ">
         <label className="label">
-          <span className="label-text text-dm-blue">
+          <span className="label-text text-dm-blue font-semibold">
             Upload an image, limit 1(one)
           </span>
         </label>
@@ -94,23 +96,28 @@ function InputForm() {
         />
       </div>
       {/* Post address input */}
-      <input
-        type="text"
-        value={address}
-        onChange={handleAddressChange}
-        placeholder="enter your address"
-        name="address"
-        className="input input-bordered input-md w-full max-w-full mt-2 rounded-full"
-      />
-      {/* Post description input */}
+      <div className="form-control w-full max-w-xs ">
+        <label className="label">
+          <span className="label-text text-dm-blue">Street Address*</span>
+        </label>
+        <input
+          type="text"
+          value={address}
+          onChange={handleAddressChange}
+          placeholder="123 Main Street, Awesomeville, Maine, 10034"
+          name="address"
+          className="input input-bordered input-md w-full max-w-full mt-0 rounded-full mb-3"
+        />
+      </div>
+
       <textarea
         value={description}
         onChange={handleDescriptionChange}
-        placeholder="write a short description about your item"
-        className="input input-bordered w-full max-w-md my-5 rounded-full py-3"
+        placeholder="Write a short description"
+        className="input input-bordered input-md w-full max-w-full my-2 rounded-full"
       />
       {/* Post category dropdown */}
-      <div className="relative inline-block">
+      <div className="relative inline-block my-2">
         <button
           className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
           type="button"
@@ -155,7 +162,7 @@ function InputForm() {
         )}
       </div>
       {/* Post condition dropdown */}
-      <div className="relative inline-block">
+      <div className="relative inline-block my-2">
         <button
           className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
           type="button"
