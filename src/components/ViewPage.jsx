@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Table from './Table';
+import Cards from './Cards';
 import { db } from '../config/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import Filter from './Filter';
@@ -34,7 +34,7 @@ function ViewPage() {
         <h1 className="text-4xl text-dm-blue font-semibold mb-8">View Items</h1>
         <Filter filter={filter} setFilter={setFilter} data={data} setPosts={setPosts}/>
         <div className="overflow-x-auto">
-          <Table data={posts} />
+          <Cards data={posts} />
         </div>
       </div>
     </div>
