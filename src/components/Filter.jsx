@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-function Filter({filter, setFilter, data, setPosts}) {
-    const [showDropdown, setShowDropdown] = useState(false)
-    const onClick = () => setShowDropdown(!showDropdown)
+function Filter({ filter, setFilter, data, setPosts }) {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const onClick = () => setShowDropdown(!showDropdown);
 
     document.addEventListener('click', (e) => {
         if (showDropdown && !document.getElementById('filterDropdown').contains(e.target) && !document.getElementById('filterButton').contains(e.target) ) {
@@ -137,6 +138,14 @@ function FilterDropdown({filter, setFilter, data, setPosts}) {
             {inputs["condition"]}
         </div>
     )
+
 }
 
-export default Filter
+FilterDropdown.propTypes = {
+  filter: PropTypes.object.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  data: PropTypes.array.isRequired,
+  setPosts: PropTypes.func.isRequired,
+};
+
+export default Filter;
