@@ -12,7 +12,7 @@ function Filter({filter, setFilter, data, setPosts}) {
     
     return (       
         <div className="flex flex-col">
-            <button onClick={() => onClick} id="filterButton" className="btn mt-2 bg-buttons hover:bg-buttons rounded-full border-transparent focus:border-transparent focus:ring-0">
+            <button onClick={() => onClick()} id="filterButton" className="btn mt-2 bg-buttons hover:bg-buttons rounded-full border-transparent focus:border-transparent focus:ring-0">
                 Filter
             </button>
 
