@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit"></link>;
 
 const Sidebar = () => {
@@ -41,7 +40,7 @@ const Sidebar = () => {
           </a>
         </li>
         <li>
-          <a href="" className="text-lm-blue active:bg-dm-blue active:text-buttons">
+          <a href="/" className="text-lm-blue active:bg-dm-blue active:text-buttons">
             faqs
           </a>
         </li>
