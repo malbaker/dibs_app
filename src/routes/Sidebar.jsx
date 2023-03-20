@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit"></link>;
 
-function Sidebar() {
+const Sidebar = () => {
   return (
     <div className="drawer-side font-outfit">
-      <label htmlFor="my-drawer" className="drawer-overlay" />
+      <label htmlFor="my-drawer" className="drawer-overlay"></label>
       <ul className="menu p-4 w-screen text-5xl bg-dm-blue text-lm-blue">
         <label htmlFor="my-drawer" className="btn btn-ghost btn-circle">
           <svg
@@ -24,37 +26,34 @@ function Sidebar() {
 
         <li>
           <a
-            className="text-lm-blue active:bg-dm-blue active:text-buttons"
             href="/post"
+            className="text-lm-blue active:bg-dm-blue active:text-buttons"
           >
             post
           </a>
         </li>
         <li>
           <a
-            className="text-lm-blue active:bg-dm-blue active:text-buttons"
             href="/view"
+            className="text-lm-blue active:bg-dm-blue active:text-buttons"
           >
             view
           </a>
         </li>
         <li>
-          <a
-            className="text-lm-blue active:bg-dm-blue active:text-buttons"
-            href="/faq"
-          >
+          <a href="" className="text-lm-blue active:bg-dm-blue active:text-buttons">
             faqs
           </a>
         </li>
 
         <li className="text-buttons mt-96">
-          <a className=" active:bg-dm-blue active:text-lm-blue" href="/contact">
+          <a href="/" className=" active:bg-dm-blue active:text-lm-blue">
             contact
           </a>
         </li>
       </ul>
     </div>
   );
-}
+};
 
 export default Sidebar;
