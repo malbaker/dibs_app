@@ -8,9 +8,13 @@ function InputForm() {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [itemType, setItemType] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isItemTypeDropdownOpen, setIsItemTypeDropdownOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState(null);
-  const [progressPercent, setProgressPercent] = useState(0);
+
+  const [progressPercent, setProgresspercent] = useState(0);
+  const [condition, setCondition] = useState("");
+  const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
+
 
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
@@ -22,7 +26,12 @@ function InputForm() {
 
   const handleItemType = (type) => {
     setItemType(type);
-    setIsDropdownOpen(false);
+    setIsItemTypeDropdownOpen(false);
+  };
+
+  const handleCondition = (condition) => {
+    setCondition(condition);
+    setIsConditionDropdownOpen(false);
   };
 
   const handleFileUpload = (event) => {
@@ -102,69 +111,77 @@ function InputForm() {
       </div>
 
       {/* Post category dropdown */}
-      <div className="form-control w-full max-w-xs ">
-        <label className="label">
-          <span className="label-text text-dm-blue font-semibold">
-            Item Category*
-          </span>
-        </label>
-        <div className="relative inline-block">
-          <button
-            className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4 mb-2"
-            type="button"
-            placeholder="select item type"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          >
-            {itemType || "select item type"}
-          </button>
-          {isDropdownOpen && (
-            <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
-              <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleItemType("furniture")}
-              >
-                furniture
-              </li>
-              <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleItemType("home decor")}
-              >
-                home decor
-              </li>
-              <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleItemType("clothing")}
-              >
-                clothing
-              </li>
-              <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleItemType("tech items")}
-              >
-                tech items
-              </li>
-              <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleItemType("other")}
-              >
-                other
-              </li>
-            </ul>
-          )}
-        </div>
-      </div>
+      <div className="relative inline-block">
+        <button
+          className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
+          type="button"
+          placeholder="select item type"
+          onClick={() => setIsItemTypeDropdownOpen(!isItemTypeDropdownOpen)}
+        >
+          {itemType || "select item type"}
+        </button>
+        {isItemTypeDropdownOpen && (
+          <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
+            <li
+              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+              onClick={() => handleItemType("furniture")}
+            >
+              furniture
+            </li>
+            <li
+              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+              onClick={() => handleItemType("home decor")}
+            >
+              home decor
+            </li>
+            <li
+              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+              onClick={() => handleItemType("clothing")}
+            >
+              clothing
+            </li>
+            <li
+              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+              onClick={() => handleItemType("tech items")}
+            >
+              tech items
+            </li>
+            <li
+              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+              onClick={() => handleItemType("other")}
+            >
+              other
+            </li>
+          </ul>
+        )}
 
-      {/* Post description input */}
-      <div className="form-control w-full max-w-xs ">
-        <label className="label">
-          <span className="label-text text-dm-blue font-semibold ">Description</span>
-        </label>
-        <textarea
-          value={description}
-          onChange={handleDescriptionChange}
-          placeholder="Large, red & green sofa, seats 10 adults"
-          className="input input-bordered w-full max-w-md mt-1 rounded-full py-3 text-sm"
-        />
+      </div>
+      {/* Post condition dropdown */}
+      <div className="relative inline-block">
+        <button
+          className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
+          type="button"
+          placeholder="select item condition"
+          onClick={() => setIsConditionDropdownOpen(!isConditionDropdownOpen)}
+        >
+          {condition || "select condition"}
+        </button>
+        {isConditionDropdownOpen && (
+          <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
+            <li
+              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+              onClick={() => handleCondition("new")}
+            >
+              new
+            </li>
+            <li
+              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+              onClick={() => handleCondition("old")}
+            >
+              old
+            </li>
+          </ul>
+        )}
       </div>
 
       <InputButton
@@ -178,7 +195,8 @@ function InputForm() {
             imgUrl != null &&
             address !== "" &&
             description !== "" &&
-            itemType !== ""
+            itemType !== "" &&
+            condition !== ""
           )
         }
       />
