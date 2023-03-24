@@ -3,6 +3,7 @@ import Cards from "./Cards";
 import { db } from "../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import Filter from "./Filter";
+import ReturnToTopButton from "./ReturnToTopButton";
 
 function ViewPage() {
   const [data, setData] = useState([]);
@@ -41,6 +42,8 @@ function ViewPage() {
         <div className="overflow-x-auto">
           <Cards data={posts} />
         </div>
+
+        <ReturnToTopButton/>
       </div>
     </div>
   );

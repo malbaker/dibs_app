@@ -12,7 +12,7 @@ function App() {
     <div className="drawer h-screen bg-lm-blue font-outfit">
       <BrowserRouter>
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content" id="scrolledElement">
           <Navbar />
           <div className="hero min-h-screen">
             <Routes>
