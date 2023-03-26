@@ -6,6 +6,7 @@ import PostPage from "./components/PostPage"; // import the PostPage component
 import ViewPage from "./components/ViewPage";
 import ContactPage from "./components/ContactPage";
 import FAQ from "./components/faq";
+import ReturnToTop from "./components/ReturnToTopButton";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           </div>
         </div>
         <Sidebar />
+        {window.location.pathname === "/view" ? <ReturnToTop /> : null}
       </BrowserRouter>
     </div>
   );
