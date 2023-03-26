@@ -13,7 +13,7 @@ export default function ReturnToTopButton() {
       viewBox="0 0 24 24"
       strokeWidth={6}
       stroke="currentColor"
-      className="w-9 h-12"
+      className="w-9 h-12 bg-buttons"
       onClick={() => onClick()}
       style={{ position: "sticky", bottom: 0, left: 0 }}
     >
