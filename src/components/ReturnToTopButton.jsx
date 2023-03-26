@@ -7,21 +7,24 @@ export default function ReturnToTopButton() {
   }
 
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={6}
-      stroke="currentColor"
-      className="w-9 h-12 bg-buttons"
+    <div
+      style={{ position: "sticky", bottom: 5, left: 5 }}
+      className="w-8 h-8 rounded-full bg-black black"
       onClick={() => onClick()}
-      style={{ position: "sticky", bottom: 0, left: 0 }}
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
-      />
-    </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        strokeWidth={2}
+        stroke="white"
+      >
+        <path
+          fillRule="evenodd"
+          d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </div>
   );
 }
