@@ -19,7 +19,7 @@ function FAQ() {
               dibs! is a project led by four students at Boston University. As busy
               college students, we know how challenging it can be to find furniture
               that both meets your financial needs, and is easy to aquire. Through
-              dibs!, we hope to make affordable furniture more accessible to
+              dibs!, we hope to make affordable furniture more accessible to more
               students.{" "}
             </p>
           </div>
