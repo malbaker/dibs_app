@@ -16,7 +16,7 @@ async function getCoordinates() {
 }
 
 // Uses reverse geocoding to lookup an address based on coordinates
-export default async function getLocation(coordinates) {
+export default async function getAddress(coordinates) {
   coordinates = coordinates || (await getCoordinates());
 
   const uri = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${
@@ -32,6 +32,6 @@ export default async function getLocation(coordinates) {
   const data = await response.json();
 
   return Object.assign({}, coordinates, {
-    formated_address: data.results[0].formatted_address,
+    formatted_address: data.results[0].formatted_address,
   });
 }

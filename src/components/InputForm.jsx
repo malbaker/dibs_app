@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../config/firebase";
 import InputButton from "./InputButton";
+import getAddress from "./Location";
 
 function InputForm() {
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState({});
+  useEffect(() => {
+    getAddress().then((address) => setAddress(address));
+  }, []);
+
   const [description, setDescription] = useState("");
   const [itemType, setItemType] = useState("");
   const [isItemTypeDropdownOpen, setIsItemTypeDropdownOpen] = useState(false);
@@ -14,10 +19,6 @@ function InputForm() {
   const [progressPercent, setProgressPercent] = useState(0);
   const [condition, setCondition] = useState("");
   const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
-
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
-  };
 
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
@@ -102,9 +103,8 @@ function InputForm() {
         </label>
         <input
           type="text"
-          value={address}
-          onChange={handleAddressChange}
-          placeholder="123 Main Street, Awesomeville, Maine, 10034"
+          readOnly
+          placeholder={address.formatted_address}
           name="address"
           className="input input-bordered input-md w-full max-w-full mt-0 rounded-full mb-3"
         />
@@ -198,7 +198,6 @@ function InputForm() {
           !!(
             progressPercent === 100 &&
             imgUrl != null &&
-            address !== "" &&
             description !== "" &&
             itemType !== "" &&
             condition !== ""
