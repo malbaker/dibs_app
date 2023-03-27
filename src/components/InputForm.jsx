@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../config/firebase";
-import InputButton from "./InputButton";
+import FinalInputButton from "./FinalInputButton";
+import CloseButton from "./CloseButton";
 
 function InputForm() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [itemType, setItemType] = useState("");
@@ -73,10 +75,16 @@ function InputForm() {
         condition,
       });
       console.log("Document written with ID: ", docRef.id);
+      setIsModalOpen(false);
     } catch (err) {
       console.error("Error adding document: ", err);
     }
     window.location.href = "/view";
+  };
+
+  /* For modal*/
+  const handleClick = () => {
+    setIsModalOpen(true);
   };
 
   return (
@@ -113,8 +121,8 @@ function InputForm() {
       <textarea
         value={description}
         onChange={handleDescriptionChange}
-        placeholder="Write a short description"
-        className="input input-bordered input-md w-full max-w-full my-2 rounded-full"
+        placeholder="write a short description"
+        className="input input-bordered input-md w-full max-w-full my-2 rounded-full pt-2"
       />
       {/* Post category dropdown */}
       <div className="relative inline-block my-2">
@@ -189,22 +197,31 @@ function InputForm() {
         )}
       </div>
 
-      <InputButton
-        onClick={(e) => {
-          handleSubmit(e);
-        }}
-        label="post item"
-        isActive={
-          !!(
-            progressPercent === 100 &&
-            imgUrl != null &&
-            address !== "" &&
-            description !== "" &&
-            itemType !== "" &&
-            condition !== ""
-          )
-        }
-      />
+      <div>
+        <a
+          href="#my-modal-2"
+          className="btn mt-3 rounded-full pl-6 pr-6 bg-buttons border-none"
+        >
+          post item
+        </a>
+
+        <div className="modal" id="my-modal-2">
+          <div className="modal-box">
+            <h3 className="font-outfit text-lg pl-4 pr-4 pt-5">
+              are you sure you would like to post this item?
+            </h3>
+            <div className="modal-action mr-20 mb-5">
+              <FinalInputButton
+                onClick={(e) => {
+                  handleSubmit(e);
+                }}
+                label="yes"
+              />
+              <CloseButton label="no" />
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
   );
 }
