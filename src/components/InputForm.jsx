@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../config/firebase";
 import InputButton from "./InputButton";
@@ -71,6 +71,9 @@ function InputForm() {
         address,
         image: imgUrl,
         condition,
+        expiration: Timestamp.fromDate(
+          new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+        ),
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (err) {
@@ -208,5 +211,4 @@ function InputForm() {
     </form>
   );
 }
-
 export default InputForm;
