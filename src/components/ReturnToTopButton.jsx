@@ -9,7 +9,7 @@ export default function ReturnToTopButton() {
   return (
     <div
       style={{ position: "sticky", bottom: 5, left: 5 }}
-      className="w-8 h-8 rounded-full bg-black black"
+      className="w-12 h-12 rounded-full bg-black black"
       onClick={() => onClick()}
     >
       <svg
