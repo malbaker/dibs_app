@@ -66,6 +66,7 @@ function Card({ post }) {
             ✕
           </label>
           <h3 className="text-lg font-bold">{post.description}</h3>
+
           <button
             onClick={() => claimItem(post)}
             className="btn mt-1 lowercase text-dm-blue bg-buttons hover:bg-buttons rounded-full border-transparent focus:border-transparent focus:ring-0"
