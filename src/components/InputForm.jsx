@@ -83,8 +83,8 @@ function InputForm() {
   };
 
   /* For modal*/
-  const handleClick = () => {
-    setIsModalOpen(true);
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -207,17 +207,17 @@ function InputForm() {
 
         <div className="modal" id="my-modal-2">
           <div className="modal-box">
-            <h3 className="font-outfit text-lg pl-4 pr-4 pt-5">
+            <h3 className="font-outfit text-xl pl-4 pr-4 pt-7">
               are you sure you would like to post this item?
             </h3>
-            <div className="modal-action mr-20 mb-5">
+            <div className="modal-action mr-10 mb-5">
               <FinalInputButton
                 onClick={(e) => {
                   handleSubmit(e);
                 }}
                 label="yes"
               />
-              <CloseButton label="no" />
+              <CloseButton label="no" type="button" onClick={handleCloseModal} />
             </div>
           </div>
         </div>
