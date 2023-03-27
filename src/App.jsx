@@ -5,7 +5,7 @@ import HomePage from "./components/HomePage";
 import PostPage from "./components/PostPage"; // import the PostPage component
 import ViewPage from "./components/ViewPage";
 import ContactPage from "./components/ContactPage";
-import FAQ from "./components/faq";
+import FAQ from "./components/FAQ";
 import ReturnToTop from "./components/ReturnToTopButton";
 
 function App() {
