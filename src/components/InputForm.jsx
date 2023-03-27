@@ -3,10 +3,8 @@ import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../config/firebase";
 import FinalInputButton from "./FinalInputButton";
-import CloseButton from "./CloseButton";
 
 function InputForm() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [itemType, setItemType] = useState("");
@@ -16,6 +14,14 @@ function InputForm() {
   const [progressPercent, setProgressPercent] = useState(0);
   const [condition, setCondition] = useState("");
   const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
+
+  const isActive =
+    address !== "" &&
+    description !== "" &&
+    itemType !== "" &&
+    condition !== "" &&
+    progressPercent === 100 &&
+    imgUrl != null;
 
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
@@ -78,16 +84,10 @@ function InputForm() {
         ),
       });
       console.log("Document written with ID: ", docRef.id);
-      setIsModalOpen(false);
     } catch (err) {
       console.error("Error adding document: ", err);
     }
     window.location.href = "/view";
-  };
-
-  /* For modal*/
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
   };
 
   return (
@@ -120,7 +120,7 @@ function InputForm() {
           className="input input-bordered input-md w-full max-w-full mt-0 rounded-full mb-3"
         />
       </div>
-
+      {/* Post description input */}
       <textarea
         value={description}
         onChange={handleDescriptionChange}
@@ -200,19 +200,29 @@ function InputForm() {
         )}
       </div>
 
-      <div>
-        <a
-          href="#my-modal-2"
-          className="btn mt-3 rounded-full pl-6 pr-6 bg-buttons border-none"
+      <div className="my-3">
+        {/* The button to open modal */}
+        <label
+          htmlFor="my-modal-4"
+          className={`mt-4 px-6 py-3 text-white rounded-full border-transparent focus:border-transparent focus:ring-0 uppercase ${
+            !isActive
+              ? "btn-disabled"
+              : "bg-buttons btn from-gray-400 to-buttons hover:from-gray-400 hover:to-buttons"
+          }`}
         >
-          post item
-        </a>
+          Post item
+        </label>
 
-        <div className="modal" id="my-modal-2">
-          <div className="modal-box">
-            <h3 className="font-outfit text-xl pl-4 pr-4 pt-7">
-              are you sure you would like to post this item?
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+        <label htmlFor="my-modal-4" className="modal cursor-pointer">
+          <label className="modal-box relative" htmlFor="">
+            <h3 className="text-lg font-bold">
+              Are you sure you want to post this item?
             </h3>
+            <p className="py-4">
+              If so click YES below. If not, click outside of this popup window
+            </p>
             <div className="modal-action mr-10 mb-5 mt-4">
               <FinalInputButton
                 onClick={(e) => {
@@ -220,10 +230,9 @@ function InputForm() {
                 }}
                 label="yes"
               />
-              <CloseButton label="no" type="button" onClick={handleCloseModal} />
             </div>
-          </div>
-        </div>
+          </label>
+        </label>
       </div>
     </form>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { db, storage } from "../config/firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
@@ -34,7 +34,7 @@ async function claimItem(post) {
 
 function Card({ post }) {
   return (
-    <>
+    <div>
       <div
         className="card card-compact w-96 bg-base-100 shadow-xl text-dm-blue"
         style={{ margin: "20px" }}
@@ -62,7 +62,10 @@ function Card({ post }) {
       <input type="checkbox" id={`modal-${post.id}`} className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
-          <label htmlFor={`modal-${post.id}`} className="btn btn-sm btn-circle absolute right-2 top-2">
+          <label
+            htmlFor={`modal-${post.id}`}
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
             ✕
           </label>
           <h3 className="text-lg font-bold">{post.description}</h3>
@@ -75,7 +78,7 @@ function Card({ post }) {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

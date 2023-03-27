@@ -12,7 +12,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@esbuild/darwin-arm64": "^0.17.12",
     "daisyui": "^2.50.1",
     "dotenv": "^16.0.3",
     "firebase": "^9.17.1",
@@ -45,6 +44,7 @@
     "vite-plugin-eslint": "^1.8.1"
   },
   "optionalDependencies": {
+    "@esbuild/darwin-arm64": "^0.17.14",
     "esbuild-linux-64": "^0.15.18"
   }
 }

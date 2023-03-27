@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function FinalInputButton({ onClick, label }) {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center ">
       <button
         onClick={(e) => {
           onClick(e);
