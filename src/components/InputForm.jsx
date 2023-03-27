@@ -210,7 +210,7 @@ function InputForm() {
             <h3 className="font-outfit text-xl pl-4 pr-4 pt-7">
               are you sure you would like to post this item?
             </h3>
-            <div className="modal-action mr-10 mb-5">
+            <div className="modal-action mr-10 mb-5 mt-4">
               <FinalInputButton
                 onClick={(e) => {
                   handleSubmit(e);
