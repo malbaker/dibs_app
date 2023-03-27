@@ -47,7 +47,11 @@ function Card({ post }) {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{post.category}</h2>
-        <p className="card-actions justify-beginning">{post.address}</p>
+        <p className="card-actions justify-beginning">
+          {post.address.formatted_address
+            ? post.address.formatted_address
+            : post.address}
+        </p>
         <div className="card-actions justify-end">
           <button
             onClick={() => claimItem(post)}
