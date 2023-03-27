@@ -33,19 +33,11 @@ async function claimItem(post) {
 }
 
 function Card({ post }) {
-  const [showModal, setShowModal] = useState(false); // state to track whether the modal should be shown
-
-  const handleClaimItem = async () => {
-    // handle claim item logic
-    setShowModal(false); // hide the modal after claim item is successful
-  };
-
   return (
     <>
       <div
-        className="card card-compact w-96 bg-base-100 shadow-xl text-dm-blue cursor-pointer"
+        className="card card-compact w-96 bg-base-100 shadow-xl text-dm-blue"
         style={{ margin: "20px" }}
-        onClick={() => setShowModal(true)} // show the modal when the card is clicked
       >
         <figure>
           <img
