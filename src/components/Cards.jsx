@@ -35,7 +35,7 @@ async function claimItem(post) {
 function Card({ post }) {
   return (
     <div
-      className="card card-compact w-96 bg-base-100 shadow-xl text-dm-blue"
+      className="card card-compact w-80 bg-base-100 shadow-xl text-dm-blue"
       style={{ margin: "20px" }}
     >
       <figure>

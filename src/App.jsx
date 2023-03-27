@@ -14,7 +14,7 @@ function App() {
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           <Navbar />
-          <div className="hero min-h-screen">
+          <div className="hero min-h-screen" style={{ overflowX: "hidden" }}>
             <Routes>
               <Route exact path="/" element={<HomePage />} />
               <Route path="/post" element={<PostPage />} />
