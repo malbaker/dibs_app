@@ -16,7 +16,7 @@ function Filter({ filter, setFilter, data, setPosts }) {
   });
 
   return (
-    <div className="flex flex-col my-4">
+    <div className="flex flex-col my-4" style={{ margin: "20px" }}>
       <button
         onClick={() => onClick()}
         id="filterButton"

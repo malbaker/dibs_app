@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../config/firebase";
-import InputButton from "./InputButton";
+import FinalInputButton from "./FinalInputButton";
 
 function InputForm() {
   const [address, setAddress] = useState("");
@@ -14,6 +14,14 @@ function InputForm() {
   const [progressPercent, setProgressPercent] = useState(0);
   const [condition, setCondition] = useState("");
   const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
+
+  const isActive =
+    address !== "" &&
+    description !== "" &&
+    itemType !== "" &&
+    condition !== "" &&
+    progressPercent === 100 &&
+    imgUrl != null;
 
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
@@ -71,6 +79,9 @@ function InputForm() {
         address,
         image: imgUrl,
         condition,
+        expiration: Timestamp.fromDate(
+          new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+        ),
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (err) {
@@ -109,12 +120,12 @@ function InputForm() {
           className="input input-bordered input-md w-full max-w-full mt-0 rounded-full mb-3"
         />
       </div>
-
+      {/* Post description input */}
       <textarea
         value={description}
         onChange={handleDescriptionChange}
-        placeholder="Write a short description"
-        className="input input-bordered input-md w-full max-w-full my-2 rounded-full"
+        placeholder="write a short description"
+        className="input input-bordered input-md w-full max-w-full my-2 rounded-full pt-2"
       />
       {/* Post category dropdown */}
       <div className="relative inline-block my-2">
@@ -189,24 +200,41 @@ function InputForm() {
         )}
       </div>
 
-      <InputButton
-        onClick={(e) => {
-          handleSubmit(e);
-        }}
-        label="post item"
-        isActive={
-          !!(
-            progressPercent === 100 &&
-            imgUrl != null &&
-            address !== "" &&
-            description !== "" &&
-            itemType !== "" &&
-            condition !== ""
-          )
-        }
-      />
+      <div className="my-3">
+        {/* The button to open modal */}
+        <label
+          htmlFor="my-modal-4"
+          className={`mt-4 px-6 py-3 text-white rounded-full border-transparent focus:border-transparent focus:ring-0 uppercase ${
+            !isActive
+              ? "btn-disabled"
+              : "bg-buttons btn from-gray-400 to-buttons hover:from-gray-400 hover:to-buttons"
+          }`}
+        >
+          Post item
+        </label>
+
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+        <label htmlFor="my-modal-4" className="modal cursor-pointer">
+          <label className="modal-box relative" htmlFor="">
+            <h3 className="text-lg font-bold">
+              Are you sure you want to post this item?
+            </h3>
+            <p className="py-4">
+              If so click YES below. If not, click outside of this popup window
+            </p>
+            <div className="modal-action mr-10 mb-5 mt-4">
+              <FinalInputButton
+                onClick={(e) => {
+                  handleSubmit(e);
+                }}
+                label="yes"
+              />
+            </div>
+          </label>
+        </label>
+      </div>
     </form>
   );
 }
-
 export default InputForm;
