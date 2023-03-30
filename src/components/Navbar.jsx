@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React from "react";
 import { BiUserCircle } from "react-icons/bi";
 
@@ -34,7 +36,7 @@ function Navbar() {
         <div className="ml-auto">
           <button className="btn bg-transparent border-0">
             {" "}
-            <a className="text-black text-xl pr-3" href="/">
+            <a className="text-black text-xl" href="/">
               <BiUserCircle />
             </a>
           </button>
