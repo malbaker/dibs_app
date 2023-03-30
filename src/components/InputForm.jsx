@@ -83,6 +83,7 @@ function InputForm() {
           new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
         ),
         timeadded: Timestamp.fromDate(new Date()),
+        claimed: false,
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (err) {
