@@ -21,8 +21,19 @@ function HomePage() {
             />
           </div>
         </div>
-        <div className="mt-6 ">
-          <p className="text-left font-outfit font-light mb-1">Newest items..</p>
+        <div className="mt-6 flex items-center justify-between -mb-1">
+          <div>
+            <p className="text-left font-outfit font-light mb-1">Newest items..</p>
+          </div>
+          <div>
+            <a href="/view">
+              <button className="text-outfit font-thin text-md bg-transparent py-2 px-4 rounded-lg">
+                more
+              </button>
+            </a>
+          </div>
+        </div>
+        <div>
           <Carousel />
         </div>
       </div>

@@ -95,9 +95,7 @@ function InputForm() {
       {/* File upload for post image */}
       <div className="form-control w-full max-w-xs ">
         <label className="label">
-          <span className="label-text text-dm-blue font-semibold">
-            Upload an image, limit 1(one)
-          </span>
+          <span className="label-text text-dm-blue font-regular">UPLOAD IMAGE</span>
         </label>
         <input
           className="file-input file-input-bordered w-full max-w-xs rounded-full mb-3"
@@ -109,7 +107,9 @@ function InputForm() {
       {/* Post address input */}
       <div className="form-control w-full max-w-xs ">
         <label className="label">
-          <span className="label-text text-dm-blue">Street Address*</span>
+          <span className="label-text text-dm-blue font-regular">
+            ITEM LOCATION*
+          </span>
         </label>
         <input
           type="text"
@@ -204,7 +204,7 @@ function InputForm() {
         {/* The button to open modal */}
         <label
           htmlFor="my-modal-4"
-          className={`mt-4 px-6 py-3 text-white rounded-full border-transparent focus:border-transparent focus:ring-0 uppercase ${
+          className={`mt-4 px-10 py-4 text-white rounded-full border-transparent focus:border-transparent focus:ring-0 uppercase ${
             !isActive
               ? "btn-disabled"
               : "bg-buttons btn from-gray-400 to-buttons hover:from-gray-400 hover:to-buttons"
@@ -220,9 +220,6 @@ function InputForm() {
             <h3 className="text-lg font-bold">
               Are you sure you want to post this item?
             </h3>
-            <p className="py-4">
-              If so click YES below. If not, click outside of this popup window
-            </p>
             <div className="modal-action mr-10 mb-5 mt-4">
               <FinalInputButton
                 onClick={(e) => {

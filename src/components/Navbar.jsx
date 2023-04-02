@@ -36,7 +36,7 @@ function Navbar() {
         <div className="ml-auto">
           <button className="btn bg-transparent border-0">
             {" "}
-            <a className="text-black text-xl" href="/">
+            <a className="text-black text-xl" href="/profile">
               <BiUserCircle />
             </a>
           </button>

@@ -14,6 +14,7 @@ module.exports = {
         buttons: "#66878F", //blueish green button color
         error: "#F87272",
         carousel: "#E4DCBE",
+        fonts: "#2F4247",
       },
 
       fontFamily: {
