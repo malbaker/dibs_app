@@ -1,5 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { HiArrowsUpDown } from "react-icons/hi2";
 
 function Filter({ filter, setFilter, data, setPosts }) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -18,11 +21,11 @@ function Filter({ filter, setFilter, data, setPosts }) {
   return (
     <div className="flex flex-col my-4" style={{ margin: "20px" }}>
       <button
-        onClick={() => onClick()}
+        onClick={onClick}
         id="filterButton"
-        className="btn mt-2 bg-buttons hover:bg-buttons w-3/4 text-dm-blue rounded-full border-transparent focus:border-transparent focus:ring-0 justify-center"
+        className="ml-2 -mt-8 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
       >
-        Filter
+        <HiArrowsUpDown className="text-white" />
       </button>
 
       <div id="filterDropdown">
