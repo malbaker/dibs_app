@@ -6,9 +6,9 @@ import InputButton from "./InputButton";
 import getAddress from "./Location";
 
 function InputForm() {
-  const [address, setAddress] = useState({});
+  const [address, setAddress] = useState("");
   useEffect(() => {
-    getAddress().then((address) => setAddress(address));
+    getAddress().then((address) => setAddress(address.formatted_address || ""));
   }, []);
 
   const [description, setDescription] = useState("");
@@ -19,6 +19,10 @@ function InputForm() {
   const [progressPercent, setProgressPercent] = useState(0);
   const [condition, setCondition] = useState("");
   const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
+
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
 
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
@@ -103,8 +107,9 @@ function InputForm() {
         </label>
         <input
           type="text"
-          readOnly
-          placeholder={address.formatted_address}
+          value={address}
+          onChange={handleAddressChange}
+          placeholder=""
           name="address"
           className="input input-bordered input-md w-full max-w-full mt-0 rounded-full mb-3"
         />
