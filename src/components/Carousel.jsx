@@ -3,19 +3,24 @@ import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 const Carousel = () => {
-  const [recentImages, setRecentImages] = useState([]);
-
-  const fetchRecentImages = async () => {
-    const postsRef = collection(db, "posts");
-    const q = query(postsRef, orderBy("timestamp", "desc"), limit(7));
-    const querySnapshot = await getDocs(q);
-
-    const images = querySnapshot.docs.map((doc) => doc.data().image);
-    setRecentImages(images);
-  };
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetchRecentImages();
+    const fetchData = async () => {
+      const q = query(collection(db, "posts"), limit(7));
+      const querySnapshot = await getDocs(q);
+      setData(() => {
+        let data = querySnapshot.docs.map((doc) => {
+          let post = doc.data();
+          post["id"] = doc.id;console.log(doc)
+          return post;
+        });
+
+        return data;
+      });
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -23,9 +28,9 @@ const Carousel = () => {
       className="carousel carousel-center max-w-md p-4 bg-carousel rounded-box"
       style={{ height: "150px" }}
     >
-      {recentImages.map((image, index) => (
-        <div key={index} className="carousel-item" style={{ margin: "0 5px" }}>
-          <img src={image} className="rounded-box" alt="" />
+      {data.map((post) => (
+        <div key={post.id} className="carousel-item" style={{ margin: "0 5px" }}>
+          <img src={post.image} className="rounded-box" alt="" />
         </div>
       ))}
     </div>
