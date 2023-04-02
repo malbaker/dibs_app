@@ -1,18 +1,18 @@
 // Returns coordinate points of device
 async function getCoordinates() {
-  const uri = `https://www.googleapis.com/geolocation/v1/geolocate?key=${
-    import.meta.env.VITE_FIREBASE_APIKEY
-  }`;
-  let response = await fetch(uri, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
+  return new Promise((resolve, reject) => {
+    // Checks if geolocation is available
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        resolve({
+          lat: position.coords.latitude.toFixed(6),
+          lng: position.coords.longitude.toFixed(6),
+        });
+      });
+    } else {
+      reject("geolocation doesn't work");
+    }
   });
-
-  const data = await response.json();
-  return data.location;
 }
 
 // Uses reverse geocoding to lookup an address based on coordinates
@@ -32,6 +32,6 @@ export default async function getAddress(coordinates) {
   const data = await response.json();
 
   return Object.assign({}, coordinates, {
-    formatted_address: data.results[0].formatted_address,
+    formatted_address: data.results[0].formatted_address || "...",
   });
 }
