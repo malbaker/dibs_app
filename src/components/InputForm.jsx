@@ -290,7 +290,6 @@ function InputForm() {
         />
       </div>
 
-
       <div className="my-3 mt-6">
         {/* The button to open modal */}
         <label
