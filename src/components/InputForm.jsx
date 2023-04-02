@@ -93,12 +93,14 @@ function InputForm() {
   return (
     <form className="flex flex-col items-center">
       {/* File upload for post image */}
-      <div className="form-control w-full max-w-xs ">
+      <div className="form-control w-full max-w-xs">
         <label className="label">
-          <span className="label-text text-dm-blue font-regular">UPLOAD IMAGE</span>
+          <span className="label-text text-dm-blue font-regular -mb-1">
+            UPLOAD IMAGE
+          </span>
         </label>
         <input
-          className="file-input file-input-bordered w-full max-w-xs rounded-full mb-3"
+          className="font-light file-input file-input-buttons h-11 w-full max-w-lg rounded-full mb-3"
           type="file"
           accept="image/*"
           onChange={(e) => handleFileUpload(e)}
@@ -107,7 +109,7 @@ function InputForm() {
       {/* Post address input */}
       <div className="form-control w-full max-w-xs ">
         <label className="label">
-          <span className="label-text text-dm-blue font-regular">
+          <span className="label-text text-dm-blue font-regular -mb-1">
             ITEM LOCATION*
           </span>
         </label>
@@ -117,90 +119,115 @@ function InputForm() {
           onChange={handleAddressChange}
           placeholder="123 Main Street, Awesomeville, Maine, 10034"
           name="address"
-          className="input input-bordered input-md w-full max-w-full mt-0 rounded-full mb-3"
+          className="input input-md h-11 w-80 max-w-80 mt-0 rounded-full mb-3"
         />
       </div>
-      {/* Post description input */}
-      <textarea
-        value={description}
-        onChange={handleDescriptionChange}
-        placeholder="write a short description"
-        className="input input-bordered input-md w-full max-w-full my-2 rounded-full pt-2"
-      />
-      {/* Post category dropdown */}
-      <div className="relative inline-block my-2">
-        <button
-          className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
-          type="button"
-          placeholder="select item type"
-          onClick={() => setIsItemTypeDropdownOpen(!isItemTypeDropdownOpen)}
-        >
-          {itemType || "select item type"}
-        </button>
-        {isItemTypeDropdownOpen && (
-          <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
-            <li
-              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-              onClick={() => handleItemType("furniture")}
-            >
-              furniture
-            </li>
-            <li
-              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-              onClick={() => handleItemType("home decor")}
-            >
-              home decor
-            </li>
-            <li
-              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-              onClick={() => handleItemType("clothing")}
-            >
-              clothing
-            </li>
-            <li
-              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-              onClick={() => handleItemType("tech items")}
-            >
-              tech items
-            </li>
-            <li
-              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-              onClick={() => handleItemType("other")}
-            >
-              other
-            </li>
-          </ul>
-        )}
-      </div>
-      {/* Post condition dropdown */}
-      <div className="relative inline-block my-2">
-        <button
-          className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
-          type="button"
-          placeholder="select item condition"
-          onClick={() => setIsConditionDropdownOpen(!isConditionDropdownOpen)}
-        >
-          {condition || "select condition"}
-        </button>
-        {isConditionDropdownOpen && (
-          <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
-            <li
-              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-              onClick={() => handleCondition("new")}
-            >
-              new
-            </li>
-            <li
-              className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-              onClick={() => handleCondition("old")}
-            >
-              old
-            </li>
-          </ul>
-        )}
+
+      <div className="form-control w-full max-w-xs ">
+        <label className="label">
+          <span className="label-text text-black font-regular">ADDITIONAL INFO</span>
+        </label>
       </div>
 
-      <div className="my-3">
+      <div className="bg-buttons rounded-3xl flex flex-col px-5 py-4 mt-1 mb-4 ">
+        {/* Post category dropdown */}
+        <div className="relative my-2">
+          <label className="label">
+            <span className="label-text text-white font-thin -mb-1 -mt-4">
+              Item Category
+            </span>
+          </label>
+          <button
+            className="input input-bordered font-light input-md w-80 h-11 rounded-full text-left pl-4"
+            type="button"
+            placeholder="select type"
+            onClick={() => setIsItemTypeDropdownOpen(!isItemTypeDropdownOpen)}
+          >
+            {itemType || "select type"}
+          </button>
+          {isItemTypeDropdownOpen && (
+            <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleItemType("furniture")}
+              >
+                furniture
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleItemType("home decor")}
+              >
+                home decor
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleItemType("clothing")}
+              >
+                clothing
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleItemType("tech items")}
+              >
+                tech items
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleItemType("other")}
+              >
+                other
+              </li>
+            </ul>
+          )}
+        </div>
+        {/* Post condition dropdown */}
+        <div className="relative -mt-1 mb-1">
+          <label className="label">
+            <span className="label-text text-white font-thin -mb-1">
+              Item Condition
+            </span>
+          </label>
+          <button
+            className="input input-bordered font-light input-md w-80 h-11 rounded-full text-left pl-4"
+            type="button"
+            placeholder="select condition"
+            onClick={() => setIsConditionDropdownOpen(!isConditionDropdownOpen)}
+          >
+            {condition || "select condition"}
+          </button>
+          {isConditionDropdownOpen && (
+            <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleCondition("new")}
+              >
+                new
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleCondition("old")}
+              >
+                old
+              </li>
+            </ul>
+          )}
+        </div>
+
+        {/* Post description input */}
+        <label className="label">
+          <span className="label-text text-white font-thin -mb-3">
+            Description of Item
+          </span>
+        </label>
+        <textarea
+          value={description}
+          onChange={handleDescriptionChange}
+          placeholder="write a short description"
+          className="input font-light input-bordered input-md w-full max-w-120 my-2 rounded-3xl pt-2 h-24"
+        />
+      </div>
+
+      <div className="my-3 mt-6">
         {/* The button to open modal */}
         <label
           htmlFor="my-modal-4"
