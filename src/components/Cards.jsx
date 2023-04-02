@@ -47,14 +47,46 @@ function Card({ post }) {
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{post.category}</h2>
-          <p className="card-actions justify-beginning">{post.address}</p>
+          <h2 className="card-title">{post.address}</h2>
+          <div className="flex space-x-2 ">
+            <button className="btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase text-white bg-buttons border-buttons">
+              {post.category}
+            </button>
+            <button
+              className={`btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase ${
+                post.condition === "new"
+                  ? "text-gray-300 bg-transparent border-gray-300"
+                  : "text-gray-700 bg-transparent border-gray-700"
+              }`}
+            >
+              {post.condition}
+            </button>
+            <button
+              className="btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase text-white bg-transparent border-transparent"
+              style={{ backgroundColor: post.color }}
+            >
+              {post.color}
+            </button>
+          </div>
           <div className="card-actions justify-end">
             <label
               htmlFor={`modal-${post.id}`}
-              className="btn mt-1 lowercase text-dm-blue bg-buttons hover:bg-buttons rounded-full border-transparent focus:border-transparent focus:ring-0"
+              className="btn mt-1 lowercase text-buttons bg-transparent hover:bg-buttons hover:text-white hover:border-transparent rounded-full border-buttons focus:border-transparent focus:ring-0 focus:text-white focus: border-transparent"
             >
-              more info
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
             </label>
           </div>
         </div>
@@ -72,7 +104,7 @@ function Card({ post }) {
 
           <button
             onClick={() => claimItem(post)}
-            className="btn mt-1 lowercase text-dm-blue bg-buttons hover:bg-buttons rounded-full border-transparent focus:border-transparent focus:ring-0"
+            className="btn mt-1 lowercase text-white bg-buttons hover:bg-buttons rounded-full border-transparent focus:border-transparent focus:ring-0"
           >
             claim item
           </button>
