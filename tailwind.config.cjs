@@ -4,15 +4,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "lm-blue": "#B9D2CE", //light main blue (ex: background homepage color)
+        "lm-blue": "#E3E3E5", //light main blue (ex: background homepage color)
         "dm-blue": "#142B4F", //dark main blue (ex: homepage header, logo color)
         accent: "#37CDBE",
         neutral: "#3D4451",
         "base-100": "#FFFFFF",
         info: "#3ABFF8",
         success: "#36D399",
-        buttons: "#F0C552", //yellow button color
+        buttons: "#66878F", //blueish green button color
         error: "#F87272",
+        carousel: "#E4DCBE",
+        fonts: "#2F4247",
       },
 
       fontFamily: {

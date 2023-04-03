@@ -1,4 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React from "react";
+import { BiUserCircle } from "react-icons/bi";
 
 function Navbar() {
   return (
@@ -23,13 +26,22 @@ function Navbar() {
       </div>
       <div className="navbar-center">
         <a
-          className="btn text-dm-blue btn-ghost normal-case text-3xl hover:bg-lm-blue hover:text-buttons"
+          className="btn text-dm-blue btn-ghost normal-case text-3xl font-outfit font-thin hover:bg-lm-blue hover:text-buttons"
           href="/"
         >
           dibs!
         </a>
       </div>
-      <div className="navbar-end" />
+      <div className="navbar-end flex">
+        <div className="ml-auto">
+          <button className="btn bg-transparent border-0">
+            {" "}
+            <a className="text-black text-xl" href="/profile">
+              <BiUserCircle />
+            </a>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
