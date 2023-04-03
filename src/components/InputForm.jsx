@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../config/firebase";
 import FinalInputButton from "./FinalInputButton";
+import getAddress from "./Location";
 
 function InputForm() {
   const [address, setAddress] = useState("");
+  useEffect(() => {
+    getAddress().then((address) => setAddress(address.formatted_address || ""));
+  }, []);
+
   const [additionalNotes, setAdditionalNotes] = useState("");
   const [itemType, setItemType] = useState("");
   const [isItemTypeDropdownOpen, setIsItemTypeDropdownOpen] = useState(false);
@@ -91,6 +96,8 @@ function InputForm() {
         expiration: Timestamp.fromDate(
           new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
         ),
+        timeadded: Timestamp.fromDate(new Date()),
+        claimed: false,
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (err) {
@@ -126,7 +133,7 @@ function InputForm() {
           type="text"
           value={address}
           onChange={handleAddressChange}
-          placeholder="123 Main Street, Awesomeville, Maine, 10034"
+          placeholder=""
           name="address"
           className="input input-md h-11 w-80 max-w-80 mt-0 rounded-full mb-3"
         />
@@ -289,6 +296,7 @@ function InputForm() {
           className="input font-light input-bordered input-md w-full max-w-120 my-2 rounded-3xl pt-2 h-20"
         />
       </div>
+
       <div className="my-3 mt-6">
         {/* The button to open modal */}
         <label

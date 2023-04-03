@@ -1,7 +1,7 @@
 import React from "react";
-import { db, storage } from "../config/firebase";
-import { doc, deleteDoc } from "firebase/firestore";
-import { ref, deleteObject } from "firebase/storage";
+import { db } from "../config/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+
 import PropTypes from "prop-types";
 
 function Cards({ data }) {
@@ -16,19 +16,10 @@ function Cards({ data }) {
 
 async function claimItem(post) {
   const docRef = doc(db, "posts", post.id);
-  await deleteDoc(docRef);
 
-  if (post.image != null) {
-    const storageRef = ref(storage, post.image);
-    deleteObject(storageRef)
-      .then(() => {
-        // File deleted successfully
-      })
-      .catch((error) => {
-        // Uh-oh, an error occurred!
-        console.log(error);
-      });
-  }
+  await updateDoc(docRef, {
+    claimed: true,
+  });
   window.location.reload();
 }
 
