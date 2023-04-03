@@ -6,7 +6,7 @@ import FinalInputButton from "./FinalInputButton";
 
 function InputForm() {
   const [address, setAddress] = useState("");
-  const [description, setDescription] = useState("");
+  const [additionalNotes, setAdditionalNotes] = useState("");
   const [itemType, setItemType] = useState("");
   const [isItemTypeDropdownOpen, setIsItemTypeDropdownOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState(null);
@@ -14,12 +14,15 @@ function InputForm() {
   const [progressPercent, setProgressPercent] = useState(0);
   const [condition, setCondition] = useState("");
   const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
+  const [color, setColor] = useState("");
+  const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
 
   const isActive =
     address !== "" &&
-    description !== "" &&
+    additionalNotes !== "" &&
     itemType !== "" &&
     condition !== "" &&
+    color !== "" &&
     progressPercent === 100 &&
     imgUrl != null;
 
@@ -27,8 +30,8 @@ function InputForm() {
     setAddress(event.target.value);
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+  const handleAdditionalNotesChange = (event) => {
+    setAdditionalNotes(event.target.value);
   };
 
   const handleItemType = (type) => {
@@ -39,6 +42,11 @@ function InputForm() {
   const handleCondition = (condition) => {
     setCondition(condition);
     setIsConditionDropdownOpen(false);
+  };
+
+  const handleColor = (color) => {
+    setColor(color);
+    setIsColorDropdownOpen(false);
   };
 
   const handleFileUpload = (event) => {
@@ -74,11 +82,12 @@ function InputForm() {
 
     try {
       const docRef = await addDoc(collection(db, "posts"), {
-        description,
+        additionalNotes,
         category: itemType,
         address,
         image: imgUrl,
         condition,
+        color,
         expiration: Timestamp.fromDate(
           new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
         ),
@@ -214,20 +223,75 @@ function InputForm() {
             </ul>
           )}
         </div>
+        {/* Post color dropdown */}
+        <div className="relative inline-block my-2">
+          <label className="label">
+            <span className="label-text text-white font-thin -mb-1">Item Color</span>
+          </label>
+          <button
+            className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
+            type="button"
+            placeholder="select color"
+            onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
+          >
+            {color || "select color"}
+          </button>
+          {isColorDropdownOpen && (
+            <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                onClick={() => handleColor("red")}
+              >
+                red
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                onClick={() => handleColor("blue")}
+              >
+                blue
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                onClick={() => handleColor("green")}
+              >
+                green
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                onClick={() => handleColor("yellow")}
+              >
+                yellow
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                onClick={() => handleColor("black")}
+              >
+                black
+              </li>
+              <li
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                onClick={() => handleColor("white")}
+              >
+                white
+              </li>
+            </ul>
+          )}
+        </div>
 
-        {/* Post description input */}
+        {/* Post additional notes input */}
         <label className="label">
           <span className="label-text text-white font-thin -mb-3">
-            Description of Item
+            additional notes
           </span>
         </label>
         <textarea
-          value={description}
-          onChange={handleDescriptionChange}
-          placeholder="write a short description"
+          value={additionalNotes}
+          onChange={handleAdditionalNotesChange}
+          placeholder="write any additional notes about your item"
           className="input font-light input-bordered input-md w-full max-w-120 my-2 rounded-3xl pt-2 h-24"
         />
       </div>
+
 
       <div className="my-3 mt-6">
         {/* The button to open modal */}
