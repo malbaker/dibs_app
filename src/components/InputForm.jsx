@@ -139,7 +139,7 @@ function InputForm() {
         />
       </div>
 
-      <div className="form-control w-full max-w-xs ">
+      <div className="form-control w-full max-w-xs -mb-1">
         <label className="label">
           <span className="label-text text-black font-regular">ADDITIONAL INFO</span>
         </label>
@@ -229,12 +229,12 @@ function InputForm() {
           )}
         </div>
         {/* Post color dropdown */}
-        <div className="relative inline-block my-2">
+        <div className="relative inline-block -my-1">
           <label className="label">
             <span className="label-text text-white font-thin -mb-1">Item Color</span>
           </label>
           <button
-            className="input input-bordered input-md w-80 h-12 rounded-full text-left pl-4"
+            className="input input-bordered input-md w-80 h-11 rounded-full text-left font-light pl-4"
             type="button"
             placeholder="select color"
             onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
@@ -285,15 +285,15 @@ function InputForm() {
 
         {/* Post additional notes input */}
         <label className="label">
-          <span className="label-text text-white font-thin -mb-3">
-            additional notes
+          <span className="label-text text-white font-thin -mb-3 mt-1">
+            Additional Notes
           </span>
         </label>
         <textarea
           value={additionalNotes}
           onChange={handleAdditionalNotesChange}
           placeholder="write any additional notes about your item"
-          className="input font-light input-bordered input-md w-full max-w-120 my-2 rounded-3xl pt-2 h-24"
+          className="input font-light input-bordered input-md w-full max-w-120 my-2 rounded-3xl pt-2 h-20"
         />
       </div>
 
@@ -301,7 +301,7 @@ function InputForm() {
         {/* The button to open modal */}
         <label
           htmlFor="my-modal-4"
-          className={`mt-4 px-10 py-4 text-white rounded-full border-transparent focus:border-transparent focus:ring-0 uppercase ${
+          className={`mt-2 px-10 py-4 text-white rounded-full border-transparent focus:border-transparent focus:ring-0 uppercase ${
             !isActive
               ? "btn-disabled"
               : "bg-buttons btn from-gray-400 to-buttons hover:from-gray-400 hover:to-buttons"
@@ -314,15 +314,15 @@ function InputForm() {
         <input type="checkbox" id="my-modal-4" className="modal-toggle" />
         <label htmlFor="my-modal-4" className="modal cursor-pointer">
           <label className="modal-box relative" htmlFor="">
-            <h3 className="text-lg font-bold">
-              Are you sure you want to post this item?
+            <h3 className="text-xl font-light px-8 pt-5">
+              are you sure you want to post this item?
             </h3>
-            <div className="modal-action mr-10 mb-5 mt-4">
+            <div className="modal-action mb-5 mt-4 flex justify-center">
               <FinalInputButton
                 onClick={(e) => {
                   handleSubmit(e);
                 }}
-                label="yes"
+                label="Yes"
               />
             </div>
           </label>

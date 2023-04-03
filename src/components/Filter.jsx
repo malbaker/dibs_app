@@ -1,5 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { HiArrowsUpDown } from "react-icons/hi2";
 
 function Filter({ filter, setFilter, data, setPosts }) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -18,11 +21,11 @@ function Filter({ filter, setFilter, data, setPosts }) {
   return (
     <div className="flex flex-col my-4" style={{ margin: "20px" }}>
       <button
-        onClick={() => onClick()}
+        onClick={onClick}
         id="filterButton"
-        className="btn mt-2 bg-buttons hover:bg-buttons w-3/4 text-dm-blue rounded-full border-transparent focus:border-transparent focus:ring-0 justify-center"
+        className="ml-2 -mt-8 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
       >
-        Filter
+        <HiArrowsUpDown className="text-white" />
       </button>
 
       <div id="filterDropdown">
@@ -157,15 +160,29 @@ function FilterDropdown({ filter, setFilter, data, setPosts }) {
   });
 
   return (
-    <div
-      className="flex flex-col text-dm-blue mt-1"
-      style={{ backgroundColor: "rgb(240 197 82 / var(--tw-bg-opacity))" }}
-    >
-      <h3>Item Type:</h3>
-      {inputs["category"]}
-
-      <h3>Item Condition:</h3>
-      {inputs["condition"]}
+    <div className="bg-gray-300 rounded-3xl p-4">
+      <div className="flex flex-col text-dm-blue -mt-2 rounded-3xl text-left m-2">
+        <h3 className="font-outfit font-light ml-2 mt-3">Item Type:</h3>
+        <div className="flex flex-wrap ml-2">
+          {inputs["category"].map((category, index) => (
+            <div
+              key={index}
+              className="bg-gray-200 rounded-full text-sm font-outfit text-gray-700 mr-2 mt-2 px-3 py-1 w-30"
+            >
+              {category}
+            </div>
+          ))}
+        </div>
+        <h3 className="font-outfit font-light ml-2 mt-3">Item Condition:</h3>
+        {inputs["condition"].map((category, index) => (
+          <div
+            key={index}
+            className="bg-gray-200 rounded-full text-sm font-outfit text-gray-700 mr-2 mt-2 px-3 py-1 w-20"
+          >
+            {category}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
