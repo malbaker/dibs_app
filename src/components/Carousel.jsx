@@ -7,12 +7,12 @@ const Carousel = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(collection(db, "posts"), limit(7));
+      const q = query(collection(db, "posts"), orderBy("timeadded", "desc"), limit(7));
       const querySnapshot = await getDocs(q);
       setData(() => {
         let data = querySnapshot.docs.map((doc) => {
           let post = doc.data();
-          post["id"] = doc.id;console.log(doc)
+          post["id"] = doc.id;
           return post;
         });
 
