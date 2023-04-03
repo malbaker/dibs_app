@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs,
+  where,
+} from "firebase/firestore";
 import { db } from "../config/firebase";
 
 const Carousel = () => {
@@ -9,6 +16,7 @@ const Carousel = () => {
     const fetchData = async () => {
       const q = query(
         collection(db, "posts"),
+        where("claimed", "==", false),
         orderBy("timeadded", "desc"),
         limit(7),
       );
