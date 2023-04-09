@@ -11,7 +11,7 @@ function ViewPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(collection(db, "posts"), where("claimed", "==", false));
+      const q = query(collection(db, "posts"));
       const querySnapshot = await getDocs(q);
 
       setData(() => {

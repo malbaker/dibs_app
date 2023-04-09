@@ -9,7 +9,7 @@ function ClaimButton({ post }) {
   const handleClaim = async () => {
     setIsClaimed(true);
     const docRef = doc(db, "posts", post.id);
-    await updateDoc(docRef, { claimed: false }); //temporary solution until we figure out what to do with this
+    await updateDoc(docRef, { claimed: true }); //temporary solution until we figure out what to do with this
   };
 
   return (
