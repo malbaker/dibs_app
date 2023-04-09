@@ -2,9 +2,9 @@ import React from "react";
 
 function Sidebar() {
   return (
-    <div className="drawer-side font-outfit">
+    <div className="drawer-side font-outfit font-light">
       <label htmlFor="my-drawer" className="drawer-overlay" />
-      <ul className="menu p-4 w-screen text-5xl bg-dm-blue text-lm-blue">
+      <ul className="menu p-4 w-screen text-5xl bg-buttons text-lm-blue">
         <label htmlFor="my-drawer" className="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@ function Sidebar() {
           </a>
         </li>
 
-        <li className="text-buttons mt-96">
+        <li className="text-dm-blue">
           <a className=" active:bg-dm-blue active:text-lm-blue" href="/contact">
             contact
           </a>

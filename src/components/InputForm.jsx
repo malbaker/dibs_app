@@ -164,31 +164,31 @@ function InputForm() {
           {isItemTypeDropdownOpen && (
             <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
                 onClick={() => handleItemType("furniture")}
               >
                 furniture
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
                 onClick={() => handleItemType("home decor")}
               >
                 home decor
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
                 onClick={() => handleItemType("clothing")}
               >
                 clothing
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
                 onClick={() => handleItemType("tech items")}
               >
                 tech items
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
                 onClick={() => handleItemType("other")}
               >
                 other
@@ -214,16 +214,16 @@ function InputForm() {
           {isConditionDropdownOpen && (
             <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
                 onClick={() => handleCondition("new")}
               >
-                new
+                brand new
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
                 onClick={() => handleCondition("old")}
               >
-                old
+                used
               </li>
             </ul>
           )}
@@ -244,37 +244,37 @@ function InputForm() {
           {isColorDropdownOpen && (
             <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
                 onClick={() => handleColor("red")}
               >
                 red
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                className="font-outfit font-light x-3 py-2 hover:bg-gray-200 cursor-pointer"
                 onClick={() => handleColor("blue")}
               >
                 blue
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
                 onClick={() => handleColor("green")}
               >
                 green
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
                 onClick={() => handleColor("yellow")}
               >
                 yellow
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
                 onClick={() => handleColor("black")}
               >
                 black
               </li>
               <li
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
                 onClick={() => handleColor("white")}
               >
                 white
@@ -317,7 +317,7 @@ function InputForm() {
             <h3 className="text-xl font-light px-8 pt-5">
               are you sure you want to post this item?
             </h3>
-            <div className="modal-action mb-5 mt-4 flex justify-center">
+            <div className="modal-action lowercase mb-5 mt-4 flex justify-center">
               <FinalInputButton
                 onClick={(e) => {
                   handleSubmit(e);
