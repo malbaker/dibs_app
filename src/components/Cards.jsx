@@ -1,6 +1,7 @@
 import React from "react";
 import { db } from "../config/firebase";
 import { doc, updateDoc } from "firebase/firestore";
+import LikeButton from "./LikeButton";
 
 import PropTypes from "prop-types";
 
@@ -58,47 +59,13 @@ function Card({ post }) {
             >
               {post.color}
             </button>
+            <div className="flex justify-start"></div>
           </div>
           <div className="card-actions justify-end">
-            <label
-              htmlFor={`modal-${post.id}`}
-              className="btn mt-1 lowercase text-buttons bg-transparent hover:bg-buttons hover:text-white hover:border-transparent rounded-full border-buttons focus:border-transparent focus:ring-0 focus:text-white focus: border-transparent"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-            </label>
+            <div className="flex items-center mr-4 -mt-20">
+              <LikeButton />
+            </div>
           </div>
-        </div>
-      </div>
-      <input type="checkbox" id={`modal-${post.id}`} className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box relative">
-          <label
-            htmlFor={`modal-${post.id}`}
-            className="btn btn-sm btn-circle absolute right-2 top-2"
-          >
-            ✕
-          </label>
-          <h3 className="text-lg font-bold">{post.description}</h3>
-
-          <button
-            onClick={() => claimItem(post)}
-            className="btn mt-1 lowercase text-white bg-buttons hover:bg-buttons rounded-full border-transparent focus:border-transparent focus:ring-0"
-          >
-            claim item
-          </button>
         </div>
       </div>
     </div>
