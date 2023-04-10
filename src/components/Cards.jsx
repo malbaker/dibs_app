@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { db, storage } from "../config/firebase";
-import { doc, deleteDoc } from "firebase/firestore";
-import { ref, deleteObject } from "firebase/storage";
+import { db } from "../config/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import LikeButton from "./LikeButton";
 import PropTypes from "prop-types";
 import ClaimButton from "./ClaimButton";
 
@@ -52,6 +52,7 @@ function Card({ post }) {
             >
               {post.color}
             </button>
+            <div className="flex justify-start"></div>
           </div>
           <div className="card-actions justify-end">
             <label
