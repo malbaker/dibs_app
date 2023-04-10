@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { db } from "../config/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import Filter from "./Filter";
 
 function ViewPage() {
@@ -11,7 +11,7 @@ function ViewPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(collection(db, "posts"));
+      const q = query(collection(db, "posts"), orderBy("timeadded", "desc"));
       const querySnapshot = await getDocs(q);
 
       setData(() => {
