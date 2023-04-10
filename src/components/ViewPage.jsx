@@ -67,4 +67,29 @@ function ViewPage() {
   );
 }
 
+function MapView() {
+  // Initialize and add the map
+  let map;
+
+  async function initMap() {
+    // Hardcoded location
+    const position = { lat: -25.344, lng: 131.031 };
+
+    // Request needed libraries.
+    const { Map } = await google.maps.importLibrary("maps");
+
+    // The map, centered at hardcoded location
+    map = new Map(document.getElementById("map"), {
+      zoom: 7,
+      center: position,
+    });
+  }
+
+  useEffect(() => {
+    initMap().then(() => console.log(document.getElementById("map")));
+  }, []);
+
+  return <div id="map" style={{ width: "100%", height: "100%" }}></div>;
+}
+
 export default ViewPage;
