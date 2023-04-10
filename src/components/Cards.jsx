@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React from "react";
-import { db } from "../config/firebase";
-import { doc, updateDoc } from "firebase/firestore";
-
+import { db, storage } from "../config/firebase";
+import { doc, deleteDoc } from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
 import PropTypes from "prop-types";
+import ClaimButton from "./ClaimButton";
 
 function Cards({ data }) {
   return (
@@ -12,15 +15,6 @@ function Cards({ data }) {
       ))}
     </div>
   );
-}
-
-async function claimItem(post) {
-  const docRef = doc(db, "posts", post.id);
-
-  await updateDoc(docRef, {
-    claimed: true,
-  });
-  window.location.reload();
 }
 
 function Card({ post }) {
@@ -62,7 +56,7 @@ function Card({ post }) {
           <div className="card-actions justify-end">
             <label
               htmlFor={`modal-${post.id}`}
-              className="btn mt-1 lowercase text-buttons bg-transparent hover:bg-buttons hover:text-white hover:border-transparent rounded-full border-buttons focus:border-transparent focus:ring-0 focus:text-white focus: border-transparent"
+              className="btn-sm mt-1 lowercase text-buttons bg-transparent hover:bg-buttons hover:text-white hover:border-transparent rounded-full focus:border-transparent focus:ring-0 focus:text-white focus: border-transparent"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +73,7 @@ function Card({ post }) {
                 />
               </svg>
             </label>
+            <ClaimButton post={post} />
           </div>
         </div>
       </div>
@@ -92,22 +87,11 @@ function Card({ post }) {
             ✕
           </label>
           <h3 className="text-lg font-bold">{post.description}</h3>
-
-          <button
-            onClick={() => claimItem(post)}
-            className="btn mt-1 lowercase text-white bg-buttons hover:bg-buttons rounded-full border-transparent focus:border-transparent focus:ring-0"
-          >
-            claim item
-          </button>
         </div>
       </div>
     </div>
   );
 }
-
-Cards.propTypes = {
-  data: PropTypes.array,
-};
 
 Card.propTypes = {
   post: PropTypes.object,
