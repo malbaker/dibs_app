@@ -81,9 +81,11 @@ function MapView() {
 
   async function initMap() {
     // Uses your geolocation to position map
-    const coordinates =  await getCoordinates()
-    const position = coordinates ? {lat: coordinates.lat, lng: coordinates.lng} : {lat: 42.349925, lng: -71.103130}
-    
+    const coordinates = await getCoordinates();
+    const position = coordinates
+      ? { lat: coordinates.lat, lng: coordinates.lng }
+      : { lat: 42.349925, lng: -71.10313 };
+
     // Request needed libraries.
     const { Map } = await google.maps.importLibrary("maps");
 
