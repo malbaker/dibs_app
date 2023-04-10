@@ -1,12 +1,12 @@
 // Returns coordinate points of device
-async function getCoordinates() {
+export async function getCoordinates() {
   return new Promise((resolve, reject) => {
     // Checks if geolocation is available
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         resolve({
-          lat: position.coords.latitude.toFixed(6),
-          lng: position.coords.longitude.toFixed(6),
+          lat: parseFloat(position.coords.latitude.toFixed(3)),
+          lng: parseFloat(position.coords.longitude.toFixed(3)),
         });
       });
     } else {
