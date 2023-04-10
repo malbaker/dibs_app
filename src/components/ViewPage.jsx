@@ -79,9 +79,9 @@ function MapView() {
   let map;
 
   async function initMap() {
-    // Hardcoded location
-    const position = { lat: -25.344, lng: 131.031 };
-
+    // Uses your geolocation to position map
+    const position = await getCoordinates() || {lat: 42.349925, lng: -71.103130}
+    
     // Request needed libraries.
     const { Map } = await google.maps.importLibrary("maps");
 
@@ -91,7 +91,7 @@ function MapView() {
       center: position,
     });
 
-    // A marker positioned at hardcoded location
+    // A marker positioned at your coordinates
     const marker = new google.maps.Marker({
       map: map,
       position: position,
