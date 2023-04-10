@@ -83,6 +83,12 @@ function MapView() {
       zoom: 7,
       center: position,
     });
+
+    // A marker positioned at hardcoded location
+    const marker = new google.maps.Marker({
+      map: map,
+      position: position,
+    });
   }
 
   useEffect(() => {
