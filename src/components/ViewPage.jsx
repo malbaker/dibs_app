@@ -89,7 +89,7 @@ function MapView() {
 
     // The map, centered at hardcoded location
     map = new Map(document.getElementById("map"), {
-      zoom: 10,
+      zoom: 15,
       center: position,
     });
 
