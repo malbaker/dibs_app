@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { db } from "../config/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import LikeButton from "./LikeButton";
-
 import PropTypes from "prop-types";
+import ClaimButton from "./ClaimButton";
 
 function Cards({ data }) {
   return (
@@ -13,15 +15,6 @@ function Cards({ data }) {
       ))}
     </div>
   );
-}
-
-async function claimItem(post) {
-  const docRef = doc(db, "posts", post.id);
-
-  await updateDoc(docRef, {
-    claimed: true,
-  });
-  window.location.reload();
 }
 
 function Card({ post }) {
@@ -62,19 +55,44 @@ function Card({ post }) {
             <div className="flex justify-start"></div>
           </div>
           <div className="card-actions justify-end">
-            <div className="flex items-center mr-4 -mt-20">
-              <LikeButton />
-            </div>
+            <label
+              htmlFor={`modal-${post.id}`}
+              className="btn-sm mt-1 lowercase text-buttons bg-transparent hover:bg-buttons hover:text-white hover:border-transparent rounded-full focus:border-transparent focus:ring-0 focus:text-white focus: border-transparent"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </label>
+            <ClaimButton post={post} />
           </div>
+        </div>
+      </div>
+      <input type="checkbox" id={`modal-${post.id}`} className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box relative">
+          <label
+            htmlFor={`modal-${post.id}`}
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <h3 className="text-lg font-bold">{post.description}</h3>
         </div>
       </div>
     </div>
   );
 }
-
-Cards.propTypes = {
-  data: PropTypes.array,
-};
 
 Card.propTypes = {
   post: PropTypes.object,
