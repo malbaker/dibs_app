@@ -41,7 +41,7 @@ function ViewPage() {
       style={{ width: "100%", height: "100%" }}
     >
       <div
-        className="max-w-fit mx-auto pt-20 justify-center"
+        className="pt-20 justify-center"
         style={{ width: "100%", height: "100%" }}
       >
         <input
