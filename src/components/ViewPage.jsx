@@ -59,10 +59,16 @@ function ViewPage() {
           setPosts={setPosts}
         />
 
-        <div className="overflow-x-auto -mt-6">
-          <Cards data={posts} />
-        </div>
+        {mapView ? <MapView /> : <ListView posts={posts} />}
       </div>
+    </div>
+  );
+}
+
+function ListView({ posts }) {
+  return (
+    <div className="overflow-x-auto -mt-6">
+      <Cards data={posts} />
     </div>
   );
 }
