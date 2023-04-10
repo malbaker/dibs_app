@@ -4,6 +4,7 @@ import Cards from "./Cards";
 import { db } from "../config/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import Filter from "./Filter";
+import { getCoordinates } from "./Location";
 
 function ViewPage() {
   const [mapView, setMapView] = useState(false);
@@ -80,14 +81,15 @@ function MapView() {
 
   async function initMap() {
     // Uses your geolocation to position map
-    const position = await getCoordinates() || {lat: 42.349925, lng: -71.103130}
+    const coordinates =  await getCoordinates()
+    const position = coordinates ? {lat: coordinates.lat, lng: coordinates.lng} : {lat: 42.349925, lng: -71.103130}
     
     // Request needed libraries.
     const { Map } = await google.maps.importLibrary("maps");
 
     // The map, centered at hardcoded location
     map = new Map(document.getElementById("map"), {
-      zoom: 7,
+      zoom: 10,
       center: position,
     });
 
