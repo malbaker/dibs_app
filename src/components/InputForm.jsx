@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  Timestamp,
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDoc,
+} from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { db, storage } from "../config/firebase";
+import { db, storage, auth } from "../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import FinalInputButton from "./FinalInputButton";
 import getAddress from "./Location";
 
 function InputForm() {
+  const [user] = useAuthState(auth);
   const [address, setAddress] = useState("");
   useEffect(() => {
     getAddress().then((address) => setAddress(address.formatted_address || ""));
@@ -24,10 +34,8 @@ function InputForm() {
 
   const isActive =
     address !== "" &&
-    additionalNotes !== "" &&
     itemType !== "" &&
     condition !== "" &&
-    color !== "" &&
     progressPercent === 100 &&
     imgUrl != null;
 
@@ -100,6 +108,21 @@ function InputForm() {
         claimed: false,
       });
       console.log("Document written with ID: ", docRef.id);
+      const userRef = doc(db, "users", user.uid);
+      getDoc(userRef)
+        .then((doc) => {
+          if (doc.exists()) {
+            console.log("Document exists");
+            updateDoc(userRef, {
+              myPosts: arrayUnion(docRef.id),
+            });
+          } else {
+            console.log("Document does not exist");
+          }
+        })
+        .catch((error) => {
+          console.error("Error checking if document exists: ", error);
+        });
     } catch (err) {
       console.error("Error adding document: ", err);
     }

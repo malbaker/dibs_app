@@ -1,10 +1,11 @@
-/* eslint-disable */
+/* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { db } from "../config/firebase";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import Filter from "./Filter";
 import { getCoordinates } from "./Location";
+import PropTypes from "prop-types";
 
 function ViewPage() {
   const [mapView, setMapView] = useState(false);
@@ -77,36 +78,38 @@ function ListView({ posts }) {
 
 function MapView() {
   // Initialize and add the map
-  let map;
-
-  async function initMap() {
-    // Uses your geolocation to position map
-    const coordinates = await getCoordinates();
-    const position = coordinates
-      ? { lat: coordinates.lat, lng: coordinates.lng }
-      : { lat: 42.349925, lng: -71.10313 };
-
-    // Request needed libraries.
-    const { Map } = await google.maps.importLibrary("maps");
-
-    // The map, centered at hardcoded location
-    map = new Map(document.getElementById("map"), {
-      zoom: 15,
-      center: position,
-    });
-
-    // A marker positioned at your coordinates
-    const marker = new google.maps.Marker({
-      map: map,
-      position: position,
-    });
-  }
 
   useEffect(() => {
+    let map;
+    async function initMap() {
+      // Uses your geolocation to position map
+      const coordinates = await getCoordinates();
+      const position = coordinates
+        ? { lat: coordinates.lat, lng: coordinates.lng }
+        : { lat: 42.349925, lng: -71.10313 };
+
+      // Request needed libraries.
+      const { Map } = await google.maps.importLibrary("maps");
+
+      // The map, centered at hardcoded location
+      map = new Map(document.getElementById("map"), {
+        zoom: 15,
+        center: position,
+      });
+
+      // A marker positioned at your coordinates
+      const marker = new google.maps.Marker({
+        map: map,
+        position: position,
+      });
+    }
+
     initMap().then(() => console.log(document.getElementById("map")));
   }, []);
 
   return <div id="map" style={{ width: "100%", height: "100%" }}></div>;
 }
-
+ListView.propTypes = {
+  posts: PropTypes.array,
+};
 export default ViewPage;

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import HomePage from "./components/HomePage";
-import PostPage from "./components/PostPage"; // import the PostPage component
+import PostPage from "./components/PostPage";
 import ViewPage from "./components/ViewPage";
 import ContactPage from "./components/ContactPage";
 import FAQ from "./components/FAQ";
@@ -21,9 +21,7 @@ function App() {
               <Route exact path="/" element={<HomePage />} />
               <Route path="/post" element={<PostPage />} />
               <Route path="/view" element={<ViewPage />} />
-
               <Route path="/contact" element={<ContactPage />} />
-
               <Route path="/faq" element={<FAQ />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>

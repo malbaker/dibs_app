@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from "react";
 import { db } from "../config/firebase";
-import { doc, updateDoc } from "firebase/firestore";
-import LikeButton from "./LikeButton";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../config/firebase";
+//import LikeButton from "./LikeButton";
 import PropTypes from "prop-types";
 import ClaimButton from "./ClaimButton";
 
@@ -18,6 +18,16 @@ function Cards({ data }) {
 }
 
 function Card({ post }) {
+  const [user] = useAuthState(auth);
+  // call it like this ---> favoritePost(post.id, user.uid);
+  async function favoritePost(postId, userId) {
+    const userRef = doc(db, "users", userId);
+
+    await updateDoc(userRef, {
+      myFavorites: arrayUnion(postId),
+    });
+  }
+
   return (
     <div>
       <div
@@ -96,6 +106,9 @@ function Card({ post }) {
 
 Card.propTypes = {
   post: PropTypes.object,
+};
+Cards.propTypes = {
+  data: PropTypes.array,
 };
 
 export default Cards;
