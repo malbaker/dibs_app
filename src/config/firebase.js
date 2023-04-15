@@ -6,6 +6,7 @@ import {
   where,
   addDoc,
   getDocs,
+  limit,
 } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import {
@@ -51,7 +52,7 @@ async function googleSignIn() {
         const docs = await getDocs(q);
         if (docs.docs.length === 0) {
           await addDoc(collection(db, "users"), {
-            uid: user.uid,
+            id: user.uid,
             name: user.displayName,
             authProvider: "google",
             email: user.email,
@@ -59,14 +60,14 @@ async function googleSignIn() {
             myFavorites: [],
             myClaims: [],
           });
+        } else {
+          console.log("User already exists");
         }
       })();
     })
     .catch((error) => {
       console.error(error);
     });
-  /////////////////////////////////////////////
-  window.locaton.href = "/profile";
 }
 
 const logout = () => {

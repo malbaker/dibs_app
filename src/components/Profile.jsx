@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 function Profile() {
   const [user] = useAuthState(auth);
+  const firstName = user?.displayName.split(" ")[0];
 
   return (
     <div className="h-screen flex justify-start items-center mr-48 ml-14 -mt-48">
@@ -17,9 +18,7 @@ function Profile() {
               USER IS SIGNED IN
              */}
             <p className="text-5xl leading-tight">Hello,</p>
-            <p className="text-5xl leading-tight">
-              {user.displayName.split(" ")[0]}!
-            </p>
+            <p className="text-5xl leading-tight">{firstName}!</p>
             <div className="mt-10">
               <div className="mb-4">
                 <button className="text-outfit font-thin text-3xl whitespace-nowrap flex items-center space-x-2 bg-transparent text-buttons py-2 px-4 rounded-lg">
@@ -58,6 +57,9 @@ function Profile() {
             <p className="text-5xl leading-tight">Hello,</p>
             <p className="text-3xl leading-tight">
               You&apos;re not currently signed in.
+            </p>
+            <p className="text-xl leading-tight">
+              By signing in, you can make your dibs experience more personalized.
             </p>
             <div className="mt-10">
               <div className="mb-4">

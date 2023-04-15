@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { db, auth } from "../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDocs,
+  query,
+  collection,
+  where,
+} from "firebase/firestore";
 import PropTypes from "prop-types";
 
 function ClaimButton({ post }) {
@@ -10,13 +18,20 @@ function ClaimButton({ post }) {
 
   const handleClaim = async () => {
     setIsClaimed(true);
-    const docRef = doc(db, "posts", post.id);
-    const userRef = doc(db, "users", user.uid);
+    const postRef = doc(db, "posts", post.id);
+    await updateDoc(postRef, { claimed: true });
 
-    await updateDoc(userRef, {
-      myFavorites: arrayUnion(post.id),
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
+    const users = await getDocs(q);
+    users.forEach((dbuser) => {
+      const userRef = doc(db, "users", dbuser.id);
+      (async () => {
+        await updateDoc(userRef, {
+          myClaims: arrayUnion(post.id),
+        });
+      })();
+      console.log(`Updated user ${userRef.id} with claimed post ${post.id}!`);
     });
-    await updateDoc(docRef, { claimed: true }); //temporary solution until we figure out what to do with this
   };
 
   return (

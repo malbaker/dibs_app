@@ -1,6 +1,15 @@
 import React from "react";
 import { db } from "../config/firebase";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import {
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  query,
+  collection,
+  where,
+  getDocs,
+  doc,
+} from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase";
 //import LikeButton from "./LikeButton";
@@ -19,12 +28,19 @@ function Cards({ data }) {
 
 function Card({ post }) {
   const [user] = useAuthState(auth);
-  // call it like this ---> favoritePost(post.id, user.uid);
-  async function favoritePost(postId, userId) {
-    const userRef = doc(db, "users", userId);
-
-    await updateDoc(userRef, {
-      myFavorites: arrayUnion(postId),
+  // call it like this ---> favoritePost(post.id);
+  async function favoritePost() {
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
+    const users = await getDocs(q);
+    users.forEach((dbuser) => {
+      const userRef = doc(db, "users", dbuser.id);
+      (async () => {
+        await updateDoc(userRef, {
+          myFavorites: arrayUnion(post.id),
+          // myFavorites: arrayRemove(post.id), TODO: write logic to remove if already favorited
+        });
+      })();
+      console.log(`Updated user ${userRef.id} with claimed post ${post.id}!`);
     });
   }
 
