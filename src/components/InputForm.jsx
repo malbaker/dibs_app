@@ -6,7 +6,6 @@ import {
   doc,
   updateDoc,
   arrayUnion,
-  getDoc,
 } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage, auth } from "../config/firebase";
@@ -109,20 +108,10 @@ function InputForm() {
       });
       console.log("Document written with ID: ", docRef.id);
       const userRef = doc(db, "users", user.uid);
-      getDoc(userRef)
-        .then((doc) => {
-          if (doc.exists()) {
-            console.log("Document exists");
-            updateDoc(userRef, {
-              myPosts: arrayUnion(docRef.id),
-            });
-          } else {
-            console.log("Document does not exist");
-          }
-        })
-        .catch((error) => {
-          console.error("Error checking if document exists: ", error);
-        });
+
+      await updateDoc(userRef, {
+        myPosts: arrayUnion(docRef.id),
+      });
     } catch (err) {
       console.error("Error adding document: ", err);
     }
