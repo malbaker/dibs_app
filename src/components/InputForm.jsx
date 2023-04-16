@@ -110,6 +110,7 @@ function InputForm() {
         ),
         timeadded: Timestamp.fromDate(new Date()),
         claimed: false,
+        likes: 0,
       });
       console.log("Document written with ID: ", docRef.id);
       const q = query(

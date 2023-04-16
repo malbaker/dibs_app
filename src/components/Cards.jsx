@@ -9,10 +9,11 @@ import {
   where,
   getDocs,
   doc,
+  limit,
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase";
-//import LikeButton from "./LikeButton";
+import LikeButton from "./LikeButton";
 import PropTypes from "prop-types";
 import ClaimButton from "./ClaimButton";
 
@@ -29,19 +30,19 @@ function Cards({ data }) {
 function Card({ post }) {
   const [user] = useAuthState(auth);
   // call it like this ---> favoritePost(post.id);
-  async function favoritePost() {
-    const q = query(collection(db, "users"), where("uid", "==", user.uid));
+  async function handleFavorite() {
+    const q = query(collection(db, "users"), where("uid", "==", user.uid), limit(1));
     const users = await getDocs(q);
-    users.forEach((dbuser) => {
-      const userRef = doc(db, "users", dbuser.id);
-      (async () => {
-        await updateDoc(userRef, {
-          myFavorites: arrayUnion(post.id),
-          // myFavorites: arrayRemove(post.id), TODO: write logic to remove if already favorited
-        });
-      })();
-      console.log(`Updated user ${userRef.id} with claimed post ${post.id}!`);
-    });
+
+    const userRef = doc(db, "users", users.docs[0].id);
+    (async () => {
+      await updateDoc(userRef, {
+        myFavorites: user.docs[0].data().myFavorites.includes(post.id)
+          ? arrayRemove(post.id)
+          : arrayUnion(post.id),
+      });
+    })();
+    console.log(`Updated user ${userRef.id} with claimed post ${post.id}!`);
   }
 
   return (
@@ -80,26 +81,8 @@ function Card({ post }) {
             </button>
             <div className="flex justify-start"></div>
           </div>
-          <div className="card-actions justify-end">
-            <label
-              htmlFor={`modal-${post.id}`}
-              className="btn-sm mt-1 lowercase text-buttons bg-transparent hover:bg-buttons hover:text-white hover:border-transparent rounded-full focus:border-transparent focus:ring-0 focus:text-white focus: border-transparent"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-            </label>
+          <div className="card-actions space-x-5 justify-end">
+            <LikeButton post={post} />
             <ClaimButton post={post} />
           </div>
         </div>
