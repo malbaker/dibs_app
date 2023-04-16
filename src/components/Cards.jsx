@@ -1,18 +1,4 @@
 import React from "react";
-import { db } from "../config/firebase";
-import {
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-  query,
-  collection,
-  where,
-  getDocs,
-  doc,
-  limit,
-} from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../config/firebase";
 import LikeButton from "./LikeButton";
 import PropTypes from "prop-types";
 import ClaimButton from "./ClaimButton";
@@ -28,23 +14,6 @@ function Cards({ data }) {
 }
 
 function Card({ post }) {
-  const [user] = useAuthState(auth);
-  // call it like this ---> favoritePost(post.id);
-  async function handleFavorite() {
-    const q = query(collection(db, "users"), where("uid", "==", user.uid), limit(1));
-    const users = await getDocs(q);
-
-    const userRef = doc(db, "users", users.docs[0].id);
-    (async () => {
-      await updateDoc(userRef, {
-        myFavorites: user.docs[0].data().myFavorites.includes(post.id)
-          ? arrayRemove(post.id)
-          : arrayUnion(post.id),
-      });
-    })();
-    console.log(`Updated user ${userRef.id} with claimed post ${post.id}!`);
-  }
-
   return (
     <div>
       <div
