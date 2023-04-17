@@ -9,7 +9,7 @@ export default function ReturnToTopButton() {
   return (
     <div
       style={{ position: "sticky", bottom: 5, left: 5 }}
-      className="w-12 h-12 rounded-full bg-black black"
+      className="w-10 h-10 rounded-full bg-transparent black"
       onClick={() => onClick()}
     >
       <svg
@@ -17,7 +17,7 @@ export default function ReturnToTopButton() {
         viewBox="0 0 24 24"
         fill="none"
         strokeWidth={2}
-        stroke="white"
+        stroke="black"
       >
         <path
           fillRule="evenodd"

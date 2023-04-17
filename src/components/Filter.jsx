@@ -19,11 +19,11 @@ function Filter({ filter, setFilter, data, setPosts }) {
   });
 
   return (
-    <div className="flex flex-col my-4" style={{ margin: "20px" }}>
+    <div className="" style={{ margin: "20px 0px 5px 25px" }}>
       <button
         onClick={onClick}
         id="filterButton"
-        className="ml-2 -mt-8 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
+        className="ml-auto -mt-12 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
       >
         <HiArrowsUpDown className="text-white" />
       </button>
