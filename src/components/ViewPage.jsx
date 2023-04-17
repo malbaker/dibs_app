@@ -21,6 +21,7 @@ function ViewPage() {
         let data = querySnapshot.docs.map((doc) => {
           let post = doc.data();
           post["id"] = doc.id;
+          post["status"] = post.claimed ? "claimed" : "unclaimed";
           return post;
         });
 

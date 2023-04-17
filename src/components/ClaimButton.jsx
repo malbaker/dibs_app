@@ -10,6 +10,7 @@ function ClaimButton({ post }) {
     setIsClaimed(true);
     const docRef = doc(db, "posts", post.id);
     await updateDoc(docRef, { claimed: true }); //temporary solution until we figure out what to do with this
+    post["status"] = "claimed";
   };
 
   return (
