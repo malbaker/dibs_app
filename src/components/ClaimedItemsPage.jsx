@@ -24,7 +24,11 @@ function ClaimedItemsPage() {
     fetchData();
   }, []);
 
-  return <Cards data={data} />;
+  return (
+    <div style={{ marginTop: "50px" }}>
+      <Cards data={data} />
+    </div>
+  );
 }
 
 export default ClaimedItemsPage;
