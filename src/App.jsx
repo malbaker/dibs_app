@@ -8,6 +8,7 @@ import ContactPage from "./components/ContactPage";
 import FAQ from "./components/FAQ";
 import ReturnToTop from "./components/ReturnToTopButton";
 import Profile from "./components/Profile";
+import ClaimedItemsPage from "./components/ClaimedItemsPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
 
               <Route path="/faq" element={<FAQ />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/claimed" element={<ClaimedItemsPage />} />
             </Routes>
           </div>
         </div>
