@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 
 function FAQ() {
@@ -47,8 +46,8 @@ function FAQ() {
           </div>
           <div className="collapse-content text-white">
             <p>
-              make sure your photos don't include any personal information that you
-              may not want to share!
+              make sure your photos don&apos;t include any personal information that
+              you may not want to share!
             </p>
           </div>
         </div>

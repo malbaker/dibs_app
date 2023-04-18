@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  Timestamp,
+  updateDoc,
+  arrayUnion,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  doc,
+  limit,
+} from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { db, storage } from "../config/firebase";
+import { db, storage, auth } from "../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import FinalInputButton from "./FinalInputButton";
 import getAddress from "./Location";
 
 function InputForm() {
+  const [user] = useAuthState(auth);
   const [address, setAddress] = useState("");
   useEffect(() => {
     getAddress().then((address) => setAddress(address.formatted_address || ""));
@@ -24,10 +38,8 @@ function InputForm() {
 
   const isActive =
     address !== "" &&
-    additionalNotes !== "" &&
     itemType !== "" &&
     condition !== "" &&
-    color !== "" &&
     progressPercent === 100 &&
     imgUrl != null;
 
@@ -98,12 +110,31 @@ function InputForm() {
         ),
         timeadded: Timestamp.fromDate(new Date()),
         claimed: false,
+        likes: 0,
       });
       console.log("Document written with ID: ", docRef.id);
+      const q = query(
+        collection(db, "users"),
+        where("uid", "==", user.uid),
+        limit(1),
+      );
+      const post = await getDoc(docRef);
+      const users = await getDocs(q);
+
+      users.forEach((dbuser) => {
+        (async () => {
+          const userRef = doc(db, "users", dbuser.id);
+          await updateDoc(userRef, {
+            myPosts: arrayUnion(post.id),
+          });
+        })();
+      });
+      console.log(`Updated user ${user.uid} with their post ${post.id}!`);
     } catch (err) {
       console.error("Error adding document: ", err);
+    } finally {
+      window.location.href = "/view";
     }
-    window.location.href = "/view";
   };
 
   return (
