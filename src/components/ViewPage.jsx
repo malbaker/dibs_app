@@ -38,13 +38,28 @@ function ViewPage() {
   }
 
   return (
-    <div className="hero-content text-center sticky top-0 max-w-screen flex flex-col overflow-x-hidden" style={{ width: "100%", height: "100%" }}>
+    <div
+      className="hero-content text-center sticky top-0 max-w-screen flex flex-col overflow-x-hidden"
+      style={{ width: "100%", height: "100%" }}
+    >
       <div className="pt-20 items-center" style={{ width: "100%", height: "100%" }}>
         <div className="flex items-center justify-between px-4">
-          <button onClick={onToggle} className="mr-auto -mt-12 rounded-full bg-buttons p-2 flex justify-center items-center w-12">
-            {mapView ? <FaListUl className="text-white" /> : <FiMap className="text-white" />}
+          <button
+            onClick={onToggle}
+            className="mr-auto -mt-12 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
+          >
+            {mapView ? (
+              <FaListUl className="text-white" />
+            ) : (
+              <FiMap className="text-white" />
+            )}
           </button>
-          <Filter filter={filter} setFilter={setFilter} data={data} setPosts={setPosts} />
+          <Filter
+            filter={filter}
+            setFilter={setFilter}
+            data={data}
+            setPosts={setPosts}
+          />
         </div>
         {mapView ? <MapView /> : <ListView posts={posts} />}
       </div>
@@ -67,7 +82,9 @@ function MapView() {
   async function initMap() {
     // Uses your geolocation to position map
     const coordinates = await getCoordinates();
-    const position = coordinates ? { lat: coordinates.lat, lng: coordinates.lng } : { lat: 42.349925, lng: -71.10313 };
+    const position = coordinates
+      ? { lat: coordinates.lat, lng: coordinates.lng }
+      : { lat: 42.349925, lng: -71.10313 };
 
     // Request needed libraries.
     const { Map } = await google.maps.importLibrary("maps");
