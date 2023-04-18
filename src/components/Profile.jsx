@@ -21,10 +21,13 @@ function Profile() {
             <p className="text-5xl leading-tight">{firstName}!</p>
             <div className="mt-10">
               <div className="mb-4">
-                <button className="text-outfit font-thin text-3xl whitespace-nowrap flex items-center space-x-2 bg-transparent text-buttons py-2 px-4 rounded-lg">
+                <a
+                  href={`/user/${user.uid}/myfavorites`}
+                  className="text-outfit font-thin text-3xl whitespace-nowrap flex items-center space-x-2 bg-transparent text-buttons py-2 px-4 rounded-lg"
+                >
                   <FaRegHeart size={24} className="mr-3" />
                   <span>my favorites</span>
-                </button>
+                </a>
               </div>
               <div className="mb-4">
                 <button className="text-outfit font-thin text-3xl whitespace-nowrap flex items-center space-x-2 bg-transparent text-buttons py-2 px-4 rounded-lg">
