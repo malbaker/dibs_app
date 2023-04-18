@@ -3,6 +3,7 @@ import HPButtons from "./HPButtons";
 import mapImg from "/images/map.png";
 import Carousel from "./Carousel";
 import ClaimedCarousel from "./ClaimedCarousel";
+import HPNavButtons from "./HPNavButtons";
 
 function HomePage() {
   return (
@@ -57,6 +58,9 @@ function HomePage() {
           </div>
           <div>
             <ClaimedCarousel />
+          </div>
+          <div className="py-5">
+            <HPNavButtons />
           </div>
         </div>
       </div>
