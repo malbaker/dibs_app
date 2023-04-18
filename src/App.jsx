@@ -9,6 +9,7 @@ import FAQ from "./components/FAQ";
 import ReturnToTop from "./components/ReturnToTopButton";
 import Profile from "./components/Profile";
 import MyFavorites from "./components/MyFavorites";
+import ClaimedItemsPage from "./components/ClaimedItemsPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/user/:userId/myfavorites" element={<MyFavorites />} />
+              <Route path="/claimed" element={<ClaimedItemsPage />} />
             </Routes>
           </div>
         </div>

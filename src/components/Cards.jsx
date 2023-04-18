@@ -16,10 +16,7 @@ function Cards({ data }) {
 function Card({ post }) {
   return (
     <div>
-      <div
-        className="card card-compact w-96 bg-base-100 shadow-xl text-dm-blue"
-        style={{ margin: "20px" }}
-      >
+      <div className="card card-compact w-96 bg-base-100 shadow-xl text-dm-blue mt-5">
         <figure>
           <img
             src={post.image}
