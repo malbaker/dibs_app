@@ -20,6 +20,7 @@ function ClaimButton({ post }) {
     setIsClaimed(true);
     const postRef = doc(db, "posts", post.id);
     await updateDoc(postRef, { claimed: true });
+    post["status"] = "claimed";
 
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const users = await getDocs(q);
