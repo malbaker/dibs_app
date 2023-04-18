@@ -52,7 +52,7 @@ async function googleSignIn() {
         const docs = await getDocs(q);
         if (docs.docs.length === 0) {
           await addDoc(collection(db, "users"), {
-            id: user.uid,
+            uid: user.uid,
             name: user.displayName,
             authProvider: "google",
             email: user.email,
