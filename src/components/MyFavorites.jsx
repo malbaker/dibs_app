@@ -57,14 +57,13 @@ function MyFavorites() {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-4xl font-bold mb-6">My Favorites</h1>
       {favoritePosts.length === 0 ? (
         <p className="text-lg font-bold text-center">
           You have no favorited posts yet!
         </p>
       ) : (
         <>
-          <h1 className="ml-6 mt-12 text-3xl font-light mb-6">My Favorites</h1>
+          <h1 className="ml-6 mt-24 text-3xl font-light mb-6">My Favorites</h1>
           <FavoritedCards data={favoritePosts} />
         </>
       )}

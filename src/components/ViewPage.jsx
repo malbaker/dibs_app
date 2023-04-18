@@ -81,29 +81,6 @@ function MapView() {
   // Initialize and add the map
   let map;
 
-  async function initMap() {
-    // Uses your geolocation to position map
-    const coordinates = await getCoordinates();
-    const position = coordinates
-      ? { lat: coordinates.lat, lng: coordinates.lng }
-      : { lat: 42.349925, lng: -71.10313 };
-
-    // Request needed libraries.
-    const { Map } = await google.maps.importLibrary("maps");
-
-    // The map, centered at hardcoded location
-    map = new Map(document.getElementById("map"), {
-      zoom: 17,
-      center: position,
-    });
-
-    // A marker positioned at your coordinates
-    const marker = new google.maps.Marker({
-      map: map,
-      position: position,
-    });
-  }
-
   useEffect(() => {
     let map;
     async function initMap() {

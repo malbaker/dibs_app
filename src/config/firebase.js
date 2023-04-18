@@ -6,7 +6,6 @@ import {
   where,
   addDoc,
   getDocs,
-  limit,
 } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import {
