@@ -41,11 +41,7 @@ const Carousel = () => {
       style={{ height: "150px" }}
     >
       {data.map((post) => (
-        <div
-          key={post.id}
-          className="carousel-item"
-          style={{ margin: "0 5px", width: "50%" }}
-        >
+        <div key={post.id} className="carousel-item my-1 mx-1.5 w-1/2">
           <img src={post.image} className="rounded-box" alt="" />
         </div>
       ))}
