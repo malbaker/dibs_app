@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { db } from "../config/firebase";
@@ -44,6 +44,7 @@ function ViewPage() {
       className="hero-content text-center sticky top-0 max-w-screen flex flex-col overflow-x-hidden"
       style={{ width: "100%", height: "100%" }}
     >
+
       <div className="pt-20 items-center" style={{ width: "100%", height: "100%" }}>
         <div className="flex items-center justify-between px-4">
           <button
@@ -63,6 +64,8 @@ function ViewPage() {
             setPosts={setPosts}
           />
         </div>
+
+
         {mapView ? <MapView /> : <ListView posts={posts} />}
       </div>
     </div>

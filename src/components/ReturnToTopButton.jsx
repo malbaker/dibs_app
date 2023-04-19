@@ -17,7 +17,7 @@ export default function ReturnToTopButton() {
         viewBox="0 0 24 24"
         fill="none"
         strokeWidth={2}
-        stroke="white"
+        stroke="black"
       >
         <path
           fillRule="evenodd"

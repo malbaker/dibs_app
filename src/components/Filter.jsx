@@ -17,7 +17,7 @@ function Filter({ filter, setFilter, data, setPosts }) {
   });
 
   return (
-    <div className="flex items-center" style={{ margin: "20px" }}>
+    <div className="" style={{ margin: "20px 0px 5px 25px" }}>
       <button
         onClick={onClick}
         id="filterButton"
