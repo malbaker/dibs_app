@@ -23,6 +23,10 @@ function InputForm() {
   const [address, setAddress] = useState("");
   useEffect(() => {
     getAddress().then((address) => setAddress(address.formatted_address || ""));
+
+    var input = document.getElementById("address-input");
+    // eslint-disable-next-line no-undef
+    var autocomplete = new google.maps.places.Autocomplete(input);
   }, []);
 
   const [additionalNotes, setAdditionalNotes] = useState("");
@@ -162,6 +166,7 @@ function InputForm() {
         </label>
         <input
           type="text"
+          id="address-input"
           value={address}
           onChange={handleAddressChange}
           placeholder=""
