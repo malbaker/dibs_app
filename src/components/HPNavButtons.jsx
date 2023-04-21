@@ -9,11 +9,11 @@ function HPNavButtons() {
         to="/contact"
         className="bg-buttons text-white font-medium py-3 px-6 rounded-full flex items-center"
       >
-        <CiMail className="mr-2" />
+        <CiMail />
       </Link>
       <Link
         to="/faq"
-        className="bg-buttons text-white font-outfit font-thin py-3 px-8 rounded-3xl"
+        className="bg-buttons text-white font-outfit font-light py-3 px-8 rounded-3xl"
       >
         help / faqs
       </Link>

@@ -14,6 +14,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import FavoritedCards from "./FavoritedCards";
 
 function MyFavorites() {
+  const [loading, setLoading] = useState(false);
   const [favoritePosts, setFavoritePosts] = useState([]);
   const [user] = useAuthState(auth);
 
@@ -39,12 +40,14 @@ function MyFavorites() {
           }
         }
         setFavoritePosts(favorites);
+        setLoading(false);
       }
     }
   }, [user]);
 
   useEffect(() => {
     if (user) {
+      setLoading(true);
       fetchFavorites();
 
       const unsubscribe = onSnapshot(doc(db, "users", user.uid), () => {
@@ -57,14 +60,20 @@ function MyFavorites() {
 
   return (
     <div className="container mx-auto">
-      {favoritePosts.length === 0 ? (
-        <p className="text-lg font-bold text-center">
-          You have no favorited posts yet!
-        </p>
+      {loading ? (
+        <p className="text-lg font-bold text-center">Loading...</p>
       ) : (
         <>
-          <h1 className="ml-6 mt-24 text-3xl font-light mb-6">My Favorites</h1>
-          <FavoritedCards data={favoritePosts} />
+          {favoritePosts.length === 0 ? (
+            <p className="text-lg font-bold text-center">
+              You have no favorited posts yet!
+            </p>
+          ) : (
+            <>
+              <h1 className="ml-6 mt-24 text-3xl font-light mb-6">My Favorites</h1>
+              <FavoritedCards data={favoritePosts} />
+            </>
+          )}
         </>
       )}
     </div>

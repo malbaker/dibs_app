@@ -8,15 +8,16 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
+import PropTypes from "prop-types";
 
-const Carousel = () => {
+const Carousel = ({ claimed }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const q = query(
         collection(db, "posts"),
-        where("claimed", "==", false),
+        where("claimed", "==", claimed),
         orderBy("timeadded", "desc"),
         limit(7),
       );
@@ -33,20 +34,27 @@ const Carousel = () => {
     };
 
     fetchData();
-  }, []);
+  }, [claimed]);
 
   return (
-    <div
-      className="carousel carousel-center max-w-md p-4 bg-carousel rounded-box"
-      style={{ height: "150px" }}
-    >
+    <div className="carousel carousel-center max-w-md p-4 bg-carousel rounded-box h-40 md:h-48">
       {data.map((post) => (
-        <div key={post.id} className="carousel-item my-1 mx-1.5 w-1/2">
-          <img src={post.image} className="rounded-box" alt="" />
+        <div key={post.id} className="carousel-item my-1 mx-1.5 w-3/5 md:w-2/3">
+          <img
+            src={post.image}
+            className="rounded-box"
+            alt={
+              post.additionalNotes && post.additionalNotes !== ""
+                ? post.additionalNotes
+                : "This post has no additional notes."
+            }
+          />
         </div>
       ))}
     </div>
   );
 };
-
+Carousel.propTypes = {
+  claimed: PropTypes.bool,
+};
 export default Carousel;

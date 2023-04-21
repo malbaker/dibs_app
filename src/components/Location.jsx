@@ -3,12 +3,18 @@ export async function getCoordinates() {
   return new Promise((resolve, reject) => {
     // Checks if geolocation is available
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        resolve({
-          lat: parseFloat(position.coords.latitude.toFixed(3)),
-          lng: parseFloat(position.coords.longitude.toFixed(3)),
-        });
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve({
+            lat: parseFloat(position.coords.latitude.toFixed(3)),
+            lng: parseFloat(position.coords.longitude.toFixed(3)),
+          });
+        },
+        (error) => {
+          console.log(error);
+          reject(error);
+        },
+      );
     } else {
       reject("geolocation doesn't work");
     }

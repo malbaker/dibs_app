@@ -1,3 +1,4 @@
+import React from "react";
 export default function ReturnToTopButton() {
   function onClick() {
     document.getElementById("scrolledElement").scrollTo({

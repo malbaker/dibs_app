@@ -79,10 +79,8 @@ function ListView({ posts }) {
 }
 
 function MapView() {
-  // Initialize and add the map
-  let map;
-
   useEffect(() => {
+    // Initialize and add the map
     let map;
     async function initMap() {
       // Uses your geolocation to position map

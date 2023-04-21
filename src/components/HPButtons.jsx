@@ -7,7 +7,7 @@ function HPButtons() {
       <div className="flex flex-col space-y-3 text-xl font-semibold">
         <Link
           to="/post"
-          className="bg-buttons font-outfit text-white font-thin py-12 px-32 rounded-3xl pt-3 pb-3"
+          className="bg-buttons font-outfit text-white font-light py-3 px-32 rounded-3xl"
         >
           post an item
         </Link>

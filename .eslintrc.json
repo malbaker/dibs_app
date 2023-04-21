@@ -13,7 +13,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "regexp"],
   "rules": {
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "quotes": ["error", "double", { "avoidEscape": true }],

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function FavoritedCards({ data }) {
   return (
-    <div className="max-w-fit">
+    <div className="w-fit mt-2 flex flex-col mx-auto md:grid md:gap-x-1 md:grid-cols-2 md:items-center lg:grid-cols-3">
       {data.map((post) => (
         <FavoritedCard key={post.id} post={post} />
       ))}
@@ -15,14 +15,14 @@ function FavoritedCard({ post }) {
   return (
     <div>
       <div
-        className="card card-compact w-96 bg-base-100 shadow-xl text-dm-blue"
+        className="card card-compact bg-base-100 shadow-xl text-dm-blue w-72 mx-7 my-3"
         style={{ margin: "20px" }}
       >
         <figure>
           <img
+            className="w-fit h-64 p-3 object-cover rounded"
             src={post.image}
             alt={post.description}
-            style={{ maxHeight: "40vh", width: "100vh" }}
           />
         </figure>
         <div className="card-body">

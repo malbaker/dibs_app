@@ -17,16 +17,20 @@ import { db, storage, auth } from "../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import FinalInputButton from "./FinalInputButton";
 import getAddress from "./Location";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 function InputForm() {
   const [user] = useAuthState(auth);
   const [address, setAddress] = useState("");
+  const [validAddress, setValidAddress] = useState(false);
   useEffect(() => {
-    getAddress().then((address) => setAddress(address.formatted_address || ""));
-
-    var input = document.getElementById("address-input");
-    // eslint-disable-next-line no-undef
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    getAddress().then((address) => {
+      setAddress(address.formatted_address || "");
+      setValidAddress(true);
+    });
   }, []);
 
   const [additionalNotes, setAdditionalNotes] = useState("");
@@ -41,14 +45,24 @@ function InputForm() {
   const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
 
   const isActive =
+    validAddress &&
     address !== "" &&
     itemType !== "" &&
     condition !== "" &&
     progressPercent === 100 &&
     imgUrl != null;
 
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
+  const handleAddressChange = (address) => {
+    setAddress(address);
+    setValidAddress(false);
+  };
+
+  const handleSelect = async (address) => {
+    const results = await geocodeByAddress(address);
+    const latLng = await getLatLng(results[0]);
+    console.log("Latitude and longitude:", latLng);
+    setAddress(address);
+    setValidAddress(true);
   };
 
   const handleAdditionalNotesChange = (event) => {
@@ -158,22 +172,58 @@ function InputForm() {
         />
       </div>
       {/* Post address input */}
-      <div className="form-control w-full max-w-xs ">
-        <label className="label">
-          <span className="label-text text-dm-blue font-regular -mb-1">
-            ITEM LOCATION*
-          </span>
-        </label>
-        <input
-          type="text"
-          id="address-input"
-          value={address}
-          onChange={handleAddressChange}
-          placeholder=""
-          name="address"
-          className="input input-md h-11 w-80 max-w-80 mt-0 rounded-full mb-3"
-        />
-      </div>
+      <PlacesAutocomplete
+        value={address}
+        onChange={handleAddressChange}
+        onSelect={handleSelect}
+      >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div className="form-control">
+            {validAddress ? (
+              <></>
+            ) : (
+              <label className="label">
+                <span className="label-text font-semibold text-red-500 -mb-1">
+                  Please enter a valid address
+                </span>
+              </label>
+            )}
+            <input
+              className="input input-md h-11 w-80 max-w-80 mt-0 rounded-full mb-3"
+              type="text"
+              {...getInputProps({
+                placeholder: "123 Main St, Boston, MA, USA",
+                className: validAddress
+                  ? "address-input input input-md h-11 w-80 max-w-80 mt-0 rounded-full mb-3"
+                  : "location-search-input address-input input input-md input-warning h-11 w-80 max-w-80 mt-0 rounded-full mb-3",
+              })}
+            />
+            <div className="autocomplete-dropdown-container">
+              {loading && <div>Loading...</div>}
+              {suggestions.map((suggestion, idx) => {
+                const className = suggestion.active
+                  ? "suggestion-item--active bg-gray-100 "
+                  : "suggestion-item bg-gray-300";
+                // inline style for demonstration purpose
+                const style = suggestion.active
+                  ? { backgroundColor: "#7dd3fc", cursor: "pointer" }
+                  : { backgroundColor: "#ffffff", cursor: "pointer" };
+                return (
+                  <div
+                    key={idx}
+                    {...getSuggestionItemProps(suggestion, {
+                      className,
+                      style,
+                    })}
+                  >
+                    <span>{suggestion.description}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </PlacesAutocomplete>
 
       <div className="form-control w-full max-w-xs -mb-1">
         <label className="label">

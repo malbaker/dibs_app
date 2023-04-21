@@ -5,7 +5,7 @@ import ClaimButton from "./ClaimButton";
 
 function Cards({ data }) {
   return (
-    <div className="max-w-fit">
+    <div className="w-fit mt-2 flex flex-col mx-auto md:grid md:gap-x-1 md:grid-cols-2 md:items-center lg:grid-cols-3">
       {data.map((post) => (
         <Card key={post.id} post={post} />
       ))}
@@ -15,40 +15,42 @@ function Cards({ data }) {
 
 function Card({ post }) {
   return (
-    <div>
-      <div
-        className="card card-compact bg-base-100 shadow-xl text-dm-blue"
-        style={{ margin: "25px 1px 20px" }}
-      >
+    <>
+      <div className="card card-compact bg-base-100 shadow-xl text-dm-blue w-72 mx-7 my-3">
         <figure>
           <img
+            className="w-fit h-64 p-3 object-cover rounded"
             src={post.image}
-            alt={post.description}
-            style={{ maxHeight: "40vh", width: "100vh" }}
+            alt={
+              post.additionalNotes && post.additionalNotes !== ""
+                ? post.additionalNotes
+                : "This post has no additional notes."
+            }
           />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{post.address}</h2>
-          <div className="flex space-x-2 ">
+          <div className="flex content-between justify-center space-x-5 mx-auto">
             <button className="btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase text-white bg-buttons border-buttons">
               {post.category}
             </button>
-            <button
-              className={`btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase ${
-                post.condition === "new"
-                  ? "text-gray-300 bg-transparent border-gray-300"
-                  : "text-gray-700 bg-transparent border-gray-700"
-              }`}
-            >
+            <button className="btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-gray-700 bg-transparent border-gray-700">
               {post.condition}
             </button>
-            <button
-              className="btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase text-white bg-transparent border-transparent"
-              style={{ backgroundColor: post.color }}
-            >
-              {post.color}
-            </button>
-            <div className="flex justify-start"></div>
+            {post.color && post.color !== "" ? (
+              <button
+                className={
+                  post.color === "white" || post.color === "yellow"
+                    ? "btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-dm-blue bg-transparent border-dm-blue"
+                    : "btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-white bg-transparent border-transparent"
+                }
+                style={{ backgroundColor: post.color }}
+              >
+                {post.color}
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="card-actions space-x-5 justify-end">
             <LikeButton post={post} />
@@ -68,7 +70,7 @@ function Card({ post }) {
           <h3 className="text-lg font-bold">{post.description}</h3>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
