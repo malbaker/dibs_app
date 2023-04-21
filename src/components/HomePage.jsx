@@ -8,12 +8,9 @@ function HomePage() {
   return (
     <div className="hero-content text-center">
       <div className="max-w-md max-h-screen">
-        <div
-          className="scrollable-container text-gray-700"
-          style={{ height: "100vh", overflowY: "auto", marginTop: "60px" }}
-        >
+        <div className="text-gray-700 overflow-y-auto pt-10">
           <HPButtons />
-          <div className="mt-6 text-dm-blue">
+          <div className="mt-2 text-dm-blue">
             <div className="flex flex-col items-start">
               <p className="text-left font-outfit font-light mb-1">
                 Explore items nearby
@@ -21,19 +18,18 @@ function HomePage() {
               <img
                 src={mapImg}
                 alt="A map"
-                className="rounded-3xl"
-                style={{ maxWidth: "100%", width: "100%", maxHeight: "150px" }}
+                className="rounded-3xl w-full max-w-full h-24 md:h-40 object-cover"
               />
             </div>
           </div>
-          <div className="mt-6 flex items-center justify-between -mb-1">
+          <div className="mt-2 flex items-center justify-between -mb-1">
             <div>
               <p className="text-left font-outfit font-light mb-1">Newest items</p>
             </div>
             <div>
               <a href="/view">
                 <button className="text-outfit font-light underline text-md bg-transparent py-2 px-4 rounded-lg">
-                  See more..
+                  See more...
                 </button>
               </a>
             </div>
@@ -41,7 +37,7 @@ function HomePage() {
           <div>
             <Carousel claimed={false} />
           </div>
-          <div className="mt-6 flex items-center justify-between -mb-1">
+          <div className="mt-2 flex items-center justify-between -mb-1">
             <div>
               <p className="text-left font-outfit font-light mb-1">
                 Recently claimed items

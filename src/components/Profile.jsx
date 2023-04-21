@@ -10,8 +10,8 @@ function Profile() {
   const firstName = user?.displayName.split(" ")[0];
 
   return (
-    <div className="h-screen flex justify-start items-center mr-48 ml-12 -mt-48">
-      <div className="text-outfit text-buttons font-light text-left">
+    <div className="h-screen flex justify-start items-center w-full">
+      <div className="text-outfit text-buttons font-light text-left max-w-xs mx-3 my-1">
         {user ? (
           <>
             {/* 

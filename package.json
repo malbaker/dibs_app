@@ -12,6 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.28",
     "daisyui": "^2.51.5",
     "dotenv": "^16.0.3",
     "firebase": "^9.17.1",
@@ -37,6 +38,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^5.0.0-next-39a3b72c6-20230414",
     "eslint-plugin-regexp": "^1.14.0",
+    "geofire-common": "^6.0.0",
     "husky": "^8.0.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",

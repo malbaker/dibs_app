@@ -14,10 +14,7 @@ function FavoritedCards({ data }) {
 function FavoritedCard({ post }) {
   return (
     <div>
-      <div
-        className="card card-compact bg-base-100 shadow-xl text-dm-blue w-72 mx-7 my-3"
-        style={{ margin: "20px" }}
-      >
+      <div className="card card-compact bg-base-100 shadow-xl text-dm-blue w-72 mx-7 my-3">
         <figure>
           <img
             className="w-fit h-64 p-3 object-cover rounded"

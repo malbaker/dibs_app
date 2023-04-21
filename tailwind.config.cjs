@@ -15,10 +15,21 @@ module.exports = {
         error: "#F87272",
         carousel: "#E4DCBE",
         fonts: "#2F4247",
+        post: {
+          red: "#ef4444",
+          blue: "#0ea5e9",
+          green: "#22c55e",
+          yellow: "#facc15",
+          black: "#030712",
+          white: "#fafafa",
+        },
       },
 
       fontFamily: {
         outfit: ["Outfit", "sans-serif"],
+      },
+      animation: {
+        "spin-reverse": "spin 1s linear reverse infinite",
       },
     },
   },

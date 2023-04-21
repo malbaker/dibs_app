@@ -11,6 +11,7 @@ import {
   where,
   doc,
   limit,
+  GeoPoint,
 } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage, auth } from "../config/firebase";
@@ -26,9 +27,14 @@ function InputForm() {
   const [user] = useAuthState(auth);
   const [address, setAddress] = useState("");
   const [validAddress, setValidAddress] = useState(false);
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
   useEffect(() => {
     getAddress().then((address) => {
+      console.log(address);
       setAddress(address.formatted_address || "");
+      setLat(address.lat || null);
+      setLng(address.lng || null);
       setValidAddress(true);
     });
   }, []);
@@ -62,6 +68,8 @@ function InputForm() {
     const latLng = await getLatLng(results[0]);
     console.log("Latitude and longitude:", latLng);
     setAddress(address);
+    setLat(latLng.lat);
+    setLng(latLng.lng);
     setValidAddress(true);
   };
 
@@ -120,6 +128,7 @@ function InputForm() {
         additionalNotes,
         category: itemType,
         address,
+        coords: new GeoPoint(lat, lng),
         image: imgUrl,
         condition,
         color,
@@ -156,9 +165,9 @@ function InputForm() {
   };
 
   return (
-    <form className="flex flex-col items-center">
+    <form className="flex flex-col items-center mt-1 max-w-xs w-full mx-auto">
       {/* File upload for post image */}
-      <div className="form-control w-full max-w-xs">
+      <div className="form-control">
         <label className="label">
           <span className="label-text text-dm-blue font-regular -mb-1">
             UPLOAD IMAGE
@@ -176,9 +185,10 @@ function InputForm() {
         value={address}
         onChange={handleAddressChange}
         onSelect={handleSelect}
+        searchOptions={{ types: ["address"] }}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="form-control">
+          <>
             {validAddress ? (
               <></>
             ) : (
@@ -189,31 +199,27 @@ function InputForm() {
               </label>
             )}
             <input
-              className="input input-md h-11 w-80 max-w-80 mt-0 rounded-full mb-3"
+              className="input input-md h-11 w-full max-w-xs mt-0 rounded-full mb-3"
               type="text"
               {...getInputProps({
                 placeholder: "123 Main St, Boston, MA, USA",
                 className: validAddress
-                  ? "address-input input input-md h-11 w-80 max-w-80 mt-0 rounded-full mb-3"
-                  : "location-search-input address-input input input-md input-warning h-11 w-80 max-w-80 mt-0 rounded-full mb-3",
+                  ? "address-input input input-md h-11 w-full max-w-full mt-0 rounded-full mb-3"
+                  : "location-search-input address-input input input-md input-warning h-11 w-full max-w-full mt-0 rounded-full mb-3",
               })}
             />
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
               {suggestions.map((suggestion, idx) => {
                 const className = suggestion.active
-                  ? "suggestion-item--active bg-gray-100 "
-                  : "suggestion-item bg-gray-300";
-                // inline style for demonstration purpose
-                const style = suggestion.active
-                  ? { backgroundColor: "#7dd3fc", cursor: "pointer" }
-                  : { backgroundColor: "#ffffff", cursor: "pointer" };
+                  ? "suggestion-item--active rounded-sm text-dm-blue bg-sky-400 hover:bg-sky-400 cursor-pointer"
+                  : "suggestion-item rounded-sm text-dm-blue cursor-pointer bg-gray-100";
+
                 return (
                   <div
                     key={idx}
                     {...getSuggestionItemProps(suggestion, {
                       className,
-                      style,
                     })}
                   >
                     <span>{suggestion.description}</span>
@@ -221,7 +227,7 @@ function InputForm() {
                 );
               })}
             </div>
-          </div>
+          </>
         )}
       </PlacesAutocomplete>
 
@@ -230,8 +236,7 @@ function InputForm() {
           <span className="label-text text-black font-regular">ADDITIONAL INFO</span>
         </label>
       </div>
-
-      <div className="bg-buttons rounded-3xl flex flex-col px-5 py-4 mt-1 mb-4 ">
+      <div className="bg-buttons rounded-3xl w-full flex flex-col px-1.5 py-4 mt-1 mb-4 ">
         {/* Post category dropdown */}
         <div className="relative my-2">
           <label className="label">
@@ -240,7 +245,7 @@ function InputForm() {
             </span>
           </label>
           <button
-            className="input input-bordered font-light input-md w-80 h-11 rounded-full text-left pl-4"
+            className="input input-bordered font-light input-md w-full h-11 rounded-full text-left"
             type="button"
             placeholder="select type"
             onClick={() => setIsItemTypeDropdownOpen(!isItemTypeDropdownOpen)}
@@ -282,6 +287,7 @@ function InputForm() {
             </ul>
           )}
         </div>
+
         {/* Post condition dropdown */}
         <div className="relative -mt-1 mb-1">
           <label className="label">
@@ -290,7 +296,7 @@ function InputForm() {
             </span>
           </label>
           <button
-            className="input input-bordered font-light input-md w-80 h-11 rounded-full text-left pl-4"
+            className="input input-bordered font-light input-md w-full h-11 rounded-full text-left pl-4"
             type="button"
             placeholder="select condition"
             onClick={() => setIsConditionDropdownOpen(!isConditionDropdownOpen)}
@@ -320,7 +326,7 @@ function InputForm() {
             <span className="label-text text-white font-thin -mb-1">Item Color</span>
           </label>
           <button
-            className="input input-bordered input-md w-80 h-11 rounded-full text-left font-light pl-4"
+            className="input input-bordered input-md w-full h-11 rounded-full text-left font-light pl-4"
             type="button"
             placeholder="select color"
             onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
