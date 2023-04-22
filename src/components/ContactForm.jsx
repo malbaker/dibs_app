@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { SlLocationPin } from "react-icons/sl";
 import { SlPhone } from "react-icons/sl";

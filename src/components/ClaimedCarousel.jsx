@@ -9,14 +9,14 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-const Carousel = () => {
+const ClaimedCarousel = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const q = query(
         collection(db, "posts"),
-        where("claimed", "==", false),
+        where("claimed", "==", true),
         orderBy("timeadded", "desc"),
         limit(7),
       );
@@ -41,7 +41,7 @@ const Carousel = () => {
       style={{ height: "150px" }}
     >
       {data.map((post) => (
-        <div key={post.id} className="carousel-item my-1 mx-1.5 w-1/2">
+        <div key={post.id} className="carousel-item mx-1.5 my-1 w-1/2">
           <img src={post.image} className="rounded-box" alt="" />
         </div>
       ))}
@@ -49,4 +49,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default ClaimedCarousel;

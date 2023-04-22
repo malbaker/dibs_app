@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { HiArrowsUpDown } from "react-icons/hi2";
@@ -19,11 +17,11 @@ function Filter({ filter, setFilter, data, setPosts }) {
   });
 
   return (
-    <div className="flex flex-col my-4" style={{ margin: "20px" }}>
+    <div className="" style={{ margin: "20px 0px 5px 25px" }}>
       <button
         onClick={onClick}
         id="filterButton"
-        className="ml-2 -mt-8 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
+        className="ml-auto -mt-12 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
       >
         <HiArrowsUpDown className="text-white" />
       </button>
@@ -55,6 +53,10 @@ function FilterDropdown({ filter, setFilter, data, setPosts }) {
     condition: [
       { index: 0, name: "new" },
       { index: 1, name: "old" },
+    ],
+    status: [
+      { index: 0, name: "claimed" },
+      { index: 1, name: "unclaimed" },
     ],
   };
 
@@ -174,14 +176,27 @@ function FilterDropdown({ filter, setFilter, data, setPosts }) {
           ))}
         </div>
         <h3 className="font-outfit font-light ml-2 mt-3">Item Condition:</h3>
-        {inputs["condition"].map((category, index) => (
-          <div
-            key={index}
-            className="bg-gray-200 rounded-full text-sm font-outfit text-gray-700 mr-2 mt-2 px-3 py-1 w-20"
-          >
-            {category}
-          </div>
-        ))}
+        <div className="flex flex-wrap ml-2">
+          {inputs["condition"].map((category, index) => (
+            <div
+              key={index}
+              className="bg-gray-200 rounded-full text-sm font-outfit text-gray-700 mr-2 mt-2 px-3 py-1 w-20"
+            >
+              {category}
+            </div>
+          ))}
+        </div>
+        <h3 className="font-outfit font-light ml-2 mt-3">Item Status:</h3>
+        <div className="flex flex-wrap ml-2">
+          {inputs["status"].map((category, index) => (
+            <div
+              key={index}
+              className="bg-gray-200 rounded-full text-sm font-outfit text-gray-700 mr-2 mt-2 px-3 py-1 w-30"
+            >
+              {category}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
