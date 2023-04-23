@@ -10,7 +10,7 @@ function Profile() {
   const firstName = user?.displayName.split(" ")[0];
 
   return (
-    <div className="h-screen flex justify-start items-center w-full">
+    <div className="h-screen flex justify-center items-center w-full">
       <div className="text-outfit text-buttons font-light text-left max-w-xs mx-3 my-1">
         {user ? (
           <>
@@ -30,16 +30,22 @@ function Profile() {
                 </a>
               </div>
               <div className="mb-4">
-                <button className="text-outfit font-thin text-3xl whitespace-nowrap flex items-center space-x-2 bg-transparent text-buttons py-2 px-4 rounded-lg">
+                <a
+                  href={`/user/${user.uid}/myposts`}
+                  className="text-outfit font-thin text-3xl whitespace-nowrap flex items-center space-x-2 bg-transparent text-buttons py-2 px-4 rounded-lg"
+                >
                   <BsBoxArrowInUp size={24} className="mr-3" />
                   <span>uploaded items</span>
-                </button>
+                </a>
               </div>
               <div className="mb-4">
-                <button className="text-outfit font-thin text-3xl whitespace-nowrap flex items-center space-x-2 bg-transparent text-buttons py-2 px-4 rounded-lg">
+                <a
+                  href={`/user/${user.uid}/myclaims`}
+                  className="text-outfit font-thin text-3xl whitespace-nowrap flex items-center space-x-2 bg-transparent text-buttons py-2 px-4 rounded-lg"
+                >
                   <BsFillBagCheckFill size={24} className="mr-3" />
                   <span>my claimed items</span>
-                </button>
+                </a>
               </div>
             </div>
             <div className="mb-4">

@@ -11,6 +11,8 @@ import ReturnToTop from "./components/ReturnToTopButton";
 import Profile from "./components/Profile";
 import MyFavorites from "./components/MyFavorites";
 import ClaimedItemsPage from "./components/ClaimedItemsPage";
+import MyClaims from "./components/MyClaims";
+import MyPosts from "./components/MyPosts";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/user/:userId/myfavorites" element={<MyFavorites />} />
+              <Route path="/user/:userId/myclaims" element={<MyClaims />} />
+              <Route path="/user/:userId/myposts" element={<MyPosts />} />
               <Route path="/claimed" element={<ClaimedItemsPage />} />
             </Routes>
           </div>

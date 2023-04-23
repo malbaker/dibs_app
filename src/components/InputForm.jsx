@@ -170,7 +170,7 @@ function InputForm() {
       <div className="form-control">
         <label className="label">
           <span className="label-text text-dm-blue font-regular -mb-1">
-            UPLOAD IMAGE
+            Upload image*
           </span>
         </label>
         <input
@@ -181,6 +181,7 @@ function InputForm() {
         />
       </div>
       {/* Post address input */}
+
       <PlacesAutocomplete
         value={address}
         onChange={handleAddressChange}
@@ -188,9 +189,13 @@ function InputForm() {
         searchOptions={{ types: ["address"] }}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <>
+          <div className="form-control w-full">
             {validAddress ? (
-              <></>
+              <label className="label justify-start text-left">
+                <span className="label-text text-dm-blue font-regular -mb-1 text-left">
+                  Item Address*
+                </span>
+              </label>
             ) : (
               <label className="label">
                 <span className="label-text font-semibold text-red-500 -mb-1">
@@ -227,7 +232,7 @@ function InputForm() {
                 );
               })}
             </div>
-          </>
+          </div>
         )}
       </PlacesAutocomplete>
 
@@ -241,7 +246,7 @@ function InputForm() {
         <div className="relative my-2">
           <label className="label">
             <span className="label-text text-white font-thin -mb-1 -mt-4">
-              Item Category
+              Item Category*
             </span>
           </label>
           <button
@@ -292,7 +297,7 @@ function InputForm() {
         <div className="relative -mt-1 mb-1">
           <label className="label">
             <span className="label-text text-white font-thin -mb-1">
-              Item Condition
+              Item Condition*
             </span>
           </label>
           <button

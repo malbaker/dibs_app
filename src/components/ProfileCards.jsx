@@ -1,25 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function FavoritedCards({ data }) {
+function ProfileCards({ data }) {
   return (
-    <div className="w-fit mt-2 flex flex-col mx-auto md:grid md:gap-x-1 md:grid-cols-2 md:items-center lg:grid-cols-3">
+    <div className="w-fit mt-2 flex flex-col mx-auto md:grid md:gap-x-8 md:grid-cols-2 md:items-center lg:grid-cols-3">
       {data.map((post) => (
-        <FavoritedCard key={post.id} post={post} />
+        <ProfileCard key={post.id} post={post} />
       ))}
     </div>
   );
 }
 
-function FavoritedCard({ post }) {
+function ProfileCard({ post }) {
   return (
     <div>
-      <div className="card card-compact bg-base-100 shadow-xl text-dm-blue w-72 mx-7 my-3">
+      <div className="card card-compact bg-base-100 shadow-xl text-dm-blue max-w-xs w-full mx-auto my-3">
         <figure>
           <img
-            className="w-fit h-64 p-3 object-cover rounded"
+            className=" w-full h-80 p-3 object-cover rounded"
             src={post.image}
-            alt={post.description}
+            alt={
+              post.additionalNotes && post.additionalNotes !== ""
+                ? post.additionalNotes
+                : "This post has no additional notes."
+            }
           />
         </figure>
         <div className="card-body">
@@ -45,11 +49,11 @@ function FavoritedCard({ post }) {
   );
 }
 
-FavoritedCard.propTypes = {
+ProfileCard.propTypes = {
   post: PropTypes.object,
 };
-FavoritedCards.propTypes = {
+ProfileCards.propTypes = {
   data: PropTypes.array,
 };
 
-export default FavoritedCards;
+export default ProfileCards;

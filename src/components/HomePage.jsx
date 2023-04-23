@@ -18,11 +18,11 @@ function HomePage() {
               <img
                 src={mapImg}
                 alt="A map"
-                className="rounded-3xl w-full max-w-full h-24 md:h-40 object-cover"
+                className="rounded-3xl w-full max-w-full h-32 md:h-40 object-cover"
               />
             </div>
           </div>
-          <div className="mt-2 flex items-center justify-between -mb-1">
+          <div className="mt-1 flex items-center justify-between -mb-1">
             <div>
               <p className="text-left font-outfit font-light mb-1">Newest items</p>
             </div>
@@ -37,7 +37,7 @@ function HomePage() {
           <div>
             <Carousel claimed={false} />
           </div>
-          <div className="mt-2 flex items-center justify-between -mb-1">
+          <div className="mt-1 flex items-center justify-between -mb-1">
             <div>
               <p className="text-left font-outfit font-light mb-1">
                 Recently claimed items
