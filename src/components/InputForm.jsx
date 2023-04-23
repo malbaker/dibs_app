@@ -241,7 +241,7 @@ function InputForm() {
           <span className="label-text text-black font-regular">ADDITIONAL INFO</span>
         </label>
       </div>
-      <div className="bg-buttons rounded-3xl w-full flex flex-col px-1.5 py-4 mt-1 mb-4 ">
+      <div className="bg-buttons rounded-3xl w-full flex flex-col px-2 py-4 mt-1 mb-2 ">
         {/* Post category dropdown */}
         <div className="relative my-2">
           <label className="label">
@@ -394,7 +394,7 @@ function InputForm() {
         />
       </div>
 
-      <div className="my-3 mt-6">
+      <div className="my-3">
         {/* The button to open modal */}
         <label
           htmlFor="my-modal-4"

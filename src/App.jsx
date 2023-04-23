@@ -21,7 +21,7 @@ function App() {
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content" id="scrolledElement">
           <Navbar />
-          <div className="hero min-h-screen overflow-x-hidden">
+          <div className="hero min-h-screen">
             <Routes>
               <Route exact path="/" element={<HomePage />} />
               <Route path="/post" element={<PostPage />} />

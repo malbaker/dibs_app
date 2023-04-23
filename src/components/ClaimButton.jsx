@@ -39,21 +39,20 @@ function ClaimButton({ post }) {
         await updateDoc(postRef, { claimed: true });
         post["status"] = "claimed";
 
-        const q = query(collection(db, "users"), where("uid", "==", user.uid));
-        const users = await getDocs(q);
-        users.forEach((dbuser) => {
-          const userRef = doc(db, "users", dbuser.id);
-          (async () => {
-            await updateDoc(userRef, {
-              myClaims: arrayUnion(post.id),
-            });
-          })();
+        if (user) {
+          const q = query(collection(db, "users"), where("uid", "==", user.uid));
+          const users = await getDocs(q);
+
+          const userRef = doc(db, "users", users.docs[0].id);
+          await updateDoc(userRef, {
+            myClaims: arrayUnion(post.id),
+          });
           console.log(`Updated user ${userRef.id} with claimed post ${post.id}!`);
-        });
+        }
       })();
       setLoading(false);
     }
-  }, [distance, post, user.uid]);
+  }, [distance, post, user]);
 
   const handleClaim = async () => {
     setLoading(true);

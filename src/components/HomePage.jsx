@@ -7,7 +7,7 @@ import HPNavButtons from "./HPNavButtons";
 function HomePage() {
   return (
     <div className="hero-content text-center">
-      <div className="max-w-md max-h-screen">
+      <div className="max-w-md">
         <div className="text-gray-700 overflow-y-auto pt-10">
           <HPButtons />
           <div className="mt-2 text-dm-blue">
