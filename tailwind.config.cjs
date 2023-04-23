@@ -15,6 +15,7 @@ module.exports = {
         error: "#F87272",
         carousel: "#E4DCBE",
         fonts: "#2F4247",
+        orange: "#FF9533",
       },
 
       fontFamily: {
