@@ -14,9 +14,13 @@ function ContactForm() {
     e.preventDefault();
     try {
       const docRef = addDoc(collection(db, "messages"), {
-        name,
-        email,
-        message,
+        to: ["malbaker@bu.edu"],
+        from: email,
+        replyTo: email,
+        message: {
+          subject: "Message from dibs user" + name,
+          text: message,
+        },
       });
       console.log("Document written with ID: ", docRef.id);
       alert(
