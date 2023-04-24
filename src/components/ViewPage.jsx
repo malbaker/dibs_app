@@ -61,7 +61,7 @@ function ViewPage() {
           />
         </div>
 
-        {mapView ? <MapView /> : <ListView posts={posts} />}
+        {mapView ? <MapView posts={posts} /> : <ListView posts={posts} />}
       </div>
     </div>
   );
@@ -75,7 +75,7 @@ function ListView({ posts }) {
   );
 }
 
-function MapView() {
+function MapView({ posts }) {
   useEffect(() => {
     // Initialize and add the map
     let map;
@@ -108,6 +108,14 @@ function MapView() {
           { featureType: "transit", stylers: [{ visibility: "off" }] },
         ],
       });
+
+      // Puts a marker on the map for each item
+      for (const post of posts) {
+        new google.maps.Marker({
+          map: map,
+          position: post.coords,
+        });
+      }
     }
 
     initMap().then(() => console.log(document.getElementById("map")));

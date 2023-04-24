@@ -128,7 +128,7 @@ function InputForm() {
         additionalNotes,
         category: itemType,
         address,
-        coords: new GeoPoint(lat, lng),
+        coords: { lat, lng },
         image: imgUrl,
         condition,
         color,
