@@ -42,7 +42,7 @@ const LikeButton = ({ post, onLikeStatusChanged }) => {
   }, [user, post.id]);
 
   const handleLike = async () => {
-    if (user && post.id) {
+    if (post.id) {
       console.log(post.id); // Check if post.id is defined
       const postRef = doc(db, "posts", post.id);
       liked
@@ -51,23 +51,25 @@ const LikeButton = ({ post, onLikeStatusChanged }) => {
 
       setLikesCount(liked ? likesCount - 1 : likesCount + 1);
 
-      const q = query(
-        collection(db, "users"),
-        where("uid", "==", user.uid),
-        limit(1),
-      );
-      const users = await getDocs(q);
+      if (user) {
+        const q = query(
+          collection(db, "users"),
+          where("uid", "==", user.uid),
+          limit(1),
+        );
+        const users = await getDocs(q);
 
-      if (users.docs[0]) {
-        const userRef = doc(db, "users", users.docs[0].id);
-        await updateDoc(userRef, {
-          myFavorites: liked ? arrayRemove(post.id) : arrayUnion(post.id),
-        });
-        setLiked(!liked);
+        if (users.docs[0]) {
+          const userRef = doc(db, "users", users.docs[0].id);
+          await updateDoc(userRef, {
+            myFavorites: liked ? arrayRemove(post.id) : arrayUnion(post.id),
+          });
+          setLiked(!liked);
 
-        // Notify the parent component about the change
-        if (onLikeStatusChanged) {
-          onLikeStatusChanged(!liked);
+          // Notify the parent component about the change
+          if (onLikeStatusChanged) {
+            onLikeStatusChanged(!liked);
+          }
         }
       }
     }

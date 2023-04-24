@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 function HPButtons() {
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col space-y-3 text-xl font-semibold">
+    <div className="flex justify-center mt-2 w-full">
+      <div className="flex space-y-3 md:text-xl font-semibold ">
         <Link
           to="/post"
-          className="bg-buttons font-outfit text-white font-thin py-12 px-32 rounded-3xl pt-3 pb-3"
+          className="bg-buttons font-outfit text-white font-light py-3 px-24 md:px-32 rounded-3xl"
         >
           post an item
         </Link>

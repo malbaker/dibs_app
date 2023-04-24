@@ -5,33 +5,29 @@ import { AiOutlineMail } from "react-icons/ai";
 
 function ContactForm() {
   return (
-    <div className="max-w-screen-sm">
-      <div className="p-2 w-full flex flex-col items-center justify-center">
-        <div className="flex items-start bg-buttons rounded">
-          <div className="btn-group bg-buttons rounded ">
-            <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
-              {" "}
-              <a className="text-black px-6 py-2 ml-4 text-xs" href="/">
-                <SlLocationPin />
-              </a>
-            </button>
-            <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
-              {" "}
-              <a className="text-black px-6 py-2 ml-4 text-xs" href="/">
-                <SlPhone />
-              </a>
-            </button>
-            <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
-              <a className=" text-black px-6 py-2 ml-4 text-xs" href="/">
-                <AiOutlineMail />
-              </a>
-            </button>
-          </div>
+    <div className="min-w-xs ">
+      <div className="w-full flex justify-center mx-auto">
+        <div className="btn-group justify-center w-full">
+          <button className="btn bg-buttons rounded border-0 hover:bg-buttons hover:opacity-25">
+            <a className="text-black px-4 py-2 text-md" href="/">
+              <SlLocationPin />
+            </a>
+          </button>
+          <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
+            <a className="text-black px-4 py-2 text-md" href="/">
+              <SlPhone />
+            </a>
+          </button>
+          <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
+            <a className=" text-black px-4 py-2 text-md" href="/">
+              <AiOutlineMail />
+            </a>
+          </button>
         </div>
       </div>
       <section className="text-dm-blue body-font flex flex-col items-center justify-center">
-        <div className="container px-5 py-24 mx-auto flex flex-col items-center justify-center">
-          <div className="lg:w-1/2 md:w-2/3">
+        <div className="container px-5 py-6 mx-auto flex flex-col items-center justify-center">
+          <div className="max-w-xs md:max-w-md">
             <div className="flex flex-wrap -m-2">
               <div className="p-2 w-full">
                 <div className="relative">

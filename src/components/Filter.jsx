@@ -17,7 +17,7 @@ function Filter({ filter, setFilter, data, setPosts }) {
   });
 
   return (
-    <div className="" style={{ margin: "20px 0px 5px 25px" }}>
+    <div className=" mt-5 mb-1.5 ml-6">
       <button
         onClick={onClick}
         id="filterButton"

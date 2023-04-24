@@ -3,11 +3,7 @@ import { BiUserCircle } from "react-icons/bi";
 
 function Navbar() {
   return (
-    <div
-      className={`navbar font-outfit ${
-        window.location.pathname === "/view" ? "fixed" : ""
-      } bg-lm-blue z-30`}
-    >
+    <div className="navbar font-outfit fixed bg-lm-blue z-30">
       <div className="navbar-start">
         <label htmlFor="my-drawer" className="btn btn-ghost text-dm-blue btn-circle">
           <svg

@@ -13,10 +13,13 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "regexp"],
   "rules": {
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "quotes": ["error", "double", { "avoidEscape": true }],
     "react/react-in-jsx-scope": ["off"]
+  },
+  "globals": {
+    "google": true
   }
 }
