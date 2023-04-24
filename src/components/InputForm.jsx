@@ -148,14 +148,11 @@ function InputForm() {
       const post = await getDoc(docRef);
       const users = await getDocs(q);
 
-      users.forEach((dbuser) => {
-        (async () => {
-          const userRef = doc(db, "users", dbuser.id);
-          await updateDoc(userRef, {
-            myPosts: arrayUnion(post.id),
-          });
-        })();
+      const userRef = doc(db, "users", users.docs[0].id);
+      await updateDoc(userRef, {
+        myPosts: arrayUnion(post.id),
       });
+
       console.log(`Updated user ${user.uid} with their post ${post.id}!`);
     } catch (err) {
       console.error("Error adding document: ", err);
