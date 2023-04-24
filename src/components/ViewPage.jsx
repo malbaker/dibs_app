@@ -76,6 +76,14 @@ function ListView({ posts }) {
 }
 
 function MapView({ posts }) {
+  const icons = {
+    "furniture": "\uefed",
+    "home decor": "\ue21e",
+    "clothing": "\uf19e",
+    "tech items": "\ue1b1",
+    "other": "\ue5d3"
+  }
+
   useEffect(() => {
     // Initialize and add the map
     let map;
@@ -99,6 +107,12 @@ function MapView({ posts }) {
       const marker = new google.maps.Marker({
         map: map,
         position: position,
+        label: {
+          text: "\ue7ff",
+          fontFamily: "Material Symbols Outlined",
+          color: "#ffffff",
+          fontSize: "18px",
+        },
       });
 
       // Gets rid of default map markers
@@ -114,6 +128,12 @@ function MapView({ posts }) {
         new google.maps.Marker({
           map: map,
           position: post.coords,
+          label: {
+            text: icons[post.category],
+            fontFamily: "Material Symbols Outlined",
+            color: "#ffffff",
+            fontSize: "18px",
+          }
         });
       }
     }
