@@ -12,7 +12,7 @@ export async function getCoordinates() {
         },
         (error) => {
           console.log(error);
-          reject(error);
+          resolve(null);
         },
       );
     } else {
