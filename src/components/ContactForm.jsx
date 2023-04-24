@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { db } from "../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
-import { SlLocationPin } from "react-icons/sl";
-import { SlPhone } from "react-icons/sl";
-import { AiOutlineMail } from "react-icons/ai";
+import { SlLocationPin, SlPhone, SlSpeech } from "react-icons/sl";
 
 function ContactForm() {
   const [name, setName] = useState("");
@@ -48,16 +46,13 @@ function ContactForm() {
             </a>
           </button>
           <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
-            <a className="text-black px-4 py-2 text-md" href="tel:6173532154">
+            <a className="text-black px-4 py-2 text-md" href="tel:5086900065">
               <SlPhone />
             </a>
           </button>
           <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
-            <a
-              className=" text-black px-4 py-2 text-md"
-              href="mailto:business@dibs.boston"
-            >
-              <AiOutlineMail />
+            <a className=" text-black px-4 py-2 text-md" href="tel:5086900065">
+              <SlSpeech />
             </a>
           </button>
         </div>
@@ -84,7 +79,7 @@ function ContactForm() {
               <div className="p-2 w-full">
                 <div className="relative">
                   <label htmlFor="email" className="leading-7 text-sm text-dm-blue">
-                    Email
+                    Email Address
                   </label>
                   <input
                     type="email"
