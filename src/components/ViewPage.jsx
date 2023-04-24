@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { db } from "../config/firebase";
@@ -76,15 +75,14 @@ function ListView({ posts }) {
 }
 
 function MapView({ posts }) {
-  const icons = {
-    "furniture": "\uefed",
-    "home decor": "\ue21e",
-    "clothing": "\uf19e",
-    "tech items": "\ue1b1",
-    "other": "\ue5d3"
-  }
-
   useEffect(() => {
+    const icons = {
+      furniture: "\uefed",
+      "home decor": "\ue21e",
+      clothing: "\uf19e",
+      "tech items": "\ue1b1",
+      other: "\ue5d3",
+    };
     // Initialize and add the map
     let map;
     async function initMap() {
@@ -133,17 +131,21 @@ function MapView({ posts }) {
             fontFamily: "Material Symbols Outlined",
             color: "#ffffff",
             fontSize: "18px",
-          }
+          },
         });
       }
     }
 
     initMap();
-  }, []);
+  }, [posts]);
 
   return <div id="map" className="w-full h-full"></div>;
 }
 ListView.propTypes = {
+  posts: PropTypes.array,
+};
+
+MapView.propTypes = {
   posts: PropTypes.array,
 };
 export default ViewPage;
