@@ -51,7 +51,7 @@ function ContactForm() {
             </a>
           </button>
           <button className="btn bg-buttons border-0 hover:bg-buttons hover:opacity-25">
-            <a className=" text-black px-4 py-2 text-md" href="tel:5086900065">
+            <a className=" text-black px-4 py-2 text-md" href="sms:5086900065">
               <SlSpeech />
             </a>
           </button>
