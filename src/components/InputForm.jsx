@@ -140,20 +140,22 @@ function InputForm() {
         likes: 0,
       });
       console.log("Document written with ID: ", docRef.id);
-      const q = query(
-        collection(db, "users"),
-        where("uid", "==", user.uid),
-        limit(1),
-      );
-      const post = await getDoc(docRef);
-      const users = await getDocs(q);
+      if (user) {
+        const q = query(
+          collection(db, "users"),
+          where("uid", "==", user.uid),
+          limit(1),
+        );
+        const post = await getDoc(docRef);
+        const users = await getDocs(q);
 
-      const userRef = doc(db, "users", users.docs[0].id);
-      await updateDoc(userRef, {
-        myPosts: arrayUnion(post.id),
-      });
+        const userRef = doc(db, "users", users.docs[0].id);
+        await updateDoc(userRef, {
+          myPosts: arrayUnion(post.id),
+        });
 
-      console.log(`Updated user ${user.uid} with their post ${post.id}!`);
+        console.log(`Updated user ${user.uid} with their post ${post.id}!`);
+      }
     } catch (err) {
       console.error("Error adding document: ", err);
     } finally {
