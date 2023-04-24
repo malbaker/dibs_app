@@ -42,6 +42,7 @@ export default async function getAddress(coordinates) {
   });
 }
 
+// Uses geocoding to take formatted address and convert it to coordinates
 export async function geocodeAddress(address, callback) {
   const geocoder = new google.maps.Geocoder();
   geocoder.geocode({ address: address }, (results, status) => {
