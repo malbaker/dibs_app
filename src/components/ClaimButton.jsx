@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from "react";
 import { db, auth } from "../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -39,7 +40,7 @@ function ClaimButton({ post }) {
     <button
       onClick={!isClaimed ? handleClaim : undefined}
       className={`${
-        isClaimed ? "bg-gray-400" : "bg-buttons hover:bg-buttons"
+        isClaimed ? "bg-gray-400" : "bg-orange hover:bg-orange"
       } text-white font-bold font-outfit py-2 px-10 rounded-full ${
         isClaimed ? "cursor-default" : ""
       }`}
