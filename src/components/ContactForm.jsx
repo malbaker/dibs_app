@@ -37,6 +37,8 @@ function ContactForm() {
             <a
               className="text-black px-4 py-2 text-md"
               href="https://goo.gl/maps/NVpRW557Ci95qp999"
+              target="_blank"
+              rel="noreferrer"
             >
               <SlLocationPin />
             </a>
