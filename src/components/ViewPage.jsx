@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { db } from "../config/firebase";
@@ -98,6 +99,11 @@ function MapView() {
       const marker = new google.maps.Marker({
         map: map,
         position: position,
+      });
+
+      // Gets rid of default map markers
+      map.setOptions({
+        styles: [{ featureType: "poi", stylers: [{ visibility: "off" }] }],
       });
     }
 
