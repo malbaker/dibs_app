@@ -19,7 +19,7 @@ function Card({ post }) {
       <div className="card card-compact bg-base-100 shadow-xl text-dm-blue max-w-xs w-full mx-auto my-3">
         <figure>
           <img
-            className=" w-full h-80 p-3 object-cover rounded"
+            className=" w-full h-80 object-cover rounded"
             src={post.image}
             alt={
               post.additionalNotes && post.additionalNotes !== ""

@@ -12,7 +12,7 @@ export async function getCoordinates() {
         },
         (error) => {
           console.log(error);
-          reject(error);
+          resolve(null);
         },
       );
     } else {
@@ -42,6 +42,7 @@ export default async function getAddress(coordinates) {
   });
 }
 
+// Uses geocoding to take formatted address and convert it to coordinates
 export async function geocodeAddress(address, callback) {
   const geocoder = new google.maps.Geocoder();
   geocoder.geocode({ address: address }, (results, status) => {
@@ -60,7 +61,6 @@ export async function getDistance(userlat, userlng, postlat, postlng) {
   const { spherical } = await google.maps.importLibrary("geometry");
   const p1 = new google.maps.LatLng(userlat, userlng);
   const p2 = new google.maps.LatLng(postlat, postlng);
-  //console.log("user location: ", p1.toString(), "post location: ", p2.toString());
   const distance = spherical.computeDistanceBetween(p1, p2);
   return distance;
 }

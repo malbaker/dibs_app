@@ -43,7 +43,6 @@ const LikeButton = ({ post, onLikeStatusChanged }) => {
 
   const handleLike = async () => {
     if (post.id) {
-      console.log(post.id); // Check if post.id is defined
       const postRef = doc(db, "posts", post.id);
       liked
         ? await updateDoc(postRef, { likes: post.likes - 1 })

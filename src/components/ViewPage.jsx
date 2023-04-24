@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { db } from "../config/firebase";
@@ -60,7 +61,7 @@ function ViewPage() {
           />
         </div>
 
-        {mapView ? <MapView /> : <ListView posts={posts} />}
+        {mapView ? <MapView posts={posts} /> : <ListView posts={posts} />}
       </div>
     </div>
   );
@@ -74,7 +75,15 @@ function ListView({ posts }) {
   );
 }
 
-function MapView() {
+function MapView({ posts }) {
+  const icons = {
+    "furniture": "\uefed",
+    "home decor": "\ue21e",
+    "clothing": "\uf19e",
+    "tech items": "\ue1b1",
+    "other": "\ue5d3"
+  }
+
   useEffect(() => {
     // Initialize and add the map
     let map;
@@ -98,10 +107,38 @@ function MapView() {
       const marker = new google.maps.Marker({
         map: map,
         position: position,
+        label: {
+          text: "\ue7ff",
+          fontFamily: "Material Symbols Outlined",
+          color: "#ffffff",
+          fontSize: "18px",
+        },
       });
+
+      // Gets rid of default map markers
+      map.setOptions({
+        styles: [
+          { featureType: "poi", stylers: [{ visibility: "off" }] },
+          { featureType: "transit", stylers: [{ visibility: "off" }] },
+        ],
+      });
+
+      // Puts a marker on the map for each item
+      for (const post of posts) {
+        new google.maps.Marker({
+          map: map,
+          position: post.coords,
+          label: {
+            text: icons[post.category],
+            fontFamily: "Material Symbols Outlined",
+            color: "#ffffff",
+            fontSize: "18px",
+          }
+        });
+      }
     }
 
-    initMap().then(() => console.log(document.getElementById("map")));
+    initMap();
   }, []);
 
   return <div id="map" className="w-full h-full"></div>;
