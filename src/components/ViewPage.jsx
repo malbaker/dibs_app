@@ -103,7 +103,10 @@ function MapView() {
 
       // Gets rid of default map markers
       map.setOptions({
-        styles: [{ featureType: "poi", stylers: [{ visibility: "off" }] }],
+        styles: [
+          { featureType: "poi", stylers: [{ visibility: "off" }] },
+          { featureType: "transit", stylers: [{ visibility: "off" }] },
+        ],
       });
     }
 
