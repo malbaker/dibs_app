@@ -138,7 +138,7 @@ function MapView({ posts }) {
       }
     }
 
-    initMap().then(() => console.log(document.getElementById("map")));
+    initMap();
   }, []);
 
   return <div id="map" className="w-full h-full"></div>;

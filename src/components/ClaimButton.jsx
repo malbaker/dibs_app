@@ -63,11 +63,9 @@ function ClaimButton({ post }) {
       console.log("user location", userlat, userlng);
       if (!post.coords) {
         geocodeAddress(post.address, (lat, lng) => {
-          //console.log(lat, lng);
           const postlat = parseFloat(lat);
           const postlng = parseFloat(lng);
           console.log("post location", postlat, postlng);
-          //console.log(postlat - userlat, postlng - userlng);
           getDistance(userlat, userlng, postlat, postlng).then((d) => {
             setDistance(d);
           });

@@ -61,7 +61,6 @@ export async function getDistance(userlat, userlng, postlat, postlng) {
   const { spherical } = await google.maps.importLibrary("geometry");
   const p1 = new google.maps.LatLng(userlat, userlng);
   const p2 = new google.maps.LatLng(postlat, postlng);
-  //console.log("user location: ", p1.toString(), "post location: ", p2.toString());
   const distance = spherical.computeDistanceBetween(p1, p2);
   return distance;
 }
