@@ -39,10 +39,7 @@ const Carousel = ({ claimed }) => {
   return (
     <div className="carousel carousel-center p-4 bg-carousel rounded-box h-32 md:h-48">
       {data.map((post) => (
-        <div
-          key={post.id}
-          className="carousel-item my-1 mx-1.5 w-1/2 md:w-3/5 h-full"
-        >
+        <div key={post.id} className="carousel-item mx-1.5 w-1/2 md:w-3/5 h-full">
           <img
             src={post.image}
             className="rounded-box w-full object-cover"
