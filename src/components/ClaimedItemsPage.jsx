@@ -25,7 +25,7 @@ function ClaimedItemsPage() {
   }, []);
 
   return (
-    <div style={{ marginTop: "50px" }}>
+    <div className="mt-14">
       <Cards data={data} />
     </div>
   );

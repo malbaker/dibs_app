@@ -3,12 +3,18 @@ export async function getCoordinates() {
   return new Promise((resolve, reject) => {
     // Checks if geolocation is available
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        resolve({
-          lat: parseFloat(position.coords.latitude.toFixed(3)),
-          lng: parseFloat(position.coords.longitude.toFixed(3)),
-        });
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve({
+            lat: parseFloat(position.coords.latitude.toFixed(3)),
+            lng: parseFloat(position.coords.longitude.toFixed(3)),
+          });
+        },
+        (error) => {
+          console.log(error);
+          resolve(null);
+        },
+      );
     } else {
       reject("geolocation doesn't work");
     }
@@ -34,4 +40,27 @@ export default async function getAddress(coordinates) {
   return Object.assign({}, coordinates, {
     formatted_address: data.results[0].formatted_address || "...",
   });
+}
+
+// Uses geocoding to take formatted address and convert it to coordinates
+export async function geocodeAddress(address, callback) {
+  const geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ address: address }, (results, status) => {
+    if (status === "OK") {
+      const location = results[0].geometry.location;
+      callback(location.lat(), location.lng());
+    } else {
+      console.error(
+        `Geocode was not successful for the following reason: ${status}`,
+      );
+    }
+  });
+}
+
+export async function getDistance(userlat, userlng, postlat, postlng) {
+  const { spherical } = await google.maps.importLibrary("geometry");
+  const p1 = new google.maps.LatLng(userlat, userlng);
+  const p2 = new google.maps.LatLng(postlat, postlng);
+  const distance = spherical.computeDistanceBetween(p1, p2);
+  return distance;
 }

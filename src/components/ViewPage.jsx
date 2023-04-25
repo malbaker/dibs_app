@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { db } from "../config/firebase";
@@ -40,13 +39,9 @@ function ViewPage() {
   }
 
   return (
-    <div
-      className="hero-content text-center sticky top-0 max-w-screen flex flex-col overflow-x-hidden"
-      style={{ width: "100%", height: "100%" }}
-    >
-
-      <div className="pt-20 items-center" style={{ width: "100%", height: "100%" }}>
-        <div className="flex items-center justify-between px-4">
+    <div className="hero-content text-center sticky top-0 max-w-screen flex flex-col overflow-x-hidden w-full h-full">
+      <div className="pt-20 items-center w-full h-full">
+        <div className="flex items-center justify-between px-4 md:px-24 lg:px-32">
           <button
             onClick={onToggle}
             className="mr-auto -mt-12 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
@@ -65,8 +60,7 @@ function ViewPage() {
           />
         </div>
 
-
-        {mapView ? <MapView /> : <ListView posts={posts} />}
+        {mapView ? <MapView posts={posts} /> : <ListView posts={posts} />}
       </div>
     </div>
   );
@@ -80,11 +74,16 @@ function ListView({ posts }) {
   );
 }
 
-function MapView() {
-  // Initialize and add the map
-  let map;
-
+function MapView({ posts }) {
   useEffect(() => {
+    const icons = {
+      furniture: "\uefed",
+      "home decor": "\ue21e",
+      clothing: "\uf19e",
+      "tech items": "\ue1b1",
+      other: "\ue5d3",
+    };
+    // Initialize and add the map
     let map;
     async function initMap() {
       // Uses your geolocation to position map
@@ -106,15 +105,47 @@ function MapView() {
       const marker = new google.maps.Marker({
         map: map,
         position: position,
+        label: {
+          text: "\ue7ff",
+          fontFamily: "Material Symbols Outlined",
+          color: "#ffffff",
+          fontSize: "18px",
+        },
       });
+
+      // Gets rid of default map markers
+      map.setOptions({
+        styles: [
+          { featureType: "poi", stylers: [{ visibility: "off" }] },
+          { featureType: "transit", stylers: [{ visibility: "off" }] },
+        ],
+      });
+
+      // Puts a marker on the map for each item
+      for (const post of posts) {
+        new google.maps.Marker({
+          map: map,
+          position: post.coords,
+          label: {
+            text: icons[post.category],
+            fontFamily: "Material Symbols Outlined",
+            color: "#ffffff",
+            fontSize: "18px",
+          },
+        });
+      }
     }
 
-    initMap().then(() => console.log(document.getElementById("map")));
-  }, []);
+    initMap();
+  }, [posts]);
 
-  return <div id="map" style={{ width: "100%", height: "100%" }}></div>;
+  return <div id="map" className="w-full h-full"></div>;
 }
 ListView.propTypes = {
+  posts: PropTypes.array,
+};
+
+MapView.propTypes = {
   posts: PropTypes.array,
 };
 export default ViewPage;
