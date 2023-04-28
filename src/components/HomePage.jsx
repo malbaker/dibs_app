@@ -14,11 +14,15 @@ function HomePage() {
               <p className="text-left font-outfit font-light mb-1">
                 Explore items nearby
               </p>
-              <img
-                src="https://maps.googleapis.com/maps/api/staticmap?center=42.35024304407072,-71.10649148284722&zoom=14&size=400x200&style=feature:poi%7Cvisibility:off&style=feature:transit%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:off&key=AIzaSyDVv_KO_Ti-zmi6n1bIm3YaSGmfbmTZbXU"
-                alt="A map"
-                className="rounded-3xl w-full max-w-full h-32 md:h-40 object-cover"
-              />
+
+              <a href="/view?mapView=true">
+                <img
+                  src="https://maps.googleapis.com/maps/api/staticmap?center=42.35024304407072,-71.10649148284722&zoom=14&size=400x200&style=feature:poi%7Cvisibility:off&style=feature:transit%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:off&key=AIzaSyDVv_KO_Ti-zmi6n1bIm3YaSGmfbmTZbXU"
+                  alt="A map"
+                  className="rounded-3xl w-full max-w-full h-32 md:h-40 object-cover"
+                />
+              </a>
+              
             </div>
           </div>
           <div className="mt-1 flex items-center justify-between -mb-1">
