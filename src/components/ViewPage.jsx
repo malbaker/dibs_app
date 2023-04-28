@@ -8,7 +8,8 @@ import PropTypes from "prop-types";
 import { FiMap, FaListUl } from "react-icons/all";
 
 function ViewPage() {
-  const [mapView, setMapView] = useState(false);
+  const queryParams = new URLSearchParams(location.search);
+  const [mapView, setMapView] = useState(queryParams.has("mapView") ? queryParams.get("mapView") == "true" : false);
   const [data, setData] = useState([]);
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({});
