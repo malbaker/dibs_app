@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 import PropTypes from "prop-types";
+import { HashLink } from "react-router-hash-link";
 
 const Carousel = ({ claimed }) => {
   const [data, setData] = useState([]);
@@ -43,7 +44,7 @@ const Carousel = ({ claimed }) => {
           key={post.id}
           className="carousel-item h-full w-2/5 mx-1.5 justify-center"
         >
-          <a className="" href={`/view#${post.id}`}>
+          <HashLink to={`/view#${post.id}`}>
             <img
               src={post.image}
               className="rounded-box w-full h-full object-cover"
@@ -53,7 +54,7 @@ const Carousel = ({ claimed }) => {
                   : "This post has no additional notes."
               }
             />
-          </a>
+          </HashLink>
         </div>
       ))}
     </div>
