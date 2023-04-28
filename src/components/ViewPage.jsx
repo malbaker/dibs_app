@@ -126,7 +126,10 @@ function MapView({ posts }) {
       for (const post of posts) {
         new google.maps.Marker({
           map: map,
-          position: post.coords,
+          position: new google.maps.LatLng(
+            post.coords.latitude,
+            post.coords.longitude,
+          ),
           label: {
             text: icons[post.category],
             fontFamily: "Material Symbols Outlined",

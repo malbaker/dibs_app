@@ -43,15 +43,17 @@ const Carousel = ({ claimed }) => {
           key={post.id}
           className="carousel-item h-full w-2/5 mx-1.5 justify-center"
         >
-          <img
-            src={post.image}
-            className="rounded-box w-full object-cover"
-            alt={
-              post.additionalNotes && post.additionalNotes !== ""
-                ? post.additionalNotes
-                : "This post has no additional notes."
-            }
-          />
+          <a className="" href={`/view#${post.id}`}>
+            <img
+              src={post.image}
+              className="rounded-box w-full h-full object-cover"
+              alt={
+                post.additionalNotes && post.additionalNotes !== ""
+                  ? post.additionalNotes
+                  : "This post has no additional notes."
+              }
+            />
+          </a>
         </div>
       ))}
     </div>

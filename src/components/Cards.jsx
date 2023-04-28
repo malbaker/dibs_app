@@ -16,7 +16,10 @@ function Cards({ data }) {
 function Card({ post }) {
   return (
     <>
-      <div className="card card-compact bg-base-100 shadow-xl text-dm-blue max-w-xs w-full mx-auto my-3">
+      <div
+        id={post.id}
+        className="card card-compact bg-base-100 shadow-xl text-dm-blue max-w-xs w-full mx-auto my-3"
+      >
         <figure>
           <img
             className=" w-full h-80 object-cover rounded"
