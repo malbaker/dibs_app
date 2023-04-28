@@ -31,7 +31,6 @@ function InputForm() {
   const [lng, setLng] = useState(null);
   useEffect(() => {
     getAddress().then((address) => {
-      console.log(address);
       setAddress(address.formatted_address || "");
       setLat(address.lat || null);
       setLng(address.lng || null);
@@ -66,7 +65,6 @@ function InputForm() {
   const handleSelect = async (address) => {
     const results = await geocodeByAddress(address);
     const latLng = await getLatLng(results[0]);
-    console.log("Latitude and longitude:", latLng);
     setAddress(address);
     setLat(latLng.lat);
     setLng(latLng.lng);
