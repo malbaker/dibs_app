@@ -60,10 +60,8 @@ function ClaimButton({ post }) {
     getAddress().then((address) => {
       const userlat = address.lat;
       const userlng = address.lng;
-      //console.log("user location", userlat, userlng);
       const postlat = parseFloat(post.coords.latitude);
       const postlng = parseFloat(post.coords.longitude);
-      //console.log("post location", postlat, postlng);
 
       getDistance(userlat, userlng, postlat, postlng).then((d) => {
         setDistance(d);
