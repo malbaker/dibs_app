@@ -14,7 +14,9 @@ function ViewPage() {
   );
   const [data, setData] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({
+    status : queryParams.has("status") & queryParams.get("status") == "claimed" ? ["claimed"] : []
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,6 +80,35 @@ function ListView({ posts }) {
 }
 
 function MapView({ posts }) {
+  const icons = {
+    "furniture": {
+      codePoint: "\uefed",
+      name: "Furniture",
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/chair/default/48px.svg"
+    },
+    "home decor": {
+      codePoint: "\ue21e",
+      name: "Home Decor",
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/floor_lamp/default/48px.svg"
+
+    },
+    "clothing": {
+      codePoint: "\uf19e",
+      name: "Clothing",
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/checkroom/default/48px.svg"
+    },
+    "tech items": {
+      codePoint: "\ue1b1",
+      name: "Tech",
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/devices/default/48px.svg"
+    },
+    "other": {
+      codePoint: "\ue5d3",
+      name: "Other",
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/pending/default/48px.svg"
+   }
+  }
+
   useEffect(() => {
     const icons = {
       furniture: "\uefed",
@@ -133,19 +164,38 @@ function MapView({ posts }) {
             post.coords.longitude,
           ),
           label: {
-            text: icons[post.category],
+            text: icons[post.category].codePoint,
             fontFamily: "Material Symbols Outlined",
             color: "#ffffff",
             fontSize: "18px",
           },
         });
       }
+
+      const legend = document.getElementById("legend");
+      // Adds each icon and and a label for it to the legend
+      for (const key in icons) {
+        const type = icons[key];
+        const name = type.name;
+        const svg = type.svg;
+        const div = document.createElement("div");
+    
+        div.innerHTML = '<img src="' + svg + '"> ' + name;
+        legend.appendChild(div);
+      }
+      // Adds legend to map
+      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     }
 
     initMap();
   }, [posts]);
 
-  return <div id="map" className="w-full h-full"></div>;
+  return (
+    <div className="w-full h-full">
+      <div id="map" className="w-full h-full"></div>
+      <div id="legend"><h3>Legend</h3></div>
+    </div>
+  );
 }
 ListView.propTypes = {
   posts: PropTypes.array,
