@@ -86,8 +86,10 @@ function ClaimButton({ post }) {
     <button
       onClick={!isClaimed ? handleClaim : undefined}
       className={`${
-        isClaimed ? "bg-gray-400 cursor-default" : "bg-buttons hover:bg-buttons"
-      } text-white font-bold font-outfit py-2 px-10 rounded-full my-auto`}
+        isClaimed ? "bg-gray-400" : "bg-orange hover:bg-orange"
+      } text-white font-bold font-outfit py-2 px-10 rounded-full my-auto ${
+        isClaimed ? "cursor-default" : ""
+      }`}
       disabled={isClaimed || loading}
     >
       {loading ? (
