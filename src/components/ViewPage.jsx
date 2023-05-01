@@ -83,28 +83,28 @@ function MapView({ posts }) {
     "furniture": {
       codePoint: "\uefed",
       name: "Furniture",
-      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/chair/default/48px.svg"
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/chair/default/24px.svg"
     },
     "home decor": {
       codePoint: "\ue21e",
       name: "Home Decor",
-      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/floor_lamp/default/48px.svg"
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/floor_lamp/default/24px.svg"
 
     },
     "clothing": {
       codePoint: "\uf19e",
       name: "Clothing",
-      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/checkroom/default/48px.svg"
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/checkroom/default/24px.svg"
     },
     "tech items": {
       codePoint: "\ue1b1",
       name: "Tech",
-      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/devices/default/48px.svg"
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/devices/default/24px.svg"
     },
     "other": {
       codePoint: "\ue5d3",
       name: "Other",
-      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/pending/default/48px.svg"
+      svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/pending/default/24px.svg"
    }
   }
 
