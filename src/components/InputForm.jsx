@@ -154,10 +154,9 @@ function InputForm() {
 
         console.log(`Updated user ${user.uid} with their post ${post.id}!`);
       }
+      window.location.href = `/view#${docRef.id}`;
     } catch (err) {
       console.error("Error adding document: ", err);
-    } finally {
-      window.location.href = "/view";
     }
   };
 
