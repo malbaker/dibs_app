@@ -160,12 +160,31 @@ function MapView({ posts }) {
           }
         });
       }
+
+      const legend = document.getElementById("legend");
+      // Adds each icon and and a label for it to the legend
+      for (const key in icons) {
+        const type = icons[key];
+        const name = type.name;
+        const svg = type.svg;
+        const div = document.createElement("div");
+    
+        div.innerHTML = '<img src="' + svg + '"> ' + name;
+        legend.appendChild(div);
+      }
+      // Adds legend to map
+      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     }
 
     initMap();
-  }, []);
+  }, [posts]);
 
-  return <div id="map" className="w-full h-full"></div>;
+  return (
+    <div className="w-full h-full">
+      <div id="map" className="w-full h-full"></div>
+      <div id="legend"><h3>Legend</h3></div>
+    </div>
+  );
 }
 ListView.propTypes = {
   posts: PropTypes.array,
