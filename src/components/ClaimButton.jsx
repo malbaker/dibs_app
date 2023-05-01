@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { db, auth } from "../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
@@ -20,12 +20,7 @@ function ClaimButton({ post }) {
   const [loading, setLoading] = useState(false);
   const [distance, setDistance] = useState(0);
 
-  useEffect(() => {
-    if (distance === 0) {
-      setLoading(false);
-      return;
-    }
-
+  const distanceCheck = useCallback(() => {
     if (distance > 90) {
       console.log("outside 300 feet. distance in useeffect", distance);
       alert("You are too far away to claim this item. Must be within 300 feet.");
@@ -54,19 +49,31 @@ function ClaimButton({ post }) {
     }
   }, [distance, post, user]);
 
+  useEffect(() => {
+    if (distance === 0) {
+      setLoading(false);
+      return;
+    }
+
+    distanceCheck();
+  }, [distance, distanceCheck]);
+
   const handleClaim = async () => {
     setLoading(true);
+    if (distance === 0) {
+      getAddress().then((address) => {
+        const userlat = address.lat;
+        const userlng = address.lng;
+        const postlat = parseFloat(post.coords.latitude);
+        const postlng = parseFloat(post.coords.longitude);
 
-    getAddress().then((address) => {
-      const userlat = address.lat;
-      const userlng = address.lng;
-      const postlat = parseFloat(post.coords.latitude);
-      const postlng = parseFloat(post.coords.longitude);
-
-      getDistance(userlat, userlng, postlat, postlng).then((d) => {
-        setDistance(d);
+        getDistance(userlat, userlng, postlat, postlng).then((d) => {
+          setDistance(d);
+        });
       });
-    });
+    } else {
+      distanceCheck();
+    }
   };
 
   return (
