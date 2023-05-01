@@ -108,74 +108,74 @@ function MapView({ posts }) {
    }
   }
 
-  useEffect(() => {
-    // Initialize and add the map
-    let map;
-    async function initMap() {
-      // Uses your geolocation to position map
-      const coordinates = await getCoordinates();
-      const position = coordinates
-        ? { lat: coordinates.lat, lng: coordinates.lng }
-        : { lat: 42.349925, lng: -71.10313 };
+  // Initialize and add the map
+  let map;
+  async function initMap() {
+    // Uses your geolocation to position map
+    const coordinates = await getCoordinates();
+    const position = coordinates
+      ? { lat: coordinates.lat, lng: coordinates.lng }
+      : { lat: 42.349925, lng: -71.10313 };
 
-      // Request needed libraries.
-      const { Map } = await google.maps.importLibrary("maps");
+    // Request needed libraries.
+    const { Map } = await google.maps.importLibrary("maps");
 
-      // The map, centered at hardcoded location
-      map = new Map(document.getElementById("map"), {
-        zoom: 15,
-        center: position,
-      });
+    // The map, centered at hardcoded location
+    map = new Map(document.getElementById("map"), {
+      zoom: 15,
+      center: position,
+    });
 
-      // A marker positioned at your coordinates
-      const marker = new google.maps.Marker({
+    // A marker positioned at your coordinates
+    const marker = new google.maps.Marker({
+      map: map,
+      position: position,
+      label: {
+        text: "\ue7ff",
+        fontFamily: "Material Symbols Outlined",
+        color: "#ffffff",
+        fontSize: "18px",
+      },
+    });
+
+    // Gets rid of default map markers
+    map.setOptions({
+      styles: [
+        { featureType: "poi", stylers: [{ visibility: "off" }] },
+        { featureType: "transit", stylers: [{ visibility: "off" }] },
+      ],
+    });
+
+    // Puts a marker on the map for each item
+    for (const post of posts) {
+      new google.maps.Marker({
         map: map,
-        position: position,
+        position: post.coords,
         label: {
-          text: "\ue7ff",
+          text: icons[post.category].codePoint,
           fontFamily: "Material Symbols Outlined",
           color: "#ffffff",
           fontSize: "18px",
-        },
+        }
       });
-
-      // Gets rid of default map markers
-      map.setOptions({
-        styles: [
-          { featureType: "poi", stylers: [{ visibility: "off" }] },
-          { featureType: "transit", stylers: [{ visibility: "off" }] },
-        ],
-      });
-
-      // Puts a marker on the map for each item
-      for (const post of posts) {
-        new google.maps.Marker({
-          map: map,
-          position: post.coords,
-          label: {
-            text: icons[post.category].codePoint,
-            fontFamily: "Material Symbols Outlined",
-            color: "#ffffff",
-            fontSize: "18px",
-          }
-        });
-      }
-
-      const legend = document.getElementById("legend");
-      // Adds each icon and and a label for it to the legend
-      for (const key in icons) {
-        const type = icons[key];
-        const name = type.name;
-        const svg = type.svg;
-        const div = document.createElement("div");
-    
-        div.innerHTML = '<img src="' + svg + '"> ' + name;
-        legend.appendChild(div);
-      }
-      // Adds legend to map
-      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     }
 
+    const legend = document.getElementById("legend");
+    // Adds each icon and and a label for it to the legend
+    for (const key in icons) {
+      const type = icons[key];
+      const name = type.name;
+      const svg = type.svg;
+      const div = document.createElement("div");
+  
+      div.innerHTML = '<img src="' + svg + '"> ' + name;
+      legend.appendChild(div);
+    }
+    // Adds legend to map
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+  }
+
+  useEffect(() => {
     initMap();
   }, [posts]);
 
