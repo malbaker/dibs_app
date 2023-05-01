@@ -174,7 +174,7 @@ function MapView({ posts }) {
         const svg = type.svg;
         const div = document.createElement("div");
 
-        div.innerHTML = '<img src="' + svg + '"> ' + name;
+        div.innerHTML = '<img className="h-1 w-1" src="' + svg + '"> ' + name;
         legend.appendChild(div);
       }
       // Adds legend to map
@@ -187,7 +187,7 @@ function MapView({ posts }) {
   return (
     <div className="w-full h-full">
       <div id="map" className="w-full h-full"></div>
-      <div id="legend">
+      <div id="legend" className="h-1/2">
         <h3>Legend</h3>
       </div>
     </div>
