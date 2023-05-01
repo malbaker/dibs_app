@@ -13,7 +13,9 @@ function ViewPage() {
   const [mapView, setMapView] = useState(queryParams.has("mapView") ? queryParams.get("mapView") == "true" : false);
   const [data, setData] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({
+    status : queryParams.has("status") & queryParams.get("status") == "claimed" ? ["claimed"] : []
+  });
 
   useEffect(() => {
     const fetchData = async () => {

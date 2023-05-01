@@ -46,7 +46,7 @@ function HomePage() {
               </p>
             </div>
             <div>
-              <a href="/claimed">
+              <a href="/view?status=claimed">
                 <button className="text-outfit font-light underline text-md bg-transparent py-2 px-4 rounded-lg">
                   See more...
                 </button>

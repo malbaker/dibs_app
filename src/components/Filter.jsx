@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { HiArrowsUpDown } from "react-icons/hi2";
 
@@ -15,6 +15,21 @@ function Filter({ filter, setFilter, data, setPosts }) {
       setShowDropdown(false);
     }
   });
+
+  useEffect(() => {
+    setPosts(() => {
+      let posts = data.filter((post) => {
+        for (let key in filter) {
+          if (filter[key].length > 0 && filter[key].indexOf(post[key]) < 0) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      return posts;
+    });
+  }, [data, filter, setPosts]);
 
   return (
     <div className=" mt-5 mb-1.5 ml-6">
