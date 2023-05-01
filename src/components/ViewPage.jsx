@@ -16,7 +16,7 @@ function ViewPage() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({
     status:
-      queryParams.has("status") & (queryParams.get("status") == "claimed")
+      queryParams.has("status") & (queryParams.get("status") === "claimed")
         ? ["claimed"]
         : [],
   });
