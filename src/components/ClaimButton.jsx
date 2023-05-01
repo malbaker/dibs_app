@@ -10,7 +10,7 @@ import {
   collection,
   where,
 } from "firebase/firestore";
-import getAddress, { geocodeAddress, getDistance } from "./Location";
+import getAddress, { getDistance } from "./Location";
 import PropTypes from "prop-types";
 import { SlReload } from "react-icons/sl";
 
@@ -60,25 +60,12 @@ function ClaimButton({ post }) {
     getAddress().then((address) => {
       const userlat = address.lat;
       const userlng = address.lng;
-      console.log("user location", userlat, userlng);
-      if (!post.coords) {
-        geocodeAddress(post.address, (lat, lng) => {
-          const postlat = parseFloat(lat);
-          const postlng = parseFloat(lng);
-          console.log("post location", postlat, postlng);
-          getDistance(userlat, userlng, postlat, postlng).then((d) => {
-            setDistance(d);
-          });
-        });
-      } else {
-        const postlat = parseFloat(post.coords.latitude);
-        const postlng = parseFloat(post.coords.longitude);
-        console.log("post location", postlat, postlng);
+      const postlat = parseFloat(post.coords.latitude);
+      const postlng = parseFloat(post.coords.longitude);
 
-        getDistance(userlat, userlng, postlat, postlng).then((d) => {
-          setDistance(d);
-        });
-      }
+      getDistance(userlat, userlng, postlat, postlng).then((d) => {
+        setDistance(d);
+      });
     });
   };
 
@@ -86,8 +73,10 @@ function ClaimButton({ post }) {
     <button
       onClick={!isClaimed ? handleClaim : undefined}
       className={`${
-        isClaimed ? "bg-gray-400 cursor-default" : "bg-buttons hover:bg-buttons"
-      } text-white font-bold font-outfit py-2 px-10 rounded-full my-auto`}
+        isClaimed ? "bg-gray-400" : "bg-orange hover:bg-orange"
+      } text-white font-bold font-outfit py-2 px-10 rounded-full my-auto ${
+        isClaimed ? "cursor-default" : ""
+      }`}
       disabled={isClaimed || loading}
     >
       {loading ? (

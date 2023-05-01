@@ -44,7 +44,6 @@ async function googleSignIn() {
   signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
-      console.log(user);
       // IdP data available using getAdditionalUserInfo(result)
       (async () => {
         const q = query(collection(db, "users"), where("uid", "==", user.uid));

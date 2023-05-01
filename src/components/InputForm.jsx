@@ -31,7 +31,6 @@ function InputForm() {
   const [lng, setLng] = useState(null);
   useEffect(() => {
     getAddress().then((address) => {
-      console.log(address);
       setAddress(address.formatted_address || "");
       setLat(address.lat || null);
       setLng(address.lng || null);
@@ -66,7 +65,6 @@ function InputForm() {
   const handleSelect = async (address) => {
     const results = await geocodeByAddress(address);
     const latLng = await getLatLng(results[0]);
-    console.log("Latitude and longitude:", latLng);
     setAddress(address);
     setLat(latLng.lat);
     setLng(latLng.lng);
@@ -128,7 +126,7 @@ function InputForm() {
         additionalNotes,
         category: itemType,
         address,
-        coords: { lat, lng },
+        coords: new GeoPoint(lat, lng),
         image: imgUrl,
         condition,
         color,
@@ -140,23 +138,22 @@ function InputForm() {
         likes: 0,
       });
       console.log("Document written with ID: ", docRef.id);
-      const q = query(
-        collection(db, "users"),
-        where("uid", "==", user.uid),
-        limit(1),
-      );
-      const post = await getDoc(docRef);
-      const users = await getDocs(q);
+      if (user) {
+        const q = query(
+          collection(db, "users"),
+          where("uid", "==", user.uid),
+          limit(1),
+        );
+        const post = await getDoc(docRef);
+        const users = await getDocs(q);
 
-      users.forEach((dbuser) => {
-        (async () => {
-          const userRef = doc(db, "users", dbuser.id);
-          await updateDoc(userRef, {
-            myPosts: arrayUnion(post.id),
-          });
-        })();
-      });
-      console.log(`Updated user ${user.uid} with their post ${post.id}!`);
+        const userRef = doc(db, "users", users.docs[0].id);
+        await updateDoc(userRef, {
+          myPosts: arrayUnion(post.id),
+        });
+
+        console.log(`Updated user ${user.uid} with their post ${post.id}!`);
+      }
     } catch (err) {
       console.error("Error adding document: ", err);
     } finally {

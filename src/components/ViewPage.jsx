@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { db } from "../config/firebase";
@@ -9,8 +8,10 @@ import PropTypes from "prop-types";
 import { FiMap, FaListUl } from "react-icons/all";
 
 function ViewPage() {
-  const queryParams = new URLSearchParams(location.search);
-  const [mapView, setMapView] = useState(queryParams.has("mapView") ? queryParams.get("mapView") == "true" : false);
+  const queryParams = new URLSearchParams(window.location.search);
+  const [mapView, setMapView] = useState(
+    queryParams.has("mapView") ? queryParams.get("mapView") === "true" : false,
+  );
   const [data, setData] = useState([]);
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({
@@ -109,6 +110,13 @@ function MapView({ posts }) {
   }
 
   useEffect(() => {
+    const icons = {
+      furniture: "\uefed",
+      "home decor": "\ue21e",
+      clothing: "\uf19e",
+      "tech items": "\ue1b1",
+      other: "\ue5d3",
+    };
     // Initialize and add the map
     let map;
     async function initMap() {
@@ -151,13 +159,16 @@ function MapView({ posts }) {
       for (const post of posts) {
         new google.maps.Marker({
           map: map,
-          position: post.coords,
+          position: new google.maps.LatLng(
+            post.coords.latitude,
+            post.coords.longitude,
+          ),
           label: {
             text: icons[post.category].codePoint,
             fontFamily: "Material Symbols Outlined",
             color: "#ffffff",
             fontSize: "18px",
-          }
+          },
         });
       }
 
@@ -187,6 +198,10 @@ function MapView({ posts }) {
   );
 }
 ListView.propTypes = {
+  posts: PropTypes.array,
+};
+
+MapView.propTypes = {
   posts: PropTypes.array,
 };
 export default ViewPage;
