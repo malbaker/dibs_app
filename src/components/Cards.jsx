@@ -34,21 +34,14 @@ function Card({ post }) {
         <div className="card-body">
           <h2 className="card-title">{post.address}</h2>
           <div className="flex content-between justify-center space-x-5 mx-auto">
-            <button className="btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase text-white bg-buttons border-buttons">
+            <button className="btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase text-gray-700 bg-transparent border-gray-700">
               {post.category}
             </button>
             <button className="btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-gray-700 bg-transparent border-gray-700">
               {post.condition}
             </button>
             {post.color && post.color !== "" ? (
-              <button
-                className={
-                  post.color === "white" || post.color === "yellow"
-                    ? "btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-dm-blue bg-transparent border-dm-blue"
-                    : "btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-white bg-transparent border-transparent"
-                }
-                style={{ backgroundColor: post.color }}
-              >
+              <button className="btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-gray-700 bg-transparent border-gray-700">
                 {post.color}
               </button>
             ) : (

@@ -151,7 +151,7 @@ function MapView({ posts }) {
 
       // Puts a marker on the map for each item
       for (const post of posts) {
-        new google.maps.Marker({
+        const postmarker = new google.maps.Marker({
           map: map,
           position: new google.maps.LatLng(
             post.coords.latitude,
@@ -163,6 +163,9 @@ function MapView({ posts }) {
             color: "#ffffff",
             fontSize: "18px",
           },
+        });
+        google.maps.event.addListener(postmarker, "click", () => {
+          window.location.href = `/view?mapView=false#${post.id}`;
         });
       }
 

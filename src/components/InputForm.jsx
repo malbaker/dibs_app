@@ -38,7 +38,7 @@ function InputForm() {
     });
   }, []);
 
-  const [additionalNotes, setAdditionalNotes] = useState("");
+  //const [additionalNotes, setAdditionalNotes] = useState("");
   const [itemType, setItemType] = useState("");
   const [isItemTypeDropdownOpen, setIsItemTypeDropdownOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState(null);
@@ -47,7 +47,6 @@ function InputForm() {
   const [condition, setCondition] = useState("");
   const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
   const [color, setColor] = useState("");
-  const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
 
   const isActive =
     validAddress &&
@@ -71,9 +70,9 @@ function InputForm() {
     setValidAddress(true);
   };
 
-  const handleAdditionalNotesChange = (event) => {
+  /* const handleAdditionalNotesChange = (event) => {
     setAdditionalNotes(event.target.value);
-  };
+  }; */
 
   const handleItemType = (type) => {
     setItemType(type);
@@ -85,9 +84,8 @@ function InputForm() {
     setIsConditionDropdownOpen(false);
   };
 
-  const handleColor = (color) => {
+  const handleColorChange = (color) => {
     setColor(color);
-    setIsColorDropdownOpen(false);
   };
 
   const handleFileUpload = (event) => {
@@ -123,7 +121,6 @@ function InputForm() {
 
     try {
       const docRef = await addDoc(collection(db, "posts"), {
-        additionalNotes,
         category: itemType,
         address,
         coords: new GeoPoint(lat, lng),
@@ -316,7 +313,25 @@ function InputForm() {
                 className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
                 onClick={() => handleCondition("old")}
               >
-                used
+                like new
+              </li>
+              <li
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleCondition("old")}
+              >
+                used - excellent
+              </li>
+              <li
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleCondition("old")}
+              >
+                used - good
+              </li>
+              <li
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleCondition("old")}
+              >
+                used - fair
               </li>
             </ul>
           )}
@@ -326,58 +341,16 @@ function InputForm() {
           <label className="label">
             <span className="label-text text-white font-thin -mb-1">Item Color</span>
           </label>
-          <button
+          <input
             className="input input-bordered input-md w-full h-11 rounded-full text-left font-light pl-4"
-            type="button"
-            placeholder="select color"
-            onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
-          >
-            {color || "select color"}
-          </button>
-          {isColorDropdownOpen && (
-            <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("red")}
-              >
-                red
-              </li>
-              <li
-                className="font-outfit font-light x-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("blue")}
-              >
-                blue
-              </li>
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("green")}
-              >
-                green
-              </li>
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("yellow")}
-              >
-                yellow
-              </li>
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("black")}
-              >
-                black
-              </li>
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("white")}
-              >
-                white
-              </li>
-            </ul>
-          )}
+            type="text"
+            placeholder="what color is your item?"
+            onChange={handleColorChange}
+          />
         </div>
 
         {/* Post additional notes input */}
-        <label className="label">
+        {/*  <label className="label">
           <span className="label-text text-white font-thin -mb-3 mt-1">
             Additional Notes
           </span>
@@ -387,7 +360,7 @@ function InputForm() {
           onChange={handleAdditionalNotesChange}
           placeholder="write any additional notes about your item"
           className="input font-light input-bordered input-md w-full max-w-120 my-2 rounded-3xl pt-2 h-20"
-        />
+        /> */}
       </div>
 
       <div className="my-3">

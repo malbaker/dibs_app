@@ -38,7 +38,7 @@ const Carousel = ({ claimed }) => {
   }, [claimed]);
 
   return (
-    <div className="carousel carousel-center p-4 bg-carousel rounded-box h-36 md:h-48">
+    <div className="carousel carousel-center p-4 bg-gray-300 rounded-box h-36 md:h-48">
       {data.map((post) => (
         <div
           key={post.id}
