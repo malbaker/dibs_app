@@ -166,10 +166,6 @@ function MapView({ posts }) {
           },
         });
       }
-
-      // Adds legend to map
-      const legend = document.getElementById("legend");
-      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     }
 
     initMap();
