@@ -111,6 +111,7 @@ function MapView({ posts }) {
         svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/pending/default/48px.svg",
       },
     };
+
     // Initialize and add the map
     let map;
     async function initMap() {
@@ -164,23 +165,10 @@ function MapView({ posts }) {
             fontSize: "18px",
           },
         });
-        google.maps.event.addListener(postmarker, "click", () => {
-          window.location.href = `/view?mapView=false#${post.id}`;
-        });
       }
 
-      const legend = document.getElementById("legend");
-      // Adds each icon and and a label for it to the legend
-      for (const key in icons) {
-        const type = icons[key];
-        const name = type.name;
-        const svg = type.svg;
-        const div = document.createElement("div");
-
-        div.innerHTML = '<img className="h-1 w-1" src="' + svg + '"> ' + name;
-        legend.appendChild(div);
-      }
       // Adds legend to map
+      const legend = document.getElementById("legend");
       map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     }
 
@@ -190,9 +178,6 @@ function MapView({ posts }) {
   return (
     <div className="w-full h-full">
       <div id="map" className="w-full h-full"></div>
-      <div id="legend" className="h-1/2">
-        <h3>Legend</h3>
-      </div>
     </div>
   );
 }
