@@ -52,7 +52,7 @@ function ViewPage() {
         <div className="flex items-center justify-between px-4 md:px-24 lg:px-32">
           <button
             onClick={onToggle}
-            className="mr-auto -mt-12 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
+            className="mr-auto -mt-12 rounded-full bg-buttons p-2 flex justify-center items-center w-12 top-0 sticky"
           >
             {mapView ? (
               <FaListUl className="text-white" />

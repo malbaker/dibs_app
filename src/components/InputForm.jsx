@@ -337,7 +337,7 @@ function InputForm() {
           )}
         </div>
         {/* Post color dropdown */}
-        <div className="relative inline-block -my-1">
+        <div className="relative inline-block -mt-1">
           <label className="label">
             <span className="label-text text-white font-thin -mb-1">Item Color</span>
           </label>
@@ -363,7 +363,7 @@ function InputForm() {
         /> */}
       </div>
 
-      <div className="my-3">
+      <div className="my-5">
         {/* The button to open modal */}
         <label
           htmlFor="my-modal-4"

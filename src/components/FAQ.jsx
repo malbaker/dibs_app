@@ -4,13 +4,13 @@ function FAQ() {
   return (
     <div className="max-w-screen-sm h-screen mt-8">
       <div className="p-4 w-full flex flex-col items-start">
-        <div className="rounded-full text-dm-blue p-4 text-center w-4/5 mx-auto mb-8 mt-6">
+        <div className="rounded-full text-buttons p-4 text-center w-4/5 mx-auto mb-8 mt-6">
           <h4 className="text-5xl font-outfit font-light">FAQs</h4>
         </div>
 
-        <div className="collapse collapse-arrow bg-dm-blue rounded-box mb-2 w-full">
+        <div className="collapse collapse-arrow bg-buttons rounded-box mb-2 w-full">
           <input type="checkbox" />
-          <div className="bg-dm-blue rounded-full collapse-title text-xl font-light text-white">
+          <div className="bg-buttons rounded-full collapse-title text-xl font-light text-white">
             who we are
           </div>
           <div className="collapse-content text-white font-thin">
@@ -24,9 +24,9 @@ function FAQ() {
           </div>
         </div>
 
-        <div className="collapse collapse-arrow bg-dm-blue rounded-box mb-2 mr-4 w-full">
+        <div className="collapse collapse-arrow bg-buttons rounded-box mb-2 mr-4 w-full">
           <input type="checkbox" />
-          <div className="bg-dm-blue rounded-full collapse-title text-xl font-light text-white">
+          <div className="bg-buttons rounded-full collapse-title text-xl font-light text-white">
             why use dibs!
           </div>
           <div className="collapse-content text-white font-thin">
@@ -39,9 +39,9 @@ function FAQ() {
           </div>
         </div>
 
-        <div className="collapse collapse-arrow bg-dm-blue rounded-box w-full">
+        <div className="collapse collapse-arrow bg-buttons rounded-box w-full">
           <input type="checkbox" />
-          <div className="bg-dm-blue rounded-full collapse-title text-xl font-light text-white">
+          <div className="bg-buttons rounded-full collapse-title text-xl font-light text-white">
             how to use dibs! safely
           </div>
           <div className="collapse-content text-white font-thin">
