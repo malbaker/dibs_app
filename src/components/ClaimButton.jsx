@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { db, auth } from "../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
@@ -10,7 +10,7 @@ import {
   collection,
   where,
 } from "firebase/firestore";
-import getAddress, { geocodeAddress, getDistance } from "./Location";
+import getAddress, { getDistance } from "./Location";
 import PropTypes from "prop-types";
 import { SlReload } from "react-icons/sl";
 
@@ -18,14 +18,9 @@ function ClaimButton({ post }) {
   const [user] = useAuthState(auth);
   const [isClaimed, setIsClaimed] = useState(post.claimed);
   const [loading, setLoading] = useState(false);
-  const [distance, setDistance] = useState(0);
+  const [distance, setDistance] = useState(null);
 
-  useEffect(() => {
-    if (distance === 0) {
-      setLoading(false);
-      return;
-    }
-
+  const distanceCheck = useCallback(() => {
     if (distance > 90) {
       console.log("outside 300 feet. distance in useeffect", distance);
       alert("You are too far away to claim this item. Must be within 300 feet.");
@@ -54,31 +49,26 @@ function ClaimButton({ post }) {
     }
   }, [distance, post, user]);
 
+  useEffect(() => {
+    console.log("distance updated");
+    if (distance) {
+      console.log("distance is 0");
+      distanceCheck();
+    }
+  }, [distance, distanceCheck]);
+
   const handleClaim = async () => {
     setLoading(true);
 
     getAddress().then((address) => {
       const userlat = address.lat;
       const userlng = address.lng;
-      console.log("user location", userlat, userlng);
-      if (!post.coords) {
-        geocodeAddress(post.address, (lat, lng) => {
-          const postlat = parseFloat(lat);
-          const postlng = parseFloat(lng);
-          console.log("post location", postlat, postlng);
-          getDistance(userlat, userlng, postlat, postlng).then((d) => {
-            setDistance(d);
-          });
-        });
-      } else {
-        const postlat = parseFloat(post.coords.latitude);
-        const postlng = parseFloat(post.coords.longitude);
-        console.log("post location", postlat, postlng);
+      const postlat = parseFloat(post.coords.latitude);
+      const postlng = parseFloat(post.coords.longitude);
 
-        getDistance(userlat, userlng, postlat, postlng).then((d) => {
-          setDistance(d);
-        });
-      }
+      getDistance(userlat, userlng, postlat, postlng).then((d) => {
+        setDistance(d);
+      });
     });
   };
 

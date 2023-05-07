@@ -8,10 +8,18 @@ import PropTypes from "prop-types";
 import { FiMap, FaListUl } from "react-icons/all";
 
 function ViewPage() {
-  const [mapView, setMapView] = useState(false);
+  const queryParams = new URLSearchParams(window.location.search);
+  const [mapView, setMapView] = useState(
+    queryParams.has("mapView") ? queryParams.get("mapView") === "true" : false,
+  );
   const [data, setData] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({
+    status:
+      queryParams.has("status") & (queryParams.get("status") === "claimed")
+        ? ["claimed"]
+        : [],
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +52,7 @@ function ViewPage() {
         <div className="flex items-center justify-between px-4 md:px-24 lg:px-32">
           <button
             onClick={onToggle}
-            className="mr-auto -mt-12 rounded-full bg-buttons p-2 flex justify-center items-center w-12"
+            className="mr-auto -mt-12 rounded-full bg-buttons p-2 flex justify-center items-center w-12 top-0 sticky"
           >
             {mapView ? (
               <FaListUl className="text-white" />
@@ -77,12 +85,33 @@ function ListView({ posts }) {
 function MapView({ posts }) {
   useEffect(() => {
     const icons = {
-      furniture: "\uefed",
-      "home decor": "\ue21e",
-      clothing: "\uf19e",
-      "tech items": "\ue1b1",
-      other: "\ue5d3",
+      furniture: {
+        codePoint: "\uefed",
+        name: "Furniture",
+        svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/chair/default/48px.svg",
+      },
+      "home decor": {
+        codePoint: "\ue21e",
+        name: "Home Decor",
+        svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/floor_lamp/default/48px.svg",
+      },
+      clothing: {
+        codePoint: "\uf19e",
+        name: "Clothing",
+        svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/checkroom/default/48px.svg",
+      },
+      "tech items": {
+        codePoint: "\ue1b1",
+        name: "Tech",
+        svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/devices/default/48px.svg",
+      },
+      other: {
+        codePoint: "\ue5d3",
+        name: "Other",
+        svg: "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/pending/default/48px.svg",
+      },
     };
+
     // Initialize and add the map
     let map;
     async function initMap() {
@@ -123,11 +152,14 @@ function MapView({ posts }) {
 
       // Puts a marker on the map for each item
       for (const post of posts) {
-        new google.maps.Marker({
+        const postmarker = new google.maps.Marker({
           map: map,
-          position: post.coords,
+          position: new google.maps.LatLng(
+            post.coords.latitude,
+            post.coords.longitude,
+          ),
           label: {
-            text: icons[post.category],
+            text: icons[post.category].codePoint,
             fontFamily: "Material Symbols Outlined",
             color: "#ffffff",
             fontSize: "18px",
@@ -139,7 +171,11 @@ function MapView({ posts }) {
     initMap();
   }, [posts]);
 
-  return <div id="map" className="w-full h-full"></div>;
+  return (
+    <div className="w-full h-full">
+      <div id="map" className="w-full h-full"></div>
+    </div>
+  );
 }
 ListView.propTypes = {
   posts: PropTypes.array,

@@ -31,7 +31,6 @@ function InputForm() {
   const [lng, setLng] = useState(null);
   useEffect(() => {
     getAddress().then((address) => {
-      console.log(address);
       setAddress(address.formatted_address || "");
       setLat(address.lat || null);
       setLng(address.lng || null);
@@ -39,7 +38,7 @@ function InputForm() {
     });
   }, []);
 
-  const [additionalNotes, setAdditionalNotes] = useState("");
+  //const [additionalNotes, setAdditionalNotes] = useState("");
   const [itemType, setItemType] = useState("");
   const [isItemTypeDropdownOpen, setIsItemTypeDropdownOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState(null);
@@ -48,7 +47,6 @@ function InputForm() {
   const [condition, setCondition] = useState("");
   const [isConditionDropdownOpen, setIsConditionDropdownOpen] = useState(false);
   const [color, setColor] = useState("");
-  const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
 
   const isActive =
     validAddress &&
@@ -66,16 +64,15 @@ function InputForm() {
   const handleSelect = async (address) => {
     const results = await geocodeByAddress(address);
     const latLng = await getLatLng(results[0]);
-    console.log("Latitude and longitude:", latLng);
     setAddress(address);
     setLat(latLng.lat);
     setLng(latLng.lng);
     setValidAddress(true);
   };
 
-  const handleAdditionalNotesChange = (event) => {
+  /* const handleAdditionalNotesChange = (event) => {
     setAdditionalNotes(event.target.value);
-  };
+  }; */
 
   const handleItemType = (type) => {
     setItemType(type);
@@ -87,9 +84,8 @@ function InputForm() {
     setIsConditionDropdownOpen(false);
   };
 
-  const handleColor = (color) => {
+  const handleColorChange = (color) => {
     setColor(color);
-    setIsColorDropdownOpen(false);
   };
 
   const handleFileUpload = (event) => {
@@ -125,7 +121,6 @@ function InputForm() {
 
     try {
       const docRef = await addDoc(collection(db, "posts"), {
-        additionalNotes,
         category: itemType,
         address,
         coords: new GeoPoint(lat, lng),
@@ -156,10 +151,9 @@ function InputForm() {
 
         console.log(`Updated user ${user.uid} with their post ${post.id}!`);
       }
+      window.location.href = `/view#${docRef.id}`;
     } catch (err) {
       console.error("Error adding document: ", err);
-    } finally {
-      window.location.href = "/view";
     }
   };
 
@@ -311,76 +305,52 @@ function InputForm() {
             <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
               <li
                 className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleCondition("new")}
+                onClick={() => handleCondition("brand new")}
               >
                 brand new
               </li>
               <li
                 className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleCondition("old")}
+                onClick={() => handleCondition("like new")}
               >
-                used
+                like new
+              </li>
+              <li
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleCondition("excellent")}
+              >
+                used - excellent
+              </li>
+              <li
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleCondition("good")}
+              >
+                used - good
+              </li>
+              <li
+                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
+                onClick={() => handleCondition("fair")}
+              >
+                used - fair
               </li>
             </ul>
           )}
         </div>
         {/* Post color dropdown */}
-        <div className="relative inline-block -my-1">
+        <div className="relative inline-block -mt-1">
           <label className="label">
             <span className="label-text text-white font-thin -mb-1">Item Color</span>
           </label>
-          <button
+          <input
             className="input input-bordered input-md w-full h-11 rounded-full text-left font-light pl-4"
-            type="button"
-            placeholder="select color"
-            onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
-          >
-            {color || "select color"}
-          </button>
-          {isColorDropdownOpen && (
-            <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("red")}
-              >
-                red
-              </li>
-              <li
-                className="font-outfit font-light x-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("blue")}
-              >
-                blue
-              </li>
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("green")}
-              >
-                green
-              </li>
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("yellow")}
-              >
-                yellow
-              </li>
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("black")}
-              >
-                black
-              </li>
-              <li
-                className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleColor("white")}
-              >
-                white
-              </li>
-            </ul>
-          )}
+            type="text"
+            placeholder="what color is your item?"
+            onChange={handleColorChange}
+          />
         </div>
 
         {/* Post additional notes input */}
-        <label className="label">
+        {/*  <label className="label">
           <span className="label-text text-white font-thin -mb-3 mt-1">
             Additional Notes
           </span>
@@ -390,10 +360,10 @@ function InputForm() {
           onChange={handleAdditionalNotesChange}
           placeholder="write any additional notes about your item"
           className="input font-light input-bordered input-md w-full max-w-120 my-2 rounded-3xl pt-2 h-20"
-        />
+        /> */}
       </div>
 
-      <div className="my-3">
+      <div className="my-5">
         {/* The button to open modal */}
         <label
           htmlFor="my-modal-4"

@@ -16,7 +16,10 @@ function Cards({ data }) {
 function Card({ post }) {
   return (
     <>
-      <div className="card card-compact bg-base-100 shadow-xl text-dm-blue max-w-xs w-full mx-auto my-3">
+      <div
+        id={post.id}
+        className="card card-compact bg-base-100 shadow-xl text-dm-blue max-w-xs w-full mx-auto my-3"
+      >
         <figure>
           <img
             className=" w-full h-80 object-cover rounded"
@@ -31,21 +34,14 @@ function Card({ post }) {
         <div className="card-body">
           <h2 className="card-title">{post.address}</h2>
           <div className="flex content-between justify-center space-x-5 mx-auto">
-            <button className="btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase text-white bg-buttons border-buttons">
+            <button className="btn rounded-3xl text-xs px-2 py-1 gap-2 lowercase text-gray-700 bg-transparent border-gray-700">
               {post.category}
             </button>
             <button className="btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-gray-700 bg-transparent border-gray-700">
               {post.condition}
             </button>
             {post.color && post.color !== "" ? (
-              <button
-                className={
-                  post.color === "white" || post.color === "yellow"
-                    ? "btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-dm-blue bg-transparent border-dm-blue"
-                    : "btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-white bg-transparent border-transparent"
-                }
-                style={{ backgroundColor: post.color }}
-              >
+              <button className="btn rounded-3xl text-xs px-4 py-1 gap-2 lowercase text-gray-700 bg-transparent border-gray-700">
                 {post.color}
               </button>
             ) : (
