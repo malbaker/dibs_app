@@ -18,7 +18,7 @@ function ClaimButton({ post }) {
   const [user] = useAuthState(auth);
   const [isClaimed, setIsClaimed] = useState(post.claimed);
   const [loading, setLoading] = useState(false);
-  const [distance, setDistance] = useState(0);
+  const [distance, setDistance] = useState(null);
 
   const distanceCheck = useCallback(() => {
     if (distance > 90) {
@@ -50,30 +50,26 @@ function ClaimButton({ post }) {
   }, [distance, post, user]);
 
   useEffect(() => {
-    if (distance === 0) {
-      setLoading(false);
-      return;
+    console.log("distance updated");
+    if (distance) {
+      console.log("distance is 0");
+      distanceCheck();
     }
-
-    distanceCheck();
   }, [distance, distanceCheck]);
 
   const handleClaim = async () => {
     setLoading(true);
-    if (distance === 0) {
-      getAddress().then((address) => {
-        const userlat = address.lat;
-        const userlng = address.lng;
-        const postlat = parseFloat(post.coords.latitude);
-        const postlng = parseFloat(post.coords.longitude);
 
-        getDistance(userlat, userlng, postlat, postlng).then((d) => {
-          setDistance(d);
-        });
+    getAddress().then((address) => {
+      const userlat = address.lat;
+      const userlng = address.lng;
+      const postlat = parseFloat(post.coords.latitude);
+      const postlng = parseFloat(post.coords.longitude);
+
+      getDistance(userlat, userlng, postlat, postlng).then((d) => {
+        setDistance(d);
       });
-    } else {
-      distanceCheck();
-    }
+    });
   };
 
   return (

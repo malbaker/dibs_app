@@ -305,31 +305,31 @@ function InputForm() {
             <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-md z-10">
               <li
                 className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleCondition("new")}
+                onClick={() => handleCondition("brand new")}
               >
                 brand new
               </li>
               <li
                 className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleCondition("old")}
+                onClick={() => handleCondition("like new")}
               >
                 like new
               </li>
               <li
                 className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleCondition("old")}
+                onClick={() => handleCondition("excellent")}
               >
                 used - excellent
               </li>
               <li
                 className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleCondition("old")}
+                onClick={() => handleCondition("good")}
               >
                 used - good
               </li>
               <li
                 className="font-outfit font-light px-3 py-2 hover:bg-gray-200 cursor-pointer lowercase"
-                onClick={() => handleCondition("old")}
+                onClick={() => handleCondition("fair")}
               >
                 used - fair
               </li>
